@@ -1,28 +1,28 @@
-import React, {useEffect} from 'react';
-import {LoginForm} from "../components/auth/loginform";
-import {useNavigate} from "react-router-dom";
-import useAuth from "../context/auth-context";
+import React, { useEffect } from 'react';
+import { LoginForm } from '../components/auth/login-form';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../context/auth-context';
 
 
 const SignIn: React.FC = () => {
 
-    const {user, loading, login} = useAuth();
+  const { user, loading, login } = useAuth();
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        if(user){
-            navigate('/');
-        }
-    }, [user]);
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user]);
 
 
-    return (
-        <>
-            <LoginForm handleSubmit={login}></LoginForm>
-            {`${loading}`}
-        </>
-    );
+  return (
+    <>
+      <LoginForm handleSubmit={login}></LoginForm>
+      {`${loading}`}
+    </>
+  );
 };
 
 export default SignIn;

@@ -1,8 +1,6 @@
 import { createContext, PropsWithChildren, useContext, useState } from "react";
-import User from "../models/user";
-import { AuthFormState } from "../components/auth/loginform";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../firebase-config";
+import User from "../models/User";
+import { AuthFormState } from "../components/auth/login-form";
 
 interface AuthContextType {
     user?: User;
