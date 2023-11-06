@@ -4,11 +4,13 @@ import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { db, storage } from '../firebase-config';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import useAuth from "../context/auth-context";
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
 
 const Create = () => {
-const {user} = useAuth();
+  const user = useSelector((state: RootState) => state.auth.currentUser)
+
 
   const [file, setFile] = useState<File | null>(null);
   const [uploadProcess, setUploadProcess] = useState<number>(0);

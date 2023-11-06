@@ -2,7 +2,6 @@ import { Typography, Grid } from '@mui/material'
 import React, { useState } from 'react'
 import BlogSection from '../components/blogsection'
 import { DocumentData, deleteDoc, doc } from 'firebase/firestore';
-import useAuth from '../context/auth-context';
 import { db } from '../firebase-config';
 
 interface CookingProps {

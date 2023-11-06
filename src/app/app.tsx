@@ -2,16 +2,16 @@ import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import Container from '@mui/material/Container';
 import Header from './components/header';
 import AppRoutes from "./routes/routes";
-import { AuthProvider } from "./context/auth-context";
 import myTheme from './theme/my-theme';
 import Footer from './components/footer';
+import { StoreProvider } from './store/StoreProvider';
 
 
 const App = () => {
 
     return (
         <div className="App">
-            <AuthProvider>
+            <StoreProvider>
                 <ThemeProvider theme={myTheme}>
                     <CssBaseline/>
                     <Header user={null} />
@@ -27,7 +27,7 @@ const App = () => {
                     </Box>
                     <Footer />
                 </ThemeProvider>
-            </AuthProvider>
+            </StoreProvider>
         </div>
     );
 }

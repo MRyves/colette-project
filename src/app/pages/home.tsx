@@ -2,11 +2,12 @@ import { DocumentData, collection, deleteDoc, doc, onSnapshot } from 'firebase/f
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase-config';
 import BlogSection from '../components/blogsection';
-import useAuth from "../context/auth-context";
 import { Card, CardContent, Grid, TextField, Typography } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
 const Home = () => {
-  const {user} = useAuth();
+  const user = useSelector((state: RootState) => state.auth.currentUser);
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState<DocumentData[]>([]);
   const [open, setOpen] = React.useState(false);
