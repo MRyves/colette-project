@@ -20,7 +20,7 @@ import {PrivateRoutes} from "../components/private-routes";
             </Route>
             <Route path="/Baking" Component={Baking} />
             <Route path="/Cooking" Component={Cooking} />
-            <Route path="/detail/:userId" Component={Detail} />
+            <Route path="/detail/:blogId" Component={Detail} />
             {/* What is wrong?? <Route path="/detail/:userId" element={<Detail />} /> */}
             <Route path="/login" element={<SignIn/>}/>
         </Routes>

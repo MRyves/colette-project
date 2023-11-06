@@ -1,20 +1,9 @@
-import {
-    Button,
-    Card,
-    CardContent,
-    CardMedia,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    Grid,
-    Rating,
-    Typography
-} from '@mui/material';
+import { Button, Card, CardContent, CardMedia, Grid, Rating, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import User from '../models/User';
+import DialogDelete from './dialog-delete';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 
 interface BlogSectionProps {
@@ -28,15 +17,12 @@ const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) 
 
   const userId = user?.uid;
   const [value, setValue] = React.useState<number | null>(2);
+  const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
+  const handleDeleteBlog = (id: number) => {
+    // TODO: delete logic
+    console.log('Delete blog: ', id);
+    setDeleteDialogOpen(false);
   };
 
   return (
@@ -66,28 +52,11 @@ const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) 
                 <Link to={`/detail/${item.id}`}>
                   <Button color='secondary' variant='outlined' disableElevation>Read more</Button>
                 </Link>
-                {/* <DialogDelete handleDelete={handleDelete} /> */}
-                <Button variant='outlined' onClick={handleClickOpen}>
+                <Button variant='outlined' onClick={() => setDeleteDialogOpen(true)}>
                   <DeleteOutlinedIcon />
                 </Button>
-                <Dialog
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby='alert-dialog-title'
-                  aria-describedby='alert-dialog-description'
-                >
-                  <DialogContent>
-                    <DialogContentText id='alert-dialog-description'>
-                      Are you sure you want to delete this recipe?
-                    </DialogContentText>
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button size='small'>{userId ?
-                      <DeleteOutlinedIcon onClick={() => handleDelete(item.id)}
-                                          style={{ cursor: 'pointer' }}></DeleteOutlinedIcon> : ''}</Button>
-                  </DialogActions>
-                </Dialog>
+                <DialogDelete isOpen={deleteDialogOpen} handleClose={() => setDeleteDialogOpen(false)}
+                              handleDelete={() => handleDeleteBlog(item.id)} />
               </CardContent>
             </Card>
           </Grid>
