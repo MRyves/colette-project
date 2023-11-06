@@ -1,11 +1,8 @@
 import { Dialog, DialogContent, DialogContentText, DialogActions, Button } from '@mui/material';
 import React from 'react';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import User from '../models/user';
+import User from '../models/User';
 
-
-  
-  
 
 interface DialogDeleteProps {
     blogs: any[];

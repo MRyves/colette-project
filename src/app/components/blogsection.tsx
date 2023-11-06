@@ -1,11 +1,20 @@
-import { Button, Card, CardContent, CardMedia, Dialog, DialogActions, DialogContent, DialogContentText, Grid, Rating, Typography } from '@mui/material';
-import React from 'react'
+import {
+    Button,
+    Card,
+    CardContent,
+    CardMedia,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    Grid,
+    Rating,
+    Typography
+} from '@mui/material';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import User from "../models/user";
-import EditIcon from '@mui/icons-material/Edit';
-import DialogDelete from './dialog-delete';
-
+import User from '../models/User';
 
 
 interface BlogSectionProps {
@@ -17,17 +26,17 @@ interface BlogSectionProps {
 
 const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) => {
 
-  const userId = user?.uid
+  const userId = user?.uid;
   const [value, setValue] = React.useState<number | null>(2);
 
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-      setOpen(true);
+    setOpen(true);
   };
 
   const handleClose = () => {
-      setOpen(false);
+    setOpen(false);
   };
 
   return (
@@ -37,44 +46,46 @@ const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) 
           <Grid item xs={12} sm={12} md={6} key={item.id}>
             <Card sx={{ borderRadius: 0, boxShadow: 2 }}>
               <Link to={`/detail/${item.id}`}>
-                <CardMedia component="img" image={item.imgUrl} title={item.title} />
+                <CardMedia component='img' image={item.imgUrl} title={item.title} />
               </Link>
               <CardContent>
                 <Rating
-                  size="small" 
-                  name="simple-controlled"
+                  size='small'
+                  name='simple-controlled'
                   value={value}
                   onChange={(event, newValue) => {
                     setValue(newValue);
                   }}
                 />
-                <Typography variant="h3">{item.title}</Typography>
+                <Typography variant='h3'>{item.title}</Typography>
                 <Typography>{item.lead}</Typography>
                 <p><strong>{item.category}</strong></p>
                 <div>
                   <p>{item.author}</p>
                 </div>
                 <Link to={`/detail/${item.id}`}>
-                  <Button color="secondary" variant="outlined" disableElevation>Read more</Button>
+                  <Button color='secondary' variant='outlined' disableElevation>Read more</Button>
                 </Link>
                 {/* <DialogDelete handleDelete={handleDelete} /> */}
-                <Button variant="outlined" onClick={handleClickOpen}>
+                <Button variant='outlined' onClick={handleClickOpen}>
                   <DeleteOutlinedIcon />
                 </Button>
                 <Dialog
                   open={open}
                   onClose={handleClose}
-                  aria-labelledby="alert-dialog-title"
-                  aria-describedby="alert-dialog-description"
+                  aria-labelledby='alert-dialog-title'
+                  aria-describedby='alert-dialog-description'
                 >
                   <DialogContent>
-                      <DialogContentText id="alert-dialog-description">
-                          Are you sure you want to delete this recipe?
-                      </DialogContentText>
+                    <DialogContentText id='alert-dialog-description'>
+                      Are you sure you want to delete this recipe?
+                    </DialogContentText>
                   </DialogContent>
                   <DialogActions>
-                      <Button onClick={handleClose}>Cancel</Button>
-                      <Button size="small">{ userId ? <DeleteOutlinedIcon onClick={() => handleDelete(item.id)} style={{ cursor: "pointer" }}></DeleteOutlinedIcon> : '' }</Button>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button size='small'>{userId ?
+                      <DeleteOutlinedIcon onClick={() => handleDelete(item.id)}
+                                          style={{ cursor: 'pointer' }}></DeleteOutlinedIcon> : ''}</Button>
                   </DialogActions>
                 </Dialog>
               </CardContent>
@@ -83,7 +94,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) 
         ))}
       </Grid>
     </div>
-  )
-}
+  );
+};
 
 export default BlogSection;

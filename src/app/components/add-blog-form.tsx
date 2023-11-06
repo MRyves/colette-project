@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import User from "../models/user";
+import User from "../models/User";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { FormControl, InputLabel, Select, MenuItem, SelectChangeEvent, Container } from '@mui/material';
 
