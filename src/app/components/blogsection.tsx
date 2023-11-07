@@ -1,9 +1,12 @@
-import { Button, Card, CardContent, CardMedia, Grid, Rating, Typography } from '@mui/material';
+import { Button, Card, CardContent, CardMedia, Grid, Rating, Stack, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import User from '../models/User';
 import DialogDelete from './dialog-delete';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { useState } from 'react';
+import CookieIcon from '@mui/icons-material/Cookie';
+
 
 
 interface BlogSectionProps {
@@ -16,14 +19,20 @@ interface BlogSectionProps {
 const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) => {
 
   const userId = user?.uid;
-  const [value, setValue] = React.useState<number | null>(2);
+  const [value, setValue] = React.useState<number | null>(null);
+  console.log({value});
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>, newValue: number | null) => {
+    setValue(newValue);
+  };
 
   const handleDeleteBlog = (id: number) => {
     // TODO: delete logic
     console.log('Delete blog: ', id);
     setDeleteDialogOpen(false);
   };
+
 
   return (
     <div>
@@ -35,14 +44,13 @@ const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) 
                 <CardMedia component='img' image={item.imgUrl} title={item.title} />
               </Link>
               <CardContent>
+                <Stack></Stack>
                 <Rating
                   size='small'
                   name='simple-controlled'
                   value={value}
-                  onChange={(event, newValue) => {
-                    setValue(newValue);
-                  }}
-                />
+                  // onChange={handleChange}
+                  />
                 <Typography variant='h3'>{item.title}</Typography>
                 <Typography>{item.lead}</Typography>
                 <Link to={`/detail/${item.id}`}>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, TextField, Typography } from '@mui/material'
+import { Button, Rating, TextField, Typography } from '@mui/material'
 
 
 
@@ -24,6 +24,7 @@ const AddCommentForm: React.FC<AddCommentFormProps>  = ({submitForm}) => {
 
     const [form, setForm] = useState(initialState);
     const {nickname, comment} = form;
+    const [value, setValue] = React.useState<number | null>(null);
 
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,6 +48,12 @@ const AddCommentForm: React.FC<AddCommentFormProps>  = ({submitForm}) => {
         <div>
             <Typography variant="h2">Comments</Typography>
             <form onSubmit={handleSubmit}>
+                <Rating
+                  size='small'
+                  name='simple-controlled'
+                  value={value}
+                  // onChange={handleChange}
+                  />
                 <TextField
                     margin="normal"
                     required

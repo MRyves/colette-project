@@ -4,8 +4,12 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import User from "../models/User";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
-import { FormControl, InputLabel, Select, MenuItem, SelectChangeEvent, Container } from '@mui/material';
+import { FormControl, InputLabel, Select, MenuItem, SelectChangeEvent, Container, Autocomplete, Stack } from '@mui/material';
 
+
+
+
+  
 
 interface AddBlogFormProps {
     user?: User;
@@ -67,20 +71,6 @@ const AddBlogForm: React.FC<AddBlogFormProps>  = ({uploadProcess, setFile, submi
             submitForm(form);
         }
     };
-    // const tags = [
-    //     { title: 'Herbst' },
-    //     { title: 'Weihnachten' },
-    //     { title: 'Geburtstag' },
-    //     { title: 'Halloween' },
-    //     { title: 'Ostern' },
-    //     { title: 'Apéro' },
-    //     { title: 'Hauptgang' },
-    //     { title: 'Dessert' },
-    //     { title: 'Vegetarisch' },
-    //     { title: 'Vegan' },
-    //     { title: 'Festlich' },
-    //     { title: 'Gebäck' },
-    //   ];
     
     return (
         <div>
@@ -116,23 +106,22 @@ const AddBlogForm: React.FC<AddBlogFormProps>  = ({uploadProcess, setFile, submi
                         ))}
                     </Select>
                 </FormControl>
-                {/* <Stack spacing={3} sx={{ width: 500 }}>
+                <Stack>
                     <Autocomplete
-                        multiple
-                        id="tags-outlined"
+                    fullWidth
+                    multiple
+                        id="tags-standard"
                         options={tags}
                         getOptionLabel={(option) => option.title}
-                        defaultValue={[tags[13]]}
-                        filterSelectedOptions
                         renderInput={(params) => (
                         <TextField
                             {...params}
-                            label="filterSelectedOptions"
-                            placeholder="Favorites"
+                            variant="standard"
+                            label="Tags"
                         />
                         )}
                     />
-                </Stack> */}
+                </Stack>
                 <TextField
                     margin="normal"
                     required
@@ -180,7 +169,20 @@ const AddBlogForm: React.FC<AddBlogFormProps>  = ({uploadProcess, setFile, submi
     )
 }
 
-
+const tags = [
+  { title: 'Gebäck' },
+  { title: 'Frühling' },
+  { title: 'Ostern' },
+  { title: 'Weihnachten' },
+  { title: 'Halloween' },
+  { title: 'Herbst' },
+  { title: 'Geburtstag' },
+  { title: 'Vegetarisch' },
+  { title: 'Vegan' },
+  { title: 'Frühstück' },
+  { title: 'Apéro' },
+  { title: 'Dessert' },
+];
 
   
 export default AddBlogForm

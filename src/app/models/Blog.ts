@@ -8,6 +8,8 @@ export default interface Blog {
   title: string;
   author: string;
   lead: string;
+  category: string;
+  tags: string;
   description: string;
   ingredients: string;
 }
