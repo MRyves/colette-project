@@ -77,7 +77,9 @@ const AddBlogForm: React.FC<AddBlogFormProps>  = ({uploadProcess, setFile, submi
     //     { title: 'Hauptgang' },
     //     { title: 'Dessert' },
     //     { title: 'Vegetarisch' },
+    //     { title: 'Vegan' },
     //     { title: 'Festlich' },
+    //     { title: 'Gebäck' },
     //   ];
     
     return (

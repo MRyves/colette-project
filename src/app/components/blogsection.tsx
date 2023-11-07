@@ -45,16 +45,9 @@ const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) 
                 />
                 <Typography variant='h3'>{item.title}</Typography>
                 <Typography>{item.lead}</Typography>
-                <p><strong>{item.category}</strong></p>
-                <div>
-                  <p>{item.author}</p>
-                </div>
                 <Link to={`/detail/${item.id}`}>
                   <Button color='secondary' variant='outlined' disableElevation>Read more</Button>
                 </Link>
-                <Button variant='outlined' onClick={() => setDeleteDialogOpen(true)}>
-                  <DeleteOutlinedIcon />
-                </Button>
                 <DialogDelete isOpen={deleteDialogOpen} handleClose={() => setDeleteDialogOpen(false)}
                               handleDelete={() => handleDeleteBlog(item.id)} />
               </CardContent>

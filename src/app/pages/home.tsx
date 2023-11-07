@@ -52,14 +52,14 @@ const Home = () => {
 
   return (
     <div>
-      <Typography variant="h1">Welcome, foodlover!</Typography>
-      <Typography>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam.</Typography>
       <Typography variant="h2">Recently added</Typography>
       <Grid container spacing={5}>
         <Grid item xs={8}>
           <BlogSection blogs={blogs} user={user} handleDelete={handleDelete} />
         </Grid>
         <Grid item xs={4}>
+          <Typography variant="h1">Welcome, foodlover!</Typography>
+          <Typography>Lorem ipsum dolor sit et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam.</Typography>
           <TextField id="outlined-basic" label="Search" variant="outlined" />
           <Card>
             <CardContent component="div">

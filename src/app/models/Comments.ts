@@ -1,6 +1,6 @@
 interface Comment {
   readonly uid: string;
-  authorName: string;
+  nickname: string;
   comment: string;
 }
 

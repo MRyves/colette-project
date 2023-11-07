@@ -22,7 +22,7 @@ const myTheme = createTheme({
         },
         h1: {
             fontFamily: 'Oswald, sans-serif',
-            fontSize: 45,
+            fontSize: 30,
             marginBottom: 20,
             fontWeight: 400,
             textTransform: "uppercase",

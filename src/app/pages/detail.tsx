@@ -50,12 +50,12 @@ const Detail = () => {
       setBlog(blogDetail.data() as Blog);
       setComments(commentsRaw.docs.map(doc => ({
         uid: doc.id,
-        authorName: doc.data().authorName,
+        nickname: doc.data().nickname,
         comment: doc.data().comment
       })));
       console.log('comments: ', commentsRaw.docs.map(doc => ({
         uid: doc.id,
-        authorName: doc.data().authorName,
+        nickname: doc.data().nickname,
         comment: doc.data().comment
       })));
     } catch (error) {
@@ -72,6 +72,13 @@ const Detail = () => {
           <CardMedia component='img' image={blog?.imgUrl} title={blog?.title} />
           <div>{blog?.description}</div>
           <AddCommentForm submitForm={createComment} />
+          <Typography variant='h3'>Hier sollten die Kommentarte erscheinen.</Typography>
+          {comments.map((comment) => (
+            <Card key={comment.uid} variant='outlined'>
+              <Typography>von {comment.nickname}</Typography>
+              <Typography>{comment.comment}</Typography>
+            </Card>
+          ))}
         </Grid>
         <Grid item xs={4}>
           <Card>
@@ -81,16 +88,9 @@ const Detail = () => {
           </Card>
           <Typography>{blog?.lead}</Typography>
           <Typography>{blog?.timestamp.toDate().toDateString()}</Typography>
-
           <Typography variant='caption'>by {blog?.author}</Typography>
         </Grid>
       </Grid>
-      <Typography variant='h3'>Hier sollten die Kommentarte erscheinen.</Typography>
-      <Card variant='outlined'>
-        <Typography>Kommentare...</Typography>
-        {/* <Typography>{comments.comment}</Typography>
-          <Typography>{comments.commentaryname}</Typography> */}
-      </Card>
     </div>
   );
 };

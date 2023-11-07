@@ -9,12 +9,12 @@ interface AddCommentFormProps {
 }
 
 export interface CommentForm {
-    commentaryname: string,
+    nickname: string,
     comment: string,
 };
 
 const initialState = {
-    commentaryname: "",
+    nickname: "",
     comment: "",
 };
 
@@ -23,7 +23,7 @@ const initialState = {
 const AddCommentForm: React.FC<AddCommentFormProps>  = ({submitForm}) => {
 
     const [form, setForm] = useState(initialState);
-    const {commentaryname, comment} = form;
+    const {nickname, comment} = form;
 
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +36,7 @@ const AddCommentForm: React.FC<AddCommentFormProps>  = ({submitForm}) => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (commentaryname && comment) {
+        if (nickname && comment) {
             submitForm(form);
         }
     };
@@ -51,11 +51,11 @@ const AddCommentForm: React.FC<AddCommentFormProps>  = ({submitForm}) => {
                     margin="normal"
                     required
                     fullWidth
-                    id="commentaryname"
+                    id="nickname"
                     label="Your name"
-                    name="commentaryname"
-                    autoComplete="commentaryname"
-                    value={commentaryname}
+                    name="nickname"
+                    autoComplete="nickname"
+                    value={nickname}
                     onChange={handleChange}
                     autoFocus
                 />
