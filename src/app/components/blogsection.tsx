@@ -53,6 +53,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) 
                   />
                 <Typography variant='h3'>{item.title}</Typography>
                 <Typography>{item.lead}</Typography>
+                <Typography><strong>{item.category}</strong></Typography>
                 <Link to={`/detail/${item.id}`}>
                   <Button color='secondary' variant='outlined' disableElevation>Read more</Button>
                 </Link>

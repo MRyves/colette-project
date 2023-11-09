@@ -4,12 +4,9 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import User from "../models/User";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
-import { FormControl, InputLabel, Select, MenuItem, SelectChangeEvent, Container, Autocomplete, Stack } from '@mui/material';
+import { FormControl, SelectChangeEvent, Container, Autocomplete, Stack, FormControlLabel, Radio, RadioGroup } from '@mui/material';
 
 
-
-
-  
 
 interface AddBlogFormProps {
     user?: User;
@@ -34,11 +31,6 @@ const initialState = {
     description: "",
     ingredients: "",
 };
-
-const categoryoption = [
-    "Kochen",
-    "Backen",
-];
 
 const AddBlogForm: React.FC<AddBlogFormProps>  = ({uploadProcess, setFile, submitForm}) => {
 
@@ -89,22 +81,17 @@ const AddBlogForm: React.FC<AddBlogFormProps>  = ({uploadProcess, setFile, submi
                     value={title}
                     onChange={handleChange}
                 />
-                <FormControl fullWidth>
-                    <InputLabel id="category">Category</InputLabel>
-                    <Select
-                        fullWidth
-                        labelId="category-label"
-                        id="demo-select-small"
+                <FormControl>
+                    <RadioGroup
+                        row
+                        aria-labelledby="demo-row-radio-buttons-group-label"
+                        name="row-radio-buttons-group"
                         value={category}
-                        label="Category"
                         onChange={onCategoryChange}
-                        >
-                        {categoryoption.map((option, index) => (
-                            <MenuItem value={option} key={index}>
-                                {option}
-                            </MenuItem>
-                        ))}
-                    </Select>
+                    >
+                    <FormControlLabel value="Kochen" control={<Radio />} label="Kochen" />
+                       <FormControlLabel value="Backen" control={<Radio />} label="Backen" />
+                    </RadioGroup>
                 </FormControl>
                 <Stack>
                     <Autocomplete
