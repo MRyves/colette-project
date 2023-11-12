@@ -63,6 +63,15 @@ const Detail = () => {
     }
   };
 
+  const formatTimestamp = (timestamp: any) => {
+    if (timestamp && timestamp.toDate) {
+      return timestamp.toDate().toLocaleString();
+    }
+    return '';
+  };
+
+
+
   return (
     <div>
       <Typography align='center' variant='h1'>{blog?.title}</Typography>
@@ -70,9 +79,9 @@ const Detail = () => {
       <Grid container spacing={8}>
         <Grid item xs={8}>
           <CardMedia component='img' image={blog?.imgUrl} title={blog?.title} />
+          <Typography>{blog?.timestamp ? formatTimestamp(blog.timestamp) : ''}</Typography>
           <div>{blog?.description}</div>
           <AddCommentForm submitForm={createComment} />
-          <Typography variant='h3'>Hier sollten die Kommentarte erscheinen.</Typography>
           {comments.map((comment) => (
             <Card key={comment.uid} variant='outlined'>
               <Typography>von {comment.nickname}</Typography>

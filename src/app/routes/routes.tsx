@@ -8,11 +8,13 @@ import Detail from '../pages/detail';
 import Edit from '../pages/edit';
 import SignIn from '../pages/login';
 import { PrivateRoutes } from "../components/private-routes";
+import Profile from '../pages/profile';
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/profile" element={<Profile user={null} />} />
       <Route element={<PrivateRoutes />}>
         <Route path="/create" element={<Create />} />
         <Route path="/edit/:id" element={<Edit />} />

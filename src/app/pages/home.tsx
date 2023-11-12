@@ -2,9 +2,10 @@ import { DocumentData, collection, deleteDoc, doc, onSnapshot } from 'firebase/f
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase-config';
 import BlogSection from '../components/blogsection';
-import { Card, CardContent, Grid, TextField, Typography } from '@mui/material';
+import { Card, CardContent, CardMedia, Grid, TextField, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const user = useSelector((state: RootState) => state.auth.currentUser);
@@ -46,15 +47,26 @@ const Home = () => {
     }
   };
 
+  const latestBlog = blogs.length > 0 ? blogs[0] : null;
 
 
   console.log("blogs", blogs);
 
   return (
     <div>
-      <Typography variant="h2">Recently added</Typography>
-      <Grid container spacing={5}>
+      <Grid container spacing={8}>
         <Grid item xs={8}>
+          {latestBlog && (
+            <Card sx={{ borderRadius: 0, boxShadow: 2 }}>
+              <Link to={`/detail/${latestBlog.id}`}>
+                <CardMedia component='img' image={latestBlog.imgUrl} title={latestBlog.title} />
+              </Link>
+              <CardContent>
+                <Typography variant='h3'>{latestBlog.title}</Typography>
+                <Typography>{latestBlog.lead}</Typography>
+                </CardContent>
+            </Card>
+          )}
           <BlogSection blogs={blogs} user={user} handleDelete={handleDelete} />
         </Grid>
         <Grid item xs={4}>

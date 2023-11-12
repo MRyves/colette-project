@@ -3,6 +3,7 @@ import {User} from 'firebase/auth';
 import { AppBar, Container, Grid, Toolbar, Typography } from '@mui/material';
 import Navigation from './navigation';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 
@@ -16,20 +17,25 @@ const Header: React.FC<HeaderProps> = ({ user, handleLogout }) => {
     const [active, setActive] = useState("home");
 
     return (
-        <AppBar position="static">
-            <Toolbar sx={{ flexWrap: 'wrap' }}>
+        <>
             <Container maxWidth="lg">
                 <Grid container spacing={3}>
                     <Grid item xs>
                         <Typography>LOGO</Typography>
                     </Grid>
                     <Grid item xs>
-                    <Navigation user={null} setActive={setActive} />
+                        <Link to={'/profile'}>Profile</Link>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </Container>
-        </Toolbar>
-    </AppBar>
-)}
+            </Container>
+            <AppBar position="static">
+                <Container maxWidth="lg">
+                    <Toolbar sx={{ flexWrap: 'wrap' }}>
+                        <Navigation user={user} setActive={setActive} />
+                    </Toolbar>
+                </Container>
+            </AppBar>
+        </>
+    )}
 
 export default Header

@@ -66,9 +66,6 @@ export const LoginForm: React.FC<LoginProps> = ({handleSubmit}) => {
         <CssBaseline />
         <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
             <Typography variant="h1">{!isSignUpMode ? 'Sign-In' : 'Sign-Up'}</Typography>
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                <p>Icon?</p>
-            </Avatar>
             <form onSubmit={handleFormSubmit}>
                 {isSignUpMode && (
                     <SignUpForm firstName={firstName} lastName={lastName} handleChange={handleChange}/>
