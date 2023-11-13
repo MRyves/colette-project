@@ -43,12 +43,19 @@ function useBlogs() {
       setError((e as Error).message);
     }
   }
-  const queryBlogs = (uid?: string) => {
+
+  function queryCategoryBlog(category: string) {
+
+  }
+
+  const queryBlogs = ({uid, category} : {uid?: string, category?: string} = {}) => {
     setLoading(true);
-    if (!uid) {
+    if (!uid && !category) {
       queryAllBlogs();
-    } else {
+    } else if(!!uid && !category) {
       querySingleBlog(uid);
+    } else if (!!category) {
+      queryCategoryBlog(category)
     }
     setLoading(false);
   };

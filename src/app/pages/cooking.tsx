@@ -1,8 +1,9 @@
 import { Typography, Grid } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import BlogSection from '../components/blogsection'
 import { DocumentData, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase-config';
+import useBlogs from '../hooks/useBlogs';
 
 interface CookingProps {
   category: string;
@@ -11,6 +12,12 @@ interface CookingProps {
 
 
 const Cooking = () => {
+  const {queryBlogs} = useBlogs();
+
+  useEffect(() => {
+    queryBlogs({category: 'cooking'});
+  }, []);
+
   return (
     <div>Cooking</div>
   )
