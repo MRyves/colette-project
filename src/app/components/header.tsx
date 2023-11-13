@@ -2,7 +2,6 @@ import React from 'react'
 import { AppBar, Container, Grid, Toolbar, Typography } from '@mui/material';
 import Navigation from './navigation';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import User from '../models/User';
 
 interface HeaderProps {
@@ -12,7 +11,6 @@ interface HeaderProps {
 
   
 const Header: React.FC<HeaderProps> = ({ user, handleLogout }) => {
-    const [active, setActive] = useState("home");
 
     return (
         <>
@@ -21,15 +19,12 @@ const Header: React.FC<HeaderProps> = ({ user, handleLogout }) => {
                     <Grid item xs>
                         <Typography>LOGO</Typography>
                     </Grid>
-                    <Grid item xs>
-                        <Link to={'/profile'}>Profile</Link>
-                    </Grid>
                 </Grid>
             </Container>
             <AppBar position="static">
                 <Container maxWidth="lg">
                     <Toolbar sx={{ flexWrap: 'wrap' }}>
-                        <Navigation user={user} setActive={setActive} />
+                        <Navigation user={user} />
                     </Toolbar>
                 </Container>
             </AppBar>

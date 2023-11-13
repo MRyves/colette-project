@@ -4,7 +4,6 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
@@ -12,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase-config';
 import User from '../models/User';
+import PersonIcon from '@mui/icons-material/Person';
 
 interface NavigationProps {
   user: User | undefined;
@@ -25,7 +25,6 @@ const pages = [
   { label: 'Baking', to: '/baking' },
   { label: 'Create', to: '/create' }
 ];
-const settings = ['Profile', 'Logout'];
 
 const Navigation: React.FC<NavigationProps> = ({ user, handleLogout, setActive }) => {
   const userId = user?.uid;
@@ -120,15 +119,17 @@ const Navigation: React.FC<NavigationProps> = ({ user, handleLogout, setActive }
             {page.label}
           </Button>
         ))}
-        {userId ? <Button sx={{ my: 2, color: 'black', display: 'block' }}
-                          onClick={onLogoutClick}>Logout</Button> :
-          <Button component={Link} sx={{ my: 2, color: 'black', display: 'block' }} to={'/login'}>Login</Button>}
       </Box>
+      {!userId ? (
+        <IconButton>
+          <PersonIcon />
+        </IconButton>
+      ) : ""}
       {userId ? (
         <Box sx={{ flexGrow: 0 }}>
           <Tooltip title='Open settings'>
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
+              <PersonIcon />
             </IconButton>
           </Tooltip>
           <Menu
@@ -147,14 +148,13 @@ const Navigation: React.FC<NavigationProps> = ({ user, handleLogout, setActive }
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
-            {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Typography textAlign='center'>{setting}</Typography>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Link to={'/profile'}>Profil</Link>
+                <Link onClick={onLogoutClick} to={'/'}>Logout</Link>
               </MenuItem>
-            ))}
           </Menu>
         </Box>
-      ) : <div>?????</div>}
+      ) : <Button component={Link} sx={{ my: 2, color: 'black', display: 'block' }} to={'/login'}>Login</Button>}
     </>
   );
 };

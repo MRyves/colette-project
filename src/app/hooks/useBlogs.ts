@@ -19,12 +19,13 @@ function useBlogs() {
           blogs.push({
             uid: doc.id,
             title: documentData.title,
+            category: documentData.category,
+            ingredients: documentData.lead,
             lead: documentData.lead,
+            description: documentData.lead,
             author: documentData.author,
             imgUrl: documentData.imgUrl,
             timestamp: documentData.timestamp,
-            category: documentData.category
-            // ....
           } as Blog);
         });
         setBlogs(blogs);
@@ -44,21 +45,32 @@ function useBlogs() {
     }
   }
 
-  function queryCategoryBlog(category: string) {
+//   function queryCategoryBlog(category: string) {
+// //
+//   }
 
-  }
-
-  const queryBlogs = ({uid, category} : {uid?: string, category?: string} = {}) => {
+  const queryBlogs = ({uid} : {uid?: string} = {}) => {
     setLoading(true);
-    if (!uid && !category) {
+    if (!uid) {
       queryAllBlogs();
-    } else if(!!uid && !category) {
+    } else {
       querySingleBlog(uid);
-    } else if (!!category) {
-      queryCategoryBlog(category)
     }
     setLoading(false);
   };
+
+
+  // const queryBlogs = ({uid, category} : {uid?: string, category?: string} = {}) => {
+  //   setLoading(true);
+  //   if (!uid && !category) {
+  //     queryAllBlogs();
+  //   } else if(!!uid && !category) {
+  //     querySingleBlog(uid);
+  //   } else if (!!category) {
+  //     queryCategoryBlog(category)
+  //   }
+  //   setLoading(false);
+  // };
 
   const deleteBlog = async (uid: string) => {
     try {

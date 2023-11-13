@@ -32,12 +32,12 @@ const Detail = () => {
   };
 
 
-  useEffect(() => {
-    if(blogId){
-      queryBlogs(blogId);
-      getComments();
-    }
-  }, [blogId]);
+  // useEffect(() => {
+  //   if(blogId){
+  //     queryBlogs(blogId);
+  //     getComments();
+  //   }
+  // }, [blogId]);
 
   const getComments = async () => {
     if (!blogId) {

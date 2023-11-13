@@ -65,13 +65,9 @@ const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) 
               </Grid>
               <Grid item xs={6} textAlign={'right'}>
                 <DeleteOutlinedIcon onClick={handleClickOpen}></DeleteOutlinedIcon>
-                {/* <DeleteOutlinedIcon onClick={() => handleDelete(item.id)} style={{ cursor: "pointer" }}></DeleteOutlinedIcon> */}
               </Grid>
             </Grid>
-            {/* { !!userId ? <DeleteOutlinedIcon onClick={() => handleDelete(item.id)} style={{ cursor: "pointer" }}></DeleteOutlinedIcon> : '' } */}
-
-            <DialogDelete isOpen={deleteDialogOpen} handleClose={() => setDeleteDialogOpen(false)}
-                          handleDelete={() => handleDeleteBlog(item.uid)} />
+            <DialogDelete isOpen={deleteDialogOpen} handleClose={() => setDeleteDialogOpen(false)} handleDelete={() => handleDeleteBlog(item.uid)} />
           </Grid>
         ))}
       </Grid>
