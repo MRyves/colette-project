@@ -8,22 +8,8 @@ import Edit from '../pages/edit';
 import SignIn from '../pages/login';
 import { PrivateRoutes } from '../components/private-routes';
 import Profile from '../pages/profile';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../store/store';
-import { auth } from '../firebase-config';
-import { logout, setUser } from '../store/auth/auth-slice';
-import User from '../models/User';
 
 const AppRoutes = () => {
-  const dispatch = useDispatch<AppDispatch>();
-
-  auth.onAuthStateChanged(user => {
-    if (user) {
-      dispatch(setUser({ uid: user.uid, email: user.email, displayName: user.displayName } as User));
-    } else {
-      dispatch(logout());
-    }
-  });
 
   return (
     <Routes>

@@ -12,7 +12,11 @@ const SignIn: React.FC = () => {
 
   const handleSubmit = (cred: AuthFormState) => {
     handleAuthForm(cred)
-      .then(() => navigate(''));
+      .then((success) => {
+        if(success){
+          navigate('/');
+        }
+      });
   };
 
   return (

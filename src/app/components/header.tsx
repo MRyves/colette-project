@@ -1,14 +1,12 @@
 import React from 'react'
-import {User} from 'firebase/auth';
 import { AppBar, Container, Grid, Toolbar, Typography } from '@mui/material';
 import Navigation from './navigation';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
-
+import User from '../models/User';
 
 interface HeaderProps {
-    user: User | null;
+    user: User | undefined;
     handleLogout?: () => void;
   }
 

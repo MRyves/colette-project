@@ -42,11 +42,13 @@ export default function useAuth() {
       } else {
         await login(authForm.email, authForm.password);
       }
+      return true;
     } catch (error) {
       setError((error as Error).message);
     } finally {
       setLoading(false);
     }
+    return false;
   }
 
   return {
