@@ -1,50 +1,22 @@
-import { collection, deleteDoc, doc, DocumentData, onSnapshot } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react';
-import { db } from '../firebase-config';
+import React, { useEffect } from 'react';
 import BlogSection from '../components/blogsection';
 import { Card, CardContent, CardMedia, Grid, TextField, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { Link } from 'react-router-dom';
+import useBlogs from '../hooks/useBlogs';
 
 const Home = () => {
   const user = useSelector((state: RootState) => state.auth.currentUser);
-  const [loading, setLoading] = useState(true);
-  const [blogs, setBlogs] = useState<DocumentData[]>([]);
-  const [open, setOpen] = React.useState(false);
+  const { blogs, queryBlogs, deleteBlog, loading, error } = useBlogs();
 
   useEffect(() => {
-    const unsub = onSnapshot(
-      collection(db, 'blogs'),
-      (snapshot) => {
-        const list: DocumentData[] = [];
-        snapshot.docs.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
-        });
-        setBlogs(list);
-        setLoading(false);
-      },
-      (error) => {
-        console.log(error);
-        setLoading(false);
-      }
-    );
-
-    return () => {
-      unsub();
-    };
+    queryBlogs();
   }, []);
 
-  const handleDelete = async (id: any) => {
-    if (window.confirm('Are you sure wanted to delete that blog ?')) {
-      try {
-        setLoading(true);
-        await deleteDoc(doc(db, 'blogs', id));
-        setLoading(false);
-      } catch (err) {
-        console.log(err);
-      }
-    }
+  const handleDelete = async (uid: string) => {
+    console.log('deleting id:', uid);
+    await deleteBlog(uid);
   };
 
   const latestBlog = blogs.length > 0 ? blogs[0] : null;
@@ -58,7 +30,7 @@ const Home = () => {
         <Grid item xs={8}>
           {latestBlog && (
             <Card sx={{ borderRadius: 0, boxShadow: 2 }}>
-              <Link to={`/detail/${latestBlog.id}`}>
+              <Link to={`/detail/${latestBlog.uid}`}>
                 <CardMedia component='img' image={latestBlog.imgUrl} title={latestBlog.title} />
               </Link>
               <CardContent>
@@ -67,7 +39,7 @@ const Home = () => {
               </CardContent>
             </Card>
           )}
-          <BlogSection blogs={blogs} user={user} handleDelete={handleDelete} />
+          <BlogSection blogs={blogs.slice(1, blogs.length - 1)} user={user} handleDelete={handleDelete} />
         </Grid>
         <Grid item xs={4}>
           <Typography variant='h1'>Welcome, foodlover!</Typography>

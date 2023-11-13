@@ -4,13 +4,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { db } from '../firebase-config';
 import { Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import AddCommentForm from '../components/add-comment-form';
-import Blog from '../models/Blog';
 import { Comments } from '../models/Comments';
+import useBlogs from '../hooks/useBlogs';
 
 const Detail = () => {
 
   const { blogId } = useParams();
-  const [blog, setBlog] = useState<Blog | null>(null);
+  const {blogs, queryBlogs} = useBlogs();
   const [comments, setComments] = useState<Comments>([]);
   const navigate = useNavigate();
 
@@ -33,10 +33,13 @@ const Detail = () => {
 
 
   useEffect(() => {
-    blogId && getBlogDetail();
+    if(blogId){
+      queryBlogs(blogId);
+      getComments();
+    }
   }, [blogId]);
 
-  const getBlogDetail = async () => {
+  const getComments = async () => {
     if (!blogId) {
       return;
     }
@@ -45,9 +48,7 @@ const Detail = () => {
     const commentsRef = collection(db, `blogs`, blogId, 'comments');
 
     try {
-      const blogDetail = await getDoc(blogRef);
       const commentsRaw = await getDocs(commentsRef);
-      setBlog(blogDetail.data() as Blog);
       setComments(commentsRaw.docs.map(doc => ({
         uid: doc.id,
         nickname: doc.data().nickname,
@@ -74,13 +75,13 @@ const Detail = () => {
 
   return (
     <div>
-      <Typography align='center' variant='h1'>{blog?.title}</Typography>
-      <Typography variant='caption'>by {blog?.author}</Typography>
+      <Typography align='center' variant='h1'>{blogs[0]?.title}</Typography>
+      <Typography variant='caption'>by {blogs[0]?.author}</Typography>
       <Grid container spacing={8}>
         <Grid item xs={8}>
-          <CardMedia component='img' image={blog?.imgUrl} title={blog?.title} />
-          <Typography>{blog?.timestamp ? formatTimestamp(blog.timestamp) : ''}</Typography>
-          <div>{blog?.description}</div>
+          <CardMedia component='img' image={blogs[0]?.imgUrl} title={blogs[0]?.title} />
+          <Typography>{blogs[0]?.timestamp ? formatTimestamp(blogs[0]?.timestamp) : ''}</Typography>
+          <div>{blogs[0]?.description}</div>
           <AddCommentForm submitForm={createComment} />
           {comments.map((comment) => (
             <Card key={comment.uid} variant='outlined'>
@@ -92,12 +93,12 @@ const Detail = () => {
         <Grid item xs={4}>
           <Card>
             <CardContent component='div'>
-              <Typography>{blog?.ingredients}</Typography>
+              <Typography>{blogs[0]?.ingredients}</Typography>
             </CardContent>
           </Card>
-          <Typography>{blog?.lead}</Typography>
-          <Typography>{blog?.timestamp.toDate().toDateString()}</Typography>
-          <Typography variant='caption'>by {blog?.author}</Typography>
+          <Typography>{blogs[0]?.lead}</Typography>
+          <Typography>{blogs[0]?.timestamp.toDate().toDateString()}</Typography>
+          <Typography variant='caption'>by {blogs[0]?.author}</Typography>
         </Grid>
       </Grid>
     </div>
