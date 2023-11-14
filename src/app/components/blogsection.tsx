@@ -54,18 +54,22 @@ const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) 
               value={value}
               // onChange={handleChange}
             />
-            <Typography variant='h3'>{item.title}</Typography>
+            <Link to={`/detail/${item.uid}`}>
+              <Typography variant='h3'>{item.title}</Typography>
+            </Link>
             <Typography>{item.lead}</Typography>
             <Typography><strong>{item.category}</strong></Typography>
             <Grid container>
               <Grid item xs={6}>
                 <Link to={`/detail/${item.uid}`}>
-                  <Button color='secondary' variant='outlined' disableElevation>Read more</Button>
+                  <Button color='secondary' variant='outlined' disableElevation>Zum Rezept</Button>
                 </Link>
               </Grid>
-              <Grid item xs={6} textAlign={'right'}>
-                <DeleteOutlinedIcon onClick={handleClickOpen}></DeleteOutlinedIcon>
-              </Grid>
+              {userId ? (
+                <Grid item xs={6} textAlign={'right'}>
+                  <DeleteOutlinedIcon onClick={handleClickOpen}></DeleteOutlinedIcon>
+                </Grid>
+              ) : ""}
             </Grid>
             <DialogDelete isOpen={deleteDialogOpen} handleClose={() => setDeleteDialogOpen(false)} handleDelete={() => handleDeleteBlog(item.uid)} />
           </Grid>

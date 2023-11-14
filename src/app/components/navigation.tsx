@@ -20,10 +20,9 @@ interface NavigationProps {
 }
 
 const pages = [
-  { label: 'Home', to: '/' },
-  { label: 'Cooking', to: '/cooking' },
-  { label: 'Baking', to: '/baking' },
-  { label: 'Create', to: '/create' }
+  { label: 'Startseite', to: '/' },
+  { label: 'Kochen', to: '/cooking' },
+  { label: 'Bachen', to: '/baking' },
 ];
 
 const Navigation: React.FC<NavigationProps> = ({ user, handleLogout, setActive }) => {
@@ -106,6 +105,7 @@ const Navigation: React.FC<NavigationProps> = ({ user, handleLogout, setActive }
               </Link>
             </MenuItem>
           ))}
+          <Button component={Link} sx={{ my: 2, color: 'black', display: 'block' }} to={'/create'}>Erstellen</Button>
         </Menu>
       </Box>
       <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -119,7 +119,10 @@ const Navigation: React.FC<NavigationProps> = ({ user, handleLogout, setActive }
             {page.label}
           </Button>
         ))}
-      </Box>
+        {userId ? (
+        <Button component={Link} sx={{ my: 2, color: 'black', display: 'block' }} to={'/create'}>Erstellen</Button>
+        ) : ""}
+        </Box>
       {!userId ? (
         <IconButton>
           <PersonIcon />

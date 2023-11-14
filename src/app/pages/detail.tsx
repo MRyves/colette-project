@@ -31,6 +31,12 @@ const Detail = () => {
     }
   };
 
+  useEffect(() => {
+    queryBlogs();
+  }, []);
+
+
+
 
   // useEffect(() => {
   //   if(blogId){

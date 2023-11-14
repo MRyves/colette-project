@@ -22,11 +22,11 @@ const DialogDelete: React.FC<DialogDeleteProps> = ({ isOpen, handleDelete, handl
       >
         <DialogContent>
           <DialogContentText id='alert-dialog-description'>
-            Are you sure you want to delete this recipe?
+            Bist du sicher, dass du dieses Rezept löschen möchtest?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>Abbrechen</Button>
           <Button onClick={() => handleDelete()} size='small'>
             <DeleteOutlinedIcon />
           </Button>

@@ -1,13 +1,16 @@
-import { createTheme } from "@mui/material";
+import { createTheme, styled } from "@mui/material";
+
+
 
 
 const myTheme = createTheme({
-    typography: {
+        typography: {
         fontFamily: 'Quattrocento, serif',
         body1: {
-            fontSize: 19,
+            fontSize: 18,
+            lineHeight: 1.5,
             marginBottom: 10,
-            fontWeight: 400,
+            fontWeight: 300,
         },
         body2: {
             fontSize: 17,
@@ -21,33 +24,35 @@ const myTheme = createTheme({
             fontWeight: 600,
         },
         h1: {
-            fontFamily: 'Oswald, sans-serif',
-            fontSize: 30,
+            fontFamily: 'Josefin Sans, sans-serif',
+            fontSize: 32,
             marginBottom: 20,
-            fontWeight: 400,
+            lineHeight: 1.3,
+            fontWeight: 600,
             textTransform: "uppercase",
-            letterSpacing: 2
+            letterSpacing: 1.7
         },
         h2: {
-            fontFamily: 'Oswald, sans-serif',
-            fontWeight: 400,
+            fontFamily: 'Josefin Sans, sans-serif',
+            fontWeight: 600,
             fontSize: 30,
             marginBottom: 10,
             textTransform: "uppercase",
-            letterSpacing: 1,
+            letterSpacing: 1.7
         },
         h3: {
-            fontFamily: 'Oswald, sans-serif',
-            fontWeight: 400,
-            fontSize: 24,
+            fontFamily: 'Josefin Sans, sans-serif',
+            fontWeight: 600,
+            fontSize: 25,
             marginBottom: 10,
             textTransform: "uppercase",
-            letterSpacing: 1
+            letterSpacing: 1.5
         },
         button: {
-            fontFamily: 'Oswald, sans-serif',
+            fontFamily: 'Work Sans, sans-serif',
             fontSize: 16,
             letterSpacing: 1,
+            borderRadius: 0,
         }
     },
     palette: {

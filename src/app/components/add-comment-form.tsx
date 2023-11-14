@@ -46,7 +46,7 @@ const AddCommentForm: React.FC<AddCommentFormProps>  = ({submitForm}) => {
 
     return (
         <div>
-            <Typography variant="h2">Comments</Typography>
+            <Typography variant="h2">Kommentare</Typography>
             <form onSubmit={handleSubmit}>
                 <Rating
                   size='small'
@@ -59,7 +59,7 @@ const AddCommentForm: React.FC<AddCommentFormProps>  = ({submitForm}) => {
                     required
                     fullWidth
                     id="nickname"
-                    label="Your name"
+                    label="Dein Name"
                     name="nickname"
                     autoComplete="nickname"
                     value={nickname}
@@ -72,14 +72,14 @@ const AddCommentForm: React.FC<AddCommentFormProps>  = ({submitForm}) => {
                     fullWidth
                     multiline
                     id="comment"
-                    label="Your comment"
+                    label="Dein Kommentar"
                     name="comment"
                     autoComplete="comment"
                     value={comment}
                     onChange={handleChange}
                     autoFocus
                 />
-                <Button type="submit" variant="outlined">Comment</Button>
+                <Button type="submit" variant="outlined">Kommentieren</Button>
            </form>
         </div>
     )
