@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import useBlogs from '../hooks/useBlogs';
 import BlogSection from '../components/blogsection';
 import User from '../models/User';
-import { Container, Grid, Typography } from '@mui/material';
+import { CardMedia, Grid, Typography } from '@mui/material';
 
 interface BakingProps {
   user?: User;
@@ -38,6 +38,7 @@ const Baking: React.FC<BakingProps> = ({ user }) => {
           </Grid>
         </Grid>
       </Grid>
+      <img src="/images/baking.jpg" alt="Beschreibung des Bildes" />
     </Grid>
   );
 };
