@@ -6,7 +6,6 @@ import { RootState } from '../store/store';
 import { Link } from 'react-router-dom';
 import useBlogs from '../hooks/useBlogs';
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
-import TuneIcon from '@mui/icons-material/Tune';
 
 const Home = () => {
   const user = useSelector((state: RootState) => state.auth.currentUser);
