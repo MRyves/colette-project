@@ -10,6 +10,7 @@ export default interface Blog {
   lead: string;
   category: string;
   tags: string;
+  duration: string;
   description: string;
   ingredients: string;
 }

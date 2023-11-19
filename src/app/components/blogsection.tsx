@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import User from '../models/User';
 import DialogDelete from './dialog-delete';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 
 
 interface BlogSectionProps {
@@ -17,12 +18,8 @@ const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) 
 
   const userId = user?.uid;
   const [value, setValue] = React.useState<number | null>(null);
-  console.log({ value });
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>, newValue: number | null) => {
-    setValue(newValue);
-  };
 
   const handleDeleteBlog = (uid: string) => {
     setDeleteDialogOpen(false);
@@ -32,10 +29,6 @@ const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) 
 
   const handleClickOpen = () => {
     setDeleteDialogOpen(true);
-  };
-
-  const handleClose = () => {
-    setDeleteDialogOpen(false);
   };
 
 
@@ -54,11 +47,20 @@ const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) 
               value={value}
               // onChange={handleChange}
             />
-            <Link to={`/detail/${item.uid}`}>
-              <Typography variant='h3'>{item.title}</Typography>
-            </Link>
+            <Grid container spacing={2} justifyContent={'space-between'}>
+              <Grid item>
+                <Typography variant='h3'>
+                  <Link to={`/detail/${item.uid}`}>{item.title}</Link>
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Stack direction="row" alignItems="top" gap={1}>
+                  <AccessAlarmIcon color='primary' />
+                  <Typography>{blogs[0]?.duration} Min.</Typography>
+                </Stack>
+              </Grid>
+            </Grid>
             <Typography>{item.lead}</Typography>
-            <Typography><strong>{item.category}</strong></Typography>
             <Grid container>
               <Grid item xs={6}>
                 <Link to={`/detail/${item.uid}`}>

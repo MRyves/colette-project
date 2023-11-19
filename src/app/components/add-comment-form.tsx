@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Rating, TextField, Typography } from '@mui/material'
-
-
+import { db } from '../firebase-config';
+import { collection, addDoc } from 'firebase/firestore';
+import { serverTimestamp } from 'firebase/firestore';
 
 
 interface AddCommentFormProps {
@@ -25,6 +26,9 @@ const AddCommentForm: React.FC<AddCommentFormProps>  = ({submitForm}) => {
     const [form, setForm] = useState(initialState);
     const {nickname, comment} = form;
     const [value, setValue] = React.useState<number | null>(null);
+    const [rating, setRating] = useState(0);
+
+
 
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,6 +47,24 @@ const AddCommentForm: React.FC<AddCommentFormProps>  = ({submitForm}) => {
     };
 
 
+    const handleRatingChange = async (event: React.SyntheticEvent, newValue: number | null) => {
+        if (newValue !== null) {
+          setRating(newValue);
+          
+          try {
+            const docRef = await addDoc(collection(db, 'bewertungen'), {
+              bewertung: newValue,
+              zeitstempel: serverTimestamp(),
+            });
+            console.log("Bewertung erfolgreich hinzugefügt mit ID: ", docRef.id);
+          } catch (error) {
+            console.error("Fehler beim Hinzufügen der Bewertung: ", error);
+          }
+        }
+      };
+      
+
+
 
     return (
         <div>
@@ -52,8 +74,8 @@ const AddCommentForm: React.FC<AddCommentFormProps>  = ({submitForm}) => {
                   size='small'
                   name='simple-controlled'
                   value={value}
-                  // onChange={handleChange}
-                  />
+                  onChange={handleRatingChange}
+                />
                 <TextField
                     margin="normal"
                     required

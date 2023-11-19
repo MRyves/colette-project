@@ -19,12 +19,9 @@ const AppRoutes = () => {
         <Route path='/create' element={<Create />} />
         <Route path='/edit/:id' element={<Edit />} />
       </Route>
-      <Route path='/Baking' element={<Baking blogs={[]} handleDelete={function(id: any): void {
-        throw new Error('Function not implemented.');
-      }} />} /> {/* Verwende 'element' statt 'Component' */}
-      <Route path='/Cooking' element={<Cooking />} /> {/* Verwende 'element' statt 'Component' */}
+      <Route path='/Baking' element={<Baking />} />
+      <Route path='/Cooking' element={<Cooking />} />
       <Route path='/detail/:blogId' element={<Detail />} />
-      {/* What is wrong?? <Route path="/detail/:userId" element={<Detail />} /> */}
       <Route path='/login' element={<SignIn />} />
     </Routes>
   );

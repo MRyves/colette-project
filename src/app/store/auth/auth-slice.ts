@@ -1,6 +1,5 @@
 import User from '../../models/User';
 import { createSlice } from '@reduxjs/toolkit';
-import { auth } from '../../firebase-config';
 
 interface AuthState {
   currentUser?: User;

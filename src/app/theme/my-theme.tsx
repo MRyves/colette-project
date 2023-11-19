@@ -1,10 +1,32 @@
-import { createTheme, styled } from "@mui/material";
+import { createTheme } from "@mui/material";
 
 
 
 
 const myTheme = createTheme({
-        typography: {
+    components: {
+        MuiCssBaseline: {
+            styleOverrides: `
+              body {
+                margin: 0;
+              }
+            `,
+          },
+              MuiButton: {
+          styleOverrides: {
+            root: {
+              fontSize: '15px',
+              borderRadius: 0,
+              letterSpacing: 1.4,
+              paddingTop: 12,
+              paddingBottom: 8,
+              paddingLeft: 20,
+              paddingRight: 20,
+            },
+          },
+        },
+    },
+    typography: {
         fontFamily: 'Quattrocento, serif',
         body1: {
             fontSize: 18,
@@ -18,10 +40,11 @@ const myTheme = createTheme({
             color: '#000000',
         },
         caption: {
-            fontSize: 17,
+            fontSize: 25,
+            lineHeight: 1.3,
             marginBottom: 10,
-            color: '#e1ac3b',
-            fontWeight: 600,
+            fontWeight: 700,
+            fontFamily: 'Quattrocento, serif',
         },
         h1: {
             fontFamily: 'Josefin Sans, sans-serif',
@@ -43,10 +66,21 @@ const myTheme = createTheme({
         h3: {
             fontFamily: 'Josefin Sans, sans-serif',
             fontWeight: 600,
-            fontSize: 25,
-            marginBottom: 10,
+            fontSize: 22,
+            marginBottom: 15,
+            marginTop: 4,
             textTransform: "uppercase",
-            letterSpacing: 1.5
+            letterSpacing: 1.1,
+            a: {
+                color: '#000000',
+                textDecoration: 'none',
+              },
+        },
+        h4: {
+            fontSize: 17,
+            marginBottom: 10,
+            color: '#e1ac3b',
+            fontWeight: 600,
         },
         button: {
             fontFamily: 'Work Sans, sans-serif',
@@ -57,12 +91,12 @@ const myTheme = createTheme({
     },
     palette: {
         primary: {
-            main: '#d3e5e7',
-        },
-        secondary: {
+            main: '#aadfdc',
+          },
+          secondary: {
             main: '#000000',
-        },
-        background: {
+          },
+          background: {
             default: '#f5f5f5',
         },
     },

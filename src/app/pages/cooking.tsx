@@ -1,55 +1,45 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useBlogs from '../hooks/useBlogs';
+import BlogSection from '../components/blogsection';
+import User from '../models/User';
+import { Grid, Typography } from '@mui/material';
 
 interface CookingProps {
-  category: string;
+  user?: User;
 }
 
+const Cooking: React.FC<CookingProps> = ({ user }) => {
+  const { blogs, queryBlogs, deleteBlog, loading, error } = useBlogs();
 
+  useEffect(() => {
+    queryBlogs();
+  }, []);
 
-const Cooking = () => {
-  const {queryBlogs} = useBlogs();
-
-  // useEffect(() => {
-  //   queryBlogs({category: 'cooking'});
-  // }, []);
+  const cookingBlogs = blogs.filter((blog) => blog.category === 'Kochen');
 
   return (
-    <div>Cooking</div>
-  )
-}
+    <Grid container direction={'row-reverse'} spacing={{ sm: 4, md: 8 }}>
+      <Grid item xs={12} sm={6} md={4}>
+        <Grid item>
+          <Typography>Tags...</Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant='caption'>«Namnis di consed mi, ut ommoluptam, que nobis int, omnia dolupta quibus»</Typography>
+          </Grid>
+        </Grid>
+      <Grid item xs={12} sm={6} md={8}>
+        <Grid container spacing={4}>
+          <Grid item>
+            <Typography variant='h1'> Kochen</Typography>
+            <Typography>In der Küche treffen Kulturen und Traditionen aufeinander. Jede Region der Welt hat ihre eigenen einzigartigen Gerichte und Zubereitungstechniken, die von Generation zu Generation weitergegeben werden. Das Kochen ermöglicht uns, die Welt zu erkunden, indem wir verschiedene Küchen und kulinarische Traditionen kennenlernen und ausprobieren.</Typography>
+          </Grid>
+          <Grid item>
+          <BlogSection blogs={cookingBlogs} user={user} handleDelete={deleteBlog} />
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+};
 
-
-
-
-// const Cooking: React.FC<CookingProps> = ({ category }) => {
-//   const {user} = useAuth();
-//   const [ setLoading] = useState(true);
-//   const [blogs, setBlogs] = useState<DocumentData[]>([]);
-//   const filteredBlogs = blogs.filter((item) => item.category === category);
-
-//   const handleDelete = async (id: any) => {
-//     if (window.confirm("Are you sure wanted to delete that blog ?")) {
-//       try {
-//         setLoading(true);
-//         await deleteDoc(doc(db, "blogs", id));
-//         setLoading(false);
-//       } catch (err) {
-//         console.log(err);
-//       }
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <Grid item xs={8}>
-//       <Typography>Coming soon...</Typography>
-//       {filteredBlogs.map((item) => (
-//         <BlogSection blogs={blogs} user={user} handleDelete={handleDelete} category="Kochen" />
-//         ))}
-//       </Grid>
-//     </div>
-//   )
-// }
-
-export default Cooking
+export default Cooking;

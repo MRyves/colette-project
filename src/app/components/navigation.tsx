@@ -22,7 +22,7 @@ interface NavigationProps {
 const pages = [
   { label: 'Startseite', to: '/' },
   { label: 'Kochen', to: '/cooking' },
-  { label: 'Bachen', to: '/baking' },
+  { label: 'Backen', to: '/baking' },
 ];
 
 const Navigation: React.FC<NavigationProps> = ({ user, handleLogout, setActive }) => {
@@ -105,7 +105,13 @@ const Navigation: React.FC<NavigationProps> = ({ user, handleLogout, setActive }
               </Link>
             </MenuItem>
           ))}
-          <Button component={Link} sx={{ my: 2, color: 'black', display: 'block' }} to={'/create'}>Erstellen</Button>
+          {userId ? (
+            <MenuItem onClick={handleCloseNavMenu}>
+              <Link to={"/create"}>
+                <Typography textAlign='center'>Erfassen</Typography>
+              </Link>
+            </MenuItem>
+          ) : ""}
         </Menu>
       </Box>
       <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -120,44 +126,9 @@ const Navigation: React.FC<NavigationProps> = ({ user, handleLogout, setActive }
           </Button>
         ))}
         {userId ? (
-        <Button component={Link} sx={{ my: 2, color: 'black', display: 'block' }} to={'/create'}>Erstellen</Button>
+        <Button component={Link} sx={{ my: 2, color: 'black', display: 'block' }} to={'/create'}>Erfassen</Button>
         ) : ""}
         </Box>
-      {!userId ? (
-        <IconButton>
-          <PersonIcon />
-        </IconButton>
-      ) : ""}
-      {userId ? (
-        <Box sx={{ flexGrow: 0 }}>
-          <Tooltip title='Open settings'>
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <PersonIcon />
-            </IconButton>
-          </Tooltip>
-          <Menu
-            sx={{ mt: '45px' }}
-            id='menu-appbar'
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right'
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right'
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
-          >
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Link to={'/profile'}>Profil</Link>
-                <Link onClick={onLogoutClick} to={'/'}>Logout</Link>
-              </MenuItem>
-          </Menu>
-        </Box>
-      ) : <Button component={Link} sx={{ my: 2, color: 'black', display: 'block' }} to={'/login'}>Login</Button>}
     </>
   );
 };

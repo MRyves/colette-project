@@ -4,7 +4,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import User from "../models/User";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
-import { FormControl, SelectChangeEvent, Container, Autocomplete, Stack, FormControlLabel, Radio, RadioGroup } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { FormControl, SelectChangeEvent, Container, Autocomplete, Stack, FormControlLabel, Radio, RadioGroup, IconButton, List, ListItem, ListItemSecondaryAction, ListItemText } from '@mui/material';
 
 
 
@@ -22,6 +23,7 @@ export interface BlogForm {
     lead: string,
     description: string,
     ingredients: string,
+    duration: string,
 };
 
 const initialState = {
@@ -30,14 +32,31 @@ const initialState = {
     category: "",
     description: "",
     ingredients: "",
+    duration: "",
 };
 
 const AddBlogForm: React.FC<AddBlogFormProps>  = ({uploadProcess, setFile, submitForm}) => {
 
     const [form, setForm] = useState(initialState);
-    const {title, category, lead, description, ingredients} = form;
+    const {title, category, lead, duration, description, ingredients} = form;
 
+    const [listItems, setListItems] = useState<string[]>([]);
+    const [listItemText, setListItemText] = useState<string>('');
+  
+    const handleAddListItem = () => {
+      if (listItemText.trim() !== '') {
+        setListItems([...listItems, listItemText]);
+        setListItemText('');
+      }
+    };
+  
+    const handleDeleteListItem = (index: number) => {
+        const updatedList = [...listItems];
+        updatedList.splice(index, 1);
+        setListItems(updatedList);
+      };
 
+      
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = event.target;
         setForm((prevForm) => ({
@@ -59,11 +78,13 @@ const AddBlogForm: React.FC<AddBlogFormProps>  = ({uploadProcess, setFile, submi
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (title && lead && description && ingredients && category) {
+        if (title && lead && description && duration && ingredients && category) {
             submitForm(form);
         }
-    };
-    
+    };          
+
+
+
     return (
         <div>
       <Container component="main" maxWidth="xs">
@@ -74,11 +95,23 @@ const AddBlogForm: React.FC<AddBlogFormProps>  = ({uploadProcess, setFile, submi
                     required
                     fullWidth
                     id="title"
-                    label="Titel"
+                    label="Rezepttitel"
                     name="title"
                     autoComplete="title"
                     autoFocus
                     value={title}
+                    onChange={handleChange}
+                />
+                <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="duration"
+                    label="Zeit"
+                    name="duration"
+                    autoComplete="duration"
+                    autoFocus
+                    value={duration}
                     onChange={handleChange}
                 />
                 <FormControl>
@@ -94,27 +127,58 @@ const AddBlogForm: React.FC<AddBlogFormProps>  = ({uploadProcess, setFile, submi
                     </RadioGroup>
                 </FormControl>
                 <Stack>
-                    <Autocomplete
+                <Autocomplete
                     fullWidth
                     multiple
-                        id="tags-standard"
-                        options={tags}
-                        getOptionLabel={(option) => option.title}
-                        renderInput={(params) => (
+                    id="tags-standard"
+                    options={tags}
+                    getOptionLabel={(option) => option.title}
+                    // onChange={handleTagsChange}
+                    renderInput={(params) => (
                         <TextField
                             {...params}
                             variant="standard"
                             label="Tags"
                         />
-                        )}
-                    />
+                    )}
+                />            
                 </Stack>
+
+                <List>
+                    {listItems.map((item, index) => (
+                        <ListItem key={index}>
+                            <ListItemText primary={item} />
+                            <ListItemSecondaryAction>
+                                <IconButton
+                                    edge="end"
+                                    aria-label="delete"
+                                    onClick={() => handleDeleteListItem(index)}
+                                >
+                                <DeleteIcon />
+                                </IconButton>
+                            </ListItemSecondaryAction>
+                        </ListItem>
+                    ))}
+                </List>
+                <TextField
+                    label="Zutaten"
+                    variant="outlined"
+                    fullWidth
+                    value={listItemText}
+                    onChange={(e) => setListItemText(e.target.value)}
+                />
+                <Button variant="outlined" color="secondary" onClick={handleAddListItem}>
+                    Hinzufügen
+                </Button>
+
+
+
                 <TextField
                     margin="normal"
                     required
                     fullWidth
                     id="outlined-multiline-static"
-                    label="Ingredients"
+                    label="Zutaten"
                     multiline
                     maxRows={4}
                     value={ingredients}
@@ -126,7 +190,7 @@ const AddBlogForm: React.FC<AddBlogFormProps>  = ({uploadProcess, setFile, submi
                     required
                     fullWidth
                     id="outlined-multiline-flexible"
-                    label="lead"
+                    label="Einleitung"
                     multiline
                     maxRows={4}
                     value={lead}
@@ -138,7 +202,7 @@ const AddBlogForm: React.FC<AddBlogFormProps>  = ({uploadProcess, setFile, submi
                     required
                     fullWidth
                     id="outlined-multiline-flexible"
-                    label="Description"
+                    label="Beschreibung"
                     multiline
                     maxRows={4}
                     value={description}
@@ -146,10 +210,10 @@ const AddBlogForm: React.FC<AddBlogFormProps>  = ({uploadProcess, setFile, submi
                     onChange={handleChange}
                 />
                 <Button component="label" variant="outlined" startIcon={<UploadFileIcon />}>
-                    Upload image
+                    Bild hochladen
                     <input type="file" accept=".jpg" hidden onChange={handleFileChange} />
                 </Button>
-                <Button type="submit" variant="outlined" disabled={uploadProcess !== null && uploadProcess < 100}>Create</Button>
+                <Button type="submit" variant="outlined" disabled={uploadProcess !== null && uploadProcess < 100}>Erstellen</Button>
             </form>
             </Container>
         </div>

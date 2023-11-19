@@ -1,28 +1,44 @@
-import React from 'react';
-import { Button, Card, CardContent, CardMedia, Grid, Rating, Stack, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
-import User from '../models/User';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import CookieIcon from '@mui/icons-material/Cookie';
+import React, { useEffect } from 'react';
+import useBlogs from '../hooks/useBlogs';
 import BlogSection from '../components/blogsection';
+import User from '../models/User';
+import { Container, Grid, Typography } from '@mui/material';
 
 interface BakingProps {
-  blogs: any[];
   user?: User;
-  handleDelete: (id: any) => void;
 }
 
-const Baking: React.FC<BakingProps> = ({ blogs, user, handleDelete }) => {
+const Baking: React.FC<BakingProps> = ({ user }) => {
+  const { blogs, queryBlogs, deleteBlog, loading, error } = useBlogs();
 
-  const filteredBlogs = blogs.filter((blog) => blog.category === 'Backen');
+  useEffect(() => {
+    queryBlogs();
+  }, []);
+
+  const bakingBlogs = blogs.filter((blog) => blog.category === 'Backen');
 
   return (
-    <div>
-      <Grid container spacing={5}>
-        {/* Hier wird die BlogSection-Komponente einmal aufgerufen und die gefilterten Blogs als Prop übergeben */}
-        <BlogSection blogs={filteredBlogs} user={user} handleDelete={handleDelete} />
+    <Grid container direction={'row-reverse'} spacing={{ sm: 4, md: 8 }}>
+      <Grid item xs={12} sm={6} md={4}>
+        <Grid item>
+          <Typography>Tags...</Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant='caption'>«Namnis di consed mi, ut ommoluptam, que nobis int, omnia dolupta quibus»</Typography>
+          </Grid>
+        </Grid>
+      <Grid item xs={12} sm={6} md={8}>
+        <Grid container spacing={4}>
+          <Grid item>
+            <Typography variant='h1'> Backen</Typography>
+            <Typography>Das Backen ist nicht nur eine kulinarische Kunst, sondern auch eine herzliche Umarmung für die Sinne. Es ist eine Zeitreise in die Wärme und Geborgenheit unserer Kindheit, als der verlockende Duft von frisch gebackenem Brot oder köstlichen Kuchen die Küche erfüllte und uns ein Lächeln ins Gesicht zauberte.</Typography>
+          </Grid>
+          <Grid item>
+            <BlogSection blogs={bakingBlogs} user={user} handleDelete={deleteBlog} />
+          </Grid>
+        </Grid>
       </Grid>
-    </div>
+    </Grid>
   );
 };
 
