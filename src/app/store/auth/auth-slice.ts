@@ -1,7 +1,7 @@
 import User from '../../models/User';
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
 import { AuthFormState } from '../../components/auth/login-form';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
 import { auth } from '../../firebase-config';
 
 interface AuthState {
@@ -13,13 +13,18 @@ interface AuthState {
 const initialAuthState: AuthState = {
   currentUser: undefined,
   loading: false,
-  error: undefined,
-}
+  error: undefined
+};
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState: initialAuthState,
   reducers: {
+    setUser: (state, action: PayloadAction<User>) => {
+      state.currentUser = action.payload;
+      state.loading = false;
+      state.error = undefined;
+    },
     logout: (state) => {
       state.currentUser = undefined;
       state.loading = false;
@@ -29,50 +34,64 @@ const authSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(login.pending, (state) => {
       state.loading = true;
-    }).addCase(login.fulfilled, (state, action: PayloadAction<User>) => {
-      state.currentUser = action.payload;
+    }).addCase(login.fulfilled, (state) => {
       state.loading = false;
       state.error = undefined;
-    }).addCase(login.rejected, (state, action) => {
-      state.currentUser = undefined
+    }).addCase(login.rejected, (state, action: PayloadAction<any>) => {
+      state.currentUser = undefined;
       state.loading = false;
-      // @ts-ignore
-      state.error = action.payload
-    })
+      state.error = action.payload as string;
+    });
   }
 
 });
 
 export const login = createAsyncThunk(
-  "auth/login",
-  async (credentials: AuthFormState, {rejectWithValue}) => {
-    console.log({credentials});
+  'auth/login',
+  async (credentials: AuthFormState, { rejectWithValue }) => {
     if (!credentials.isSignUpMode) {
       try {
-        const {user} = await signInWithEmailAndPassword(auth, credentials.email, credentials.password);
-        return {uid: user.uid, email: user.email, displayName: user.displayName} as User;
+        await signInWithEmailAndPassword(auth, credentials.email, credentials.password);
       } catch (e) {
         console.error('This account does not exist!');
-        return rejectWithValue("This account does not exists!")
+        return rejectWithValue('This account does not exists!');
       }
     } else {
       try {
-        const userCredential = await createUserWithEmailAndPassword(auth, credentials.email, credentials.password);
-        const user = userCredential.user;
+        const userCredential = await createUserWithEmailAndPassword(auth, credentials.email, credentials.password)
+          .then((userCredentials) => {
+            signOut(auth);
+            return userCredentials;
+          });
+        const {user} = userCredential;
         const displayName = `${credentials.firstName} ${credentials.lastName}`;
         await updateProfile(user, {
-          displayName: displayName,
+          displayName: displayName
         });
-        return {uid: user.uid, email: user.email, displayName: user.displayName} as User;
+        await signInWithEmailAndPassword(auth, credentials.email, credentials.password);
       } catch (error) {
         console.error('Error creating user:', error);
-        return rejectWithValue("This account does not exists!")
+        return rejectWithValue('This account does not exists!');
 
       }
     }
   }
 );
 
-export const {logout} = authSlice.actions;
+export const checkAuthStatus = () => (dispatch: Dispatch) => {
+  return auth.onAuthStateChanged(user => {
+    if (user) {
+      dispatch(authSlice.actions.setUser({
+        uid: user.uid,
+        email: user.email!,
+        displayName: user.displayName || 'Kein Anzeigename!'
+      }));
+    } else {
+      dispatch(authSlice.actions.logout());
+    }
+  });
+};
+
+export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;

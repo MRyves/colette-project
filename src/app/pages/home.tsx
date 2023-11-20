@@ -17,10 +17,14 @@ const Home = () => {
 
   const handleDelete = async (uid: string) => {
     console.log('deleting id:', uid);
+    // 0oSxdqpuyGOIB9TTPp8B
+    // Hx2IkCwwm531ThejKgkr
     await deleteBlog(uid);
   };
 
   const latestBlog = blogs.length > 0 ? blogs[0] : null;
+
+  console.log({blogs});
 
   return (
     <Grid container direction={'row-reverse'} spacing={{ sm: 4, md: 8 }}>

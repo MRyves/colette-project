@@ -1,5 +1,5 @@
 import {configureStore} from "@reduxjs/toolkit";
-import authReducer from "./auth/auth-slice";
+import authReducer, { checkAuthStatus } from './auth/auth-slice';
 
 export const appStore = configureStore({
   reducer: {
@@ -7,6 +7,7 @@ export const appStore = configureStore({
   }
 });
 
+appStore.dispatch(checkAuthStatus());
 
 export type RootState = ReturnType<typeof appStore.getState>;
 export type AppDispatch = typeof appStore.dispatch;
