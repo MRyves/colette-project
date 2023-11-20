@@ -22,19 +22,23 @@ const Cooking: React.FC<CookingProps> = ({ user }) => {
       <Grid item xs={12} sm={6} md={4}>
         <Grid item>
           <Typography>Tags...</Typography>
-          </Grid>
-          <Grid item>
-            <Typography variant='caption'>«Namnis di consed mi, ut ommoluptam, que nobis int, omnia dolupta quibus»</Typography>
-          </Grid>
         </Grid>
+        <Grid item>
+          <Typography variant='caption'>«Namnis di consed mi, ut ommoluptam, que nobis int, omnia dolupta
+            quibus»</Typography>
+        </Grid>
+      </Grid>
       <Grid item xs={12} sm={6} md={8}>
         <Grid container spacing={4}>
           <Grid item>
             <Typography variant='h1'> Kochen</Typography>
-            <Typography>In der Küche treffen Kulturen und Traditionen aufeinander. Jede Region der Welt hat ihre eigenen einzigartigen Gerichte und Zubereitungstechniken, die von Generation zu Generation weitergegeben werden. Das Kochen ermöglicht uns, die Welt zu erkunden, indem wir verschiedene Küchen und kulinarische Traditionen kennenlernen und ausprobieren.</Typography>
+            <Typography>In der Küche treffen Kulturen und Traditionen aufeinander. Jede Region der Welt hat ihre eigenen
+              einzigartigen Gerichte und Zubereitungstechniken, die von Generation zu Generation weitergegeben werden.
+              Das Kochen ermöglicht uns, die Welt zu erkunden, indem wir verschiedene Küchen und kulinarische
+              Traditionen kennenlernen und ausprobieren.</Typography>
           </Grid>
           <Grid item>
-          <BlogSection blogs={cookingBlogs} user={user} handleDelete={deleteBlog} />
+            <BlogSection blogs={cookingBlogs} user={user} handleDelete={deleteBlog} />
           </Grid>
         </Grid>
       </Grid>
