@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import useBlogs from '../hooks/useBlogs';
 import BlogSection from '../components/blogsection';
-import User from '../models/User';
 import { CardMedia, Grid, Typography } from '@mui/material';
+import User from '../models/User';
 
 interface BakingProps {
   user?: User;
@@ -12,10 +12,9 @@ const Baking: React.FC<BakingProps> = ({ user }) => {
   const { blogs, queryBlogs, deleteBlog, loading, error } = useBlogs();
 
   useEffect(() => {
-    queryBlogs();
+    queryBlogs({category: 'Backen'});
   }, []);
 
-  const bakingBlogs = blogs.filter((blog) => blog.category === 'Backen');
 
   return (
     <Grid container direction={'row-reverse'} spacing={{ sm: 4, md: 8 }}>
@@ -34,7 +33,7 @@ const Baking: React.FC<BakingProps> = ({ user }) => {
             <Typography>Das Backen ist nicht nur eine kulinarische Kunst, sondern auch eine herzliche Umarmung für die Sinne. Es ist eine Zeitreise in die Wärme und Geborgenheit unserer Kindheit, als der verlockende Duft von frisch gebackenem Brot oder köstlichen Kuchen die Küche erfüllte und uns ein Lächeln ins Gesicht zauberte.</Typography>
           </Grid>
           <Grid item>
-            <BlogSection blogs={bakingBlogs} user={user} handleDelete={deleteBlog} />
+            <BlogSection blogs={blogs} user={user} handleDelete={deleteBlog} />
           </Grid>
         </Grid>
       </Grid>

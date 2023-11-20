@@ -14,6 +14,7 @@ const Detail = () => {
 
   const { blogId } = useParams();
   const { blogs, querySingleBlog, loading, error } = useBlogs();
+  // TODO: colette, useComments()
   const [comments, setComments] = useState<Comments>([]);
 
   const createComment = async (form: any) => {

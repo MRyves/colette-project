@@ -1,5 +1,5 @@
 import { Button, CardMedia, Grid, Rating, Stack, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import User from '../models/User';
 import DialogDelete from './dialog-delete';
@@ -17,17 +17,20 @@ interface BlogSectionProps {
 const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) => {
 
   const userId = user?.uid;
-  const [value, setValue] = React.useState<number | null>(null);
-  const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
+  const [ratingValue, setRatingValue] = useState<number | null>(null);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [deletingUid, setDeletingUid] = useState<string>('');
 
 
-  const handleDeleteBlog = (uid: string) => {
+  const handleDeleteBlog = () => {
+    handleDelete(deletingUid);
     setDeleteDialogOpen(false);
-    handleDelete(uid);
+    setDeletingUid('');
   };
 
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (uid: string) => {
+    setDeletingUid(uid);
     setDeleteDialogOpen(true);
   };
 
@@ -44,7 +47,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) 
             <Rating
               size='small'
               name='simple-controlled'
-              value={value}
+              value={ratingValue}
               // onChange={handleChange}
             />
             <Grid container spacing={2} justifyContent={'space-between'}>
@@ -54,9 +57,9 @@ const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) 
                 </Typography>
               </Grid>
               <Grid item>
-                <Stack direction="row" alignItems="top" gap={1}>
+                <Stack direction='row' alignItems='top' gap={1}>
                   <AccessAlarmIcon color='primary' />
-                  <Typography>{blogs[0]?.duration} Min.</Typography>
+                  <Typography>{item?.duration} Min.</Typography>
                 </Stack>
               </Grid>
             </Grid>
@@ -69,13 +72,14 @@ const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) 
               </Grid>
               {userId ? (
                 <Grid item xs={6} textAlign={'right'}>
-                  <DeleteOutlinedIcon onClick={handleClickOpen}></DeleteOutlinedIcon>
+                  <DeleteOutlinedIcon onClick={() => handleClickOpen(item.uid)}></DeleteOutlinedIcon>
                 </Grid>
-              ) : ""}
+              ) : ''}
             </Grid>
-            <DialogDelete isOpen={deleteDialogOpen} handleClose={() => setDeleteDialogOpen(false)} handleDelete={() => handleDeleteBlog(item.uid)} />
           </Grid>
         ))}
+        <DialogDelete isOpen={deleteDialogOpen} handleClose={() => setDeleteDialogOpen(false)}
+                      handleDelete={handleDeleteBlog} />
       </Grid>
     </div>
   );

@@ -9,8 +9,8 @@ export default interface Blog {
   author: string;
   lead: string;
   category: string;
-  tags: string;
+  tags: string[];
   duration: string;
   description: string;
-  ingredients: string;
+  ingredients: string[];
 }

@@ -1,21 +1,18 @@
 import React, { useEffect } from 'react';
 import useBlogs from '../hooks/useBlogs';
 import BlogSection from '../components/blogsection';
-import User from '../models/User';
 import { Grid, Typography } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
-interface CookingProps {
-  user?: User;
-}
 
-const Cooking: React.FC<CookingProps> = ({ user }) => {
+const Cooking = () => {
   const { blogs, queryBlogs, deleteBlog, loading, error } = useBlogs();
+  const user = useSelector((state: RootState) => state.auth.currentUser);
 
   useEffect(() => {
-    queryBlogs();
+    queryBlogs({ category: 'Kochen' });
   }, []);
-
-  const cookingBlogs = blogs.filter((blog) => blog.category === 'Kochen');
 
   return (
     <Grid container direction={'row-reverse'} spacing={{ sm: 4, md: 8 }}>
@@ -38,7 +35,7 @@ const Cooking: React.FC<CookingProps> = ({ user }) => {
               Traditionen kennenlernen und ausprobieren.</Typography>
           </Grid>
           <Grid item>
-            <BlogSection blogs={cookingBlogs} user={user} handleDelete={deleteBlog} />
+            <BlogSection blogs={blogs} user={user} handleDelete={deleteBlog} />
           </Grid>
         </Grid>
       </Grid>

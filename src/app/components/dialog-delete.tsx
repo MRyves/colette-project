@@ -10,7 +10,7 @@ interface DialogDeleteProps {
 }
 
 
-const DialogDelete: React.FC<DialogDeleteProps> = ({ isOpen, handleDelete, handleClose }) => {
+const DialogDelete: React.FC<DialogDeleteProps> = ({  isOpen, handleDelete, handleClose }) => {
 
   return (
     <div>
