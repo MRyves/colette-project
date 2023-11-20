@@ -142,6 +142,18 @@ const AddBlogForm: React.FC<AddBlogFormProps>  = ({uploadProcess, setFile, submi
                     )}
                 />            
                 </Stack>
+                <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="outlined-multiline-static"
+                    label="Zutaten"
+                    multiline
+                    maxRows={4}
+                    value={ingredients}
+                    name="ingredients"
+                    onChange={handleChange}
+                />
 
                 <List>
                     {form.ingredients.map((item, index) => (
@@ -162,21 +174,6 @@ const AddBlogForm: React.FC<AddBlogFormProps>  = ({uploadProcess, setFile, submi
                 <Button variant="outlined" color="secondary" onClick={handleAddListItem}>
                     Hinzufügen
                 </Button>
-
-
-
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="outlined-multiline-static"
-                    label="Zutaten"
-                    multiline
-                    maxRows={4}
-                    value={ingredients}
-                    name="ingredients"
-                    onChange={handleChange}
-                />
                 <TextField
                     margin="normal"
                     required

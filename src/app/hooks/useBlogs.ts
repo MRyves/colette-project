@@ -69,6 +69,8 @@ function useBlogs() {
       });
   };
 
+  
+
   const queryBlogs = ({ uid, category }: { uid?: string, category?: string } = {}) => {
     setLoading(true);
     if (!uid && !category) {
@@ -80,6 +82,8 @@ function useBlogs() {
     }
     setLoading(false);
   };
+
+
 
   const deleteBlog = async (uid: string) => {
     try {

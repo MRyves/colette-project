@@ -12,15 +12,13 @@ const Main = () => {
 
   return (<>
     <Header user={currentUser} />
-    <Box
-      sx={{
-        pt: 8,
-        pb: 8
-      }}
-    >
-      <Container maxWidth='lg'>
-        <AppRoutes />
-      </Container>
+      <Box
+        sx={{
+          pt: 8,
+          pb: 8
+        }}
+      >
+      <AppRoutes />
     </Box>
     <Footer />
   </>);

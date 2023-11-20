@@ -62,7 +62,7 @@ export const LoginForm: React.FC<LoginProps> = ({handleSubmit}) => {
 
 
     return <div>
-      <Container component="main" maxWidth="xs">
+      <Container maxWidth="xs">
         <CssBaseline />
         <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
             <Typography variant="h1">{!isSignUpMode ? 'Sign-In' : 'Sign-Up'}</Typography>
