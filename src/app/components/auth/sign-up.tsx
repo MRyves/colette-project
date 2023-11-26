@@ -1,63 +1,52 @@
-import React, { useState } from 'react';
-import TextField from '@mui/material/TextField';
-import Profile from '../../pages/profile';
-import { Button, Avatar } from '@mui/material';
-import UploadFileIcon from '@mui/icons-material/UploadFile';
-import { User } from 'firebase/auth';
-
+import { TextField } from '@mui/material';
+import React from 'react';
+import { Controller } from 'react-hook-form';
 
 interface SignUpFormProps {
-  firstName: string;
-  lastName: string;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  // user: User | null;
-  // setFile: (file: File) => void;
+  control: any;
+  errors: any;
 }
 
-
-const SignUpForm: React.FC<SignUpFormProps> = ({ firstName, lastName, handleChange }) => {
-
-  // const [file, setFile] = useState<File | null>(null);
-  // const userId = user?.uid || '';
-  // const [photoURL, setPhotoURL] = useState('');
-
-
-  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //     if (e.target.files && e.target.files[0]) {
-  //         setFile(e.target.files[0]);
-  //     }
-  // };
-
+const SignUpForm: React.FC<SignUpFormProps> = ({ control, errors }) => {
   return (
     <div>
-      {/* <Button component="label" variant="outlined" startIcon={<UploadFileIcon />}>
-          Upload image
-          <input type="file" accept=".jpg" hidden onChange={handleFileChange} />
-      </Button>
-      <Avatar alt="Remy Sharp" src={photoURL} /> */}
-      <TextField
-        margin="normal"
-        required
-        fullWidth
-        id="firstName"
-        label="Vorname"
+      <Controller
         name="firstName"
-        autoComplete="firstName"
-        autoFocus
-        value={firstName}
-        onChange={handleChange}
+        control={control}
+        defaultValue=""
+        render={({ field }) => (
+          <>
+            <TextField
+              {...field}
+              required
+              fullWidth
+              autoFocus
+              margin="normal"
+              type="text"
+              placeholder="Vorname"
+            />
+            {errors.firstName && <p>{errors.firstName.message}</p>}
+          </>
+        )}
       />
-      <TextField
-        margin="normal"
-        required
-        fullWidth
+      <Controller
         name="lastName"
-        label="Nachname"
-        type="lastName"
-        id="lastName"
-        autoComplete="current-password"
-        value={lastName}
-        onChange={handleChange}
+        control={control}
+        defaultValue=""
+        render={({ field }) => (
+          <>
+            <TextField
+              {...field}
+              required
+              fullWidth
+              autoFocus
+              margin="normal"
+              type="text"
+              placeholder="Nachname"
+            />
+            {errors.lastName && <p>{errors.lastName.message}</p>}
+          </>
+        )}
       />
     </div>
   );

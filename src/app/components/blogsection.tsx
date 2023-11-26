@@ -1,10 +1,20 @@
-import { Button, CardMedia, Grid, Rating, Stack, Typography } from '@mui/material';
+import {
+  Button,
+  CardMedia,
+  Grid,
+  Rating,
+  Stack,
+  Typography,
+} from '@mui/material';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import User from '../models/User';
 import DialogDelete from './dialog-delete';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
+import EditIcon from '@mui/icons-material/Edit';
+import { ReadmoreButton } from '../theme/my-theme';
+
 
 
 interface BlogSectionProps {
@@ -13,14 +23,15 @@ interface BlogSectionProps {
   handleDelete: (uid: string) => void;
 }
 
-
-const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) => {
-
+const BlogSection: React.FC<BlogSectionProps> = ({
+  blogs,
+  user,
+  handleDelete,
+}) => {
   const userId = user?.uid;
   const [ratingValue, setRatingValue] = useState<number | null>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [deletingUid, setDeletingUid] = useState<string>('');
-
 
   const handleDeleteBlog = () => {
     handleDelete(deletingUid);
@@ -28,12 +39,10 @@ const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) 
     setDeletingUid('');
   };
 
-
   const handleClickOpen = (uid: string) => {
     setDeletingUid(uid);
     setDeleteDialogOpen(true);
   };
-
 
   return (
     <div>
@@ -41,45 +50,60 @@ const BlogSection: React.FC<BlogSectionProps> = ({ blogs, user, handleDelete }) 
         {blogs?.map((item) => (
           <Grid item xs={12} sm={12} md={6} key={item.uid}>
             <Link to={`/detail/${item.uid}`}>
-              <CardMedia component='img' image={item.imgUrl} title={item.title} />
+              <CardMedia
+                style={{ marginBottom: '10px' }}
+                component="img"
+                image={item.imgUrl}
+                title={item.title}
+              />
             </Link>
-            <Stack></Stack>
-            <Rating
-              size='small'
-              name='simple-controlled'
-              value={ratingValue}
-              // onChange={handleChange}
-            />
+            <Rating size="small" name="simple-controlled" value={ratingValue} />
             <Grid container spacing={2} justifyContent={'space-between'}>
               <Grid item>
-                <Typography variant='h3'>
+                <Typography variant="h3">
                   <Link to={`/detail/${item.uid}`}>{item.title}</Link>
                 </Typography>
               </Grid>
               <Grid item>
-                <Stack direction='row' alignItems='top' gap={1}>
-                  <AccessAlarmIcon color='primary' />
+                <Stack direction="row" alignItems="top" gap={1}>
+                  <AccessAlarmIcon color="secondary" />
                   <Typography>{item?.duration} Min.</Typography>
                 </Stack>
               </Grid>
             </Grid>
             <Typography>{item.lead}</Typography>
-            <Grid container>
-              <Grid item xs={6}>
+            <Grid container alignItems={'center'}>
+              <Grid item xs={10}>
                 <Link to={`/detail/${item.uid}`}>
-                  <Button color='secondary' variant='outlined' disableElevation>Zum Rezept</Button>
+                  <ReadmoreButton variant="outlined" disableElevation>
+                    Zum Rezept
+                  </ReadmoreButton>
                 </Link>
               </Grid>
               {userId ? (
-                <Grid item xs={6} textAlign={'right'}>
-                  <DeleteOutlinedIcon onClick={() => handleClickOpen(item.uid)}></DeleteOutlinedIcon>
-                </Grid>
-              ) : ''}
+                <>
+                  <Grid item xs={1}>
+                    <Link to={`/edit/${item.uid}`}>
+                      <EditIcon />
+                    </Link>
+                  </Grid>
+                  <Grid item textAlign={'right'} xs={1}>
+                    <DeleteOutlinedIcon
+                      onClick={() => handleClickOpen(item.uid)}
+                    ></DeleteOutlinedIcon>
+                  </Grid>
+                </>
+              ) : (
+                ''
+              )}
             </Grid>
           </Grid>
         ))}
-        <DialogDelete isOpen={deleteDialogOpen} handleClose={() => setDeleteDialogOpen(false)}
-                      handleDelete={handleDeleteBlog} />
+        <DialogDelete
+          isOpen={deleteDialogOpen}
+          handleClose={() => setDeleteDialogOpen(false)}
+          handleDelete={handleDeleteBlog}
+        />
       </Grid>
     </div>
   );

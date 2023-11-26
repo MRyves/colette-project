@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import useBlogs from '../hooks/useBlogs';
 import BlogSection from '../components/blogsection';
-import { Container, Grid, Typography } from '@mui/material';
+import { CardMedia, Container, Grid, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
+import { MainImage } from '../theme/my-theme';
 
 
 const Cooking = () => {
@@ -43,7 +44,9 @@ const Cooking = () => {
           </Grid>
         </Grid>
       </Container>
-      <img src="/assets/baking.jpg" alt="Mein Bild" />
+      <MainImage>
+        <img src="assets/cooking.jpg" alt="Kochen" style={{ maxWidth: '100%'}} />
+      </MainImage>
     </>
   );
 };

@@ -1,40 +1,53 @@
+import { TextField } from '@mui/material';
 import React from 'react';
-import TextField from '@mui/material/TextField';
-
+import { Controller } from 'react-hook-form';
 
 interface SignInFormProps {
-  email: string;
-  password: string;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  control: any;
+  errors: any;
 }
 
-
-const SignInForm: React.FC<SignInFormProps> = ({ email, password, handleChange }) => {
+const SignInForm: React.FC<SignInFormProps> = ({ control, errors }) => {
   return (
     <div>
-      <TextField
-        margin="normal"
-        required
-        fullWidth
-        id="email"
-        label="E-Mail"
+      <Controller
         name="email"
-        autoComplete="email"
-        value={email}
-        onChange={handleChange}
-        autoFocus
+        control={control}
+        defaultValue=""
+        render={({ field }) => (
+          <>
+            <TextField
+              {...field}
+              required
+              fullWidth
+              autoFocus
+              margin="normal"
+              type="email"
+              placeholder="E-Mail"
+              autoComplete="email"
+            />
+            {errors.email && <p>{errors.email.message}</p>}
+          </>
+        )}
       />
-      <TextField
-        margin="normal"
-        required
-        fullWidth
+      <Controller
         name="password"
-        label="Password"
-        type="password"
-        id="password"
-        autoComplete="current-password"
-        value={password}
-        onChange={handleChange}
+        control={control}
+        defaultValue=""
+        render={({ field }) => (
+          <>
+            <TextField
+              required
+              fullWidth
+              autoFocus
+              margin="normal"
+              {...field}
+              type="password"
+              placeholder="Passwort"
+            />
+            {errors.password && <p>{errors.password.message}</p>}
+          </>
+        )}
       />
     </div>
   );

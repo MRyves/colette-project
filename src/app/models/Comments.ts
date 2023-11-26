@@ -4,4 +4,4 @@ interface Comment {
   comment: string;
 }
 
-export type Comments = Array<Comment>;
+export type Comments = Comment[];

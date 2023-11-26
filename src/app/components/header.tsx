@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppBar, Container, Grid, Toolbar, Typography } from '@mui/material';
+import { AppBar, Container, Grid } from '@mui/material';
 import Navigation from './navigation';
 import User from '../models/User';
 import LoginNav from './loginnav';
@@ -17,20 +17,25 @@ const Header: React.FC<HeaderProps> = ({ user, handleLogout }) => {
         <>
             <AppBar position="static" elevation={0}>
                 <Container maxWidth="lg">
-                    <Toolbar sx={{ flexWrap: 'wrap', justifyContent: 'flex-end' }}>
-                        <LoginNav user={user} />
-                    </Toolbar>
+                    <Grid container justifyContent={'space-between'}>
+                        <Grid item>
+                            <Link to={'/'}>
+                                <img src="assets/logo.png" alt="Beschreibung des Bildes" style={{ maxWidth: '150px', paddingTop: '40px', paddingBottom: '30px' }} />
+                            </Link>
+                        </Grid>
+                        <Grid item>
+                            <p>Darkmode</p>
+                        </Grid>
+                    </Grid>
                 </Container>
             </AppBar>
-            <Container maxWidth="lg">
-                <Grid container spacing={2} justifyContent={'space-between'}>
-                    <Grid item>
-                        <Link to={'/'}>
-                            <Typography>LOGO</Typography>
-                        </Link>
-                    </Grid>
+            <Container maxWidth="lg" sx={{ borderBottom: '1px solid #000000', borderTop: '1px solid #000000', marginTop: '50px' }}>
+                <Grid container justifyContent={'space-between'}>
                     <Grid item>
                         <Navigation user={user} />
+                    </Grid>
+                    <Grid item>
+                        <LoginNav user={user} />
                     </Grid>
                 </Grid>
             </Container>

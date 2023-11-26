@@ -5,13 +5,14 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase-config';
 import User from '../models/User';
-import PersonIcon from '@mui/icons-material/Person';
+
+
+
 
 interface NavigationProps {
   user: User | undefined;
@@ -66,6 +67,10 @@ const Navigation: React.FC<NavigationProps> = ({ user, handleLogout, setActive }
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+
+  const location = useLocation();
+
 
   return (
     <>
@@ -125,7 +130,7 @@ const Navigation: React.FC<NavigationProps> = ({ user, handleLogout, setActive }
             {page.label}
           </Button>
         ))}
-        {userId ? (
+        {userId && location.pathname !== '/create' ? (
         <Button component={Link} sx={{ my: 2, color: 'black', display: 'block' }} to={'/create'}>Erfassen</Button>
         ) : ""}
         </Box>

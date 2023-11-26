@@ -1,24 +1,24 @@
-import { AppBar, Box, Container, Typography } from '@mui/material'
-import React from 'react'
-import AppRoutes from '../routes/routes'
+import { Box, Container, Typography } from '@mui/material';
+import React from 'react';
+import { PaddContainer } from '../theme/my-theme';
+
 
 const Footer = () => {
+
   return (
     <>
-    <Box bgcolor="secondary.main">
-      <Container maxWidth="lg">
-        <Typography>Kochen, Backen, Impressum</Typography>
-      </Container>
-    </Box>
-      <AppBar position="static" elevation={0}>
-          <Container maxWidth="lg">
-              <p>© Copyright 2024, Colette Güntensperger</p>
-          </Container>
-      </AppBar>
+      <Box bgcolor="#cab093">
+        <PaddContainer maxWidth="lg">
+          <Typography>Kochen, Backen, Impressum</Typography>
+        </PaddContainer>
+      </Box>
+      <Box bgcolor="#000000">
+        <PaddContainer maxWidth="lg">
+          <Typography variant='body2'>© Copyright 2024, Colette Güntensperger</Typography>
+        </PaddContainer>
+      </Box>
     </>
-
-
-  )
+  );
 }
 
-export default Footer
+export default Footer;

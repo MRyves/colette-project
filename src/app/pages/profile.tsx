@@ -1,27 +1,19 @@
-import { Avatar, Button, Container } from '@mui/material';
-import { User } from 'firebase/auth';
-import React, { useState } from 'react'
-import Blog from '../models/Blog';
+import { Container, Typography } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { RootState } from '../store/store';
 
 
+const Profile = () => {
+  const { blogId } = useParams();
+  const currentUser = useSelector((state: RootState) => state.auth.currentUser);
 
-
-interface ProfileProps {
-    user: User | null;
-  }
-
-  
-const Profile: React.FC<ProfileProps> = ({ user }) => {
-
-    const [blog, setBlog] = useState<Blog | null>(null);
-    
-    return (
-        <Container maxWidth='lg'>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
-            <p>Hallo {blog?.author}</p>
-            <p>Hier sind alle meine Einträge.</p>
-        </Container>
-    )
-}
+  return (
+    <Container maxWidth="lg">
+      <Typography variant='h3'>Hallo {currentUser?.displayName || 'Name'}</Typography>
+      <p>Hier siehst du alle deine bis jetzt verfassten Rezepte:</p>
+    </Container>
+  );
+};
 
 export default Profile;

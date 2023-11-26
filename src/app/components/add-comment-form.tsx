@@ -39,6 +39,7 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({ submitForm }) => {
     e.preventDefault();
     if (nickname && comment) {
       submitForm(form);
+      setForm(initialState);
     }
   };
 
@@ -63,7 +64,7 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({ submitForm }) => {
 
   return (
     <div>
-      <Typography variant='h2'>Kommentare</Typography>
+      <Typography variant='h2' sx={{m: '50px 0px 0px 0px'}}>Kommentare</Typography>
       <form onSubmit={handleSubmit}>
         <Rating
           size='small'
