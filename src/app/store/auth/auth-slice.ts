@@ -1,7 +1,7 @@
 import User from '../../models/User';
 import { createAsyncThunk, createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
 import { AuthFormState } from '../../components/auth/login-form';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../../firebase-config';
 
 interface AuthState {
@@ -34,45 +34,49 @@ const authSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(login.pending, (state) => {
       state.loading = true;
-    }).addCase(login.fulfilled, (state) => {
+    }).addCase(login.fulfilled, (state, action) => {
+      if (action.payload.displayName && state.currentUser) {
+        state.currentUser.displayName = action.payload.displayName;
+      }
       state.loading = false;
       state.error = undefined;
-    }).addCase(login.rejected, (state, action: PayloadAction<any>) => {
+    }).addCase(login.rejected, (state, action) => {
       state.currentUser = undefined;
       state.loading = false;
-      state.error = action.payload as string;
+      state.error = action.payload;
     });
   }
 
 });
 
-export const login = createAsyncThunk(
+export const login = createAsyncThunk<
+  { displayName?: string },
+  AuthFormState, {
+  rejectValue: string
+}
+>(
   'auth/login',
-  async (credentials: AuthFormState, { rejectWithValue }) => {
+  async (credentials, { rejectWithValue }) => {
     if (!credentials.isSignUpMode) {
       try {
         await signInWithEmailAndPassword(auth, credentials.email, credentials.password);
+        return {};
       } catch (e) {
         console.error('This account does not exist!');
         return rejectWithValue('This account does not exists!');
       }
     } else {
       try {
-        const userCredential = await createUserWithEmailAndPassword(auth, credentials.email, credentials.password)
-          .then((userCredentials) => {
-            signOut(auth);
-            return userCredentials;
-          });
-        const {user} = userCredential;
+        const userCredential = await createUserWithEmailAndPassword(auth, credentials.email, credentials.password);
+        const { user } = userCredential;
         const displayName = `${credentials.firstName} ${credentials.lastName}`;
         await updateProfile(user, {
           displayName: displayName
         });
-        await signInWithEmailAndPassword(auth, credentials.email, credentials.password);
+        return { displayName };
       } catch (error) {
         console.error('Error creating user:', error);
         return rejectWithValue('This account does not exists!');
-
       }
     }
   }
