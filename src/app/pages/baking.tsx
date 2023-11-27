@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import useBlogs from '../hooks/useBlogs';
 import BlogSection from '../components/blogsection';
-import { CardMedia, Container, Grid, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { MainContainer, MainImage } from '../theme/my-theme';
