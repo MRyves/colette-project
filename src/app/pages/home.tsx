@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import BlogSection from '../components/blogsection';
-import { CardMedia, Container, Grid, Stack, Typography, } from '@mui/material';
+import { CardMedia, Container, Grid, Stack, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { Link } from 'react-router-dom';
@@ -14,8 +14,8 @@ const Home = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth.currentUser);
   const { blogs, queryBlogs, deleteBlog, loading, error } = useBlogs();
-
   const [searchQuery, setSearchQuery] = useState('');
+  const latestBlog = useMemo(() => (blogs.length > 0 ? blogs[0] : null), [blogs]);
 
   useEffect(() => {
     queryBlogs();
@@ -31,18 +31,11 @@ const Home = () => {
   };
 
 
-
-  const latestBlog = blogs.length > 0 ? blogs[0] : null;
-
-  console.log({ blogs });
-
-
-
   return (
-    <Container maxWidth="lg" >
-      <Grid container direction={'row-reverse'} spacing={{ sm: 4, md: 8 }} >
+    <Container maxWidth='lg'>
+      <Grid container direction={'row-reverse'} spacing={{ sm: 4, md: 8 }}>
         <Grid item xs={12} sm={6} md={4}>
-          <Typography variant="h1">Welcome, foodlover!</Typography>
+          <Typography variant='h1'>Welcome, foodlover!</Typography>
           <Typography>
             Begleite uns in unserer Küche, während wir die Aromen der Welt
             entdecken und lernen, wie man aus einfachen Zutaten magische
@@ -63,29 +56,29 @@ const Home = () => {
                 <>
                   <Link to={`/detail/${latestBlog.uid}`}>
                     <CardMedia
-                      component="img"
+                      component='img'
                       image={latestBlog.imgUrl}
                       title={latestBlog.title}
                     />
                   </Link>
                   <Grid container spacing={2} justifyContent={'space-between'}>
                     <Grid item>
-                      <Typography variant="h3">
+                      <Typography variant='h3'>
                         <Link to={`/detail/${latestBlog.uid}`}>
                           {latestBlog.title}
                         </Link>
                       </Typography>
                     </Grid>
                     <Grid item>
-                      <Stack direction="row" alignItems="top" gap={1}>
-                        <AccessAlarmIcon color="primary" />
+                      <Stack direction='row' alignItems='top' gap={1}>
+                        <AccessAlarmIcon color='primary' />
                         <Typography>{latestBlog.duration} Min.</Typography>
                       </Stack>
                     </Grid>
                   </Grid>
                   <Typography>{latestBlog.lead}</Typography>
                   <Link to={`/detail/${latestBlog.uid}`}>
-                    <ReadmoreButton variant="outlined" disableElevation>
+                    <ReadmoreButton variant='outlined' disableElevation>
                       Zum Rezept
                     </ReadmoreButton>
                   </Link>

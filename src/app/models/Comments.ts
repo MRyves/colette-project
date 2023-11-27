@@ -1,4 +1,4 @@
-interface Comment {
+export interface Comment {
   readonly uid: string;
   nickname: string;
   comment: string;

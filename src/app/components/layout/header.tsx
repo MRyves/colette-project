@@ -1,8 +1,8 @@
 import React from 'react'
 import { AppBar, Container, Grid } from '@mui/material';
 import Navigation from './navigation';
-import User from '../models/User';
-import LoginNav from './loginnav';
+import User from '../../models/User';
+import LoginNav from '../loginnav';
 import { Link } from 'react-router-dom';
 
 interface HeaderProps {

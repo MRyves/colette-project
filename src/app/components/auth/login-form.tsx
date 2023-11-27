@@ -26,7 +26,7 @@ const initialState: AuthFormState = {
 };
 
 export const LoginForm: React.FC<LoginProps> = ({ handleSubmit: submitForm }) => {
-  const { control, handleSubmit: handleFormSubmit, formState: { errors }, setValue, watch } = useForm({
+  const { control, handleSubmit: handleFormSubmit, formState: { errors }, setValue, watch } = useForm<AuthFormState, string>({
     defaultValues: initialState
   });
 

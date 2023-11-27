@@ -1,6 +1,6 @@
-import Header from './components/header';
+import Header from './components/layout/header';
 import AppRoutes from './routes/routes';
-import Footer from './components/footer';
+import Footer from './components/layout/footer';
 import { Fab } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState } from './store/store';

@@ -1,4 +1,4 @@
-import AddBlogForm, { BlogForm } from '../components/add-blog-form';
+import BlogForm, { BlogFormState } from '../components/blog-form';
 import { useEffect, useState } from 'react';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { db, storage } from '../firebase-config';
@@ -17,7 +17,7 @@ const Create = () => {
   const [imgUrl, setImageUrl] = useState<string>("");
   const navigate = useNavigate();
 
-  const createBlogPost = async (form:BlogForm) => {
+  const createBlogPost = async (form:BlogFormState) => {
     try {
       await addDoc(collection(db, "blogs"), {
           ...form,
@@ -66,7 +66,7 @@ const Create = () => {
 
 
   return (
-    <AddBlogForm user={user} setFile={setFile} submitForm={createBlogPost} uploadProcess={uploadProcess} />
+    <BlogForm user={user} setFile={setFile} submitForm={createBlogPost} uploadProcess={uploadProcess} />
   );
 };
 

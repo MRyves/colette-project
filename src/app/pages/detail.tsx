@@ -3,8 +3,8 @@ import { addDoc, collection, doc, getDocs } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
 import { db } from '../firebase-config';
 import { Card, CardContent, CardMedia, Container, Grid, ListItem, Stack, Typography, } from '@mui/material';
-import AddCommentForm from '../components/add-comment-form';
-import { Comments } from '../models/Comments';
+import AddCommentForm, { CommentForm } from '../components/add-comment-form';
+import { Comment, Comments } from '../models/Comments';
 import useBlogs from '../hooks/useBlogs';
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import { TagButton, ZutatenCard } from '../theme/my-theme';
@@ -31,7 +31,7 @@ const Detail = () => {
       await addDoc(commentsRef, {
         ...form,
       });
-      setComments([...comments, comment]);
+      setComments([...comments, form]);
     } catch (err) {
       console.log(err);
     }

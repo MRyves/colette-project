@@ -1,10 +1,12 @@
 import { TextField } from '@mui/material';
 import React from 'react';
-import { Controller } from 'react-hook-form';
+import { Controller, FieldErrors } from 'react-hook-form';
+import { Control } from 'react-hook-form/dist/types/form';
+import { AuthFormState } from './login-form';
 
 interface SignUpFormProps {
-  control: any;
-  errors: any;
+  control: Control<AuthFormState, string>;
+  errors: FieldErrors<AuthFormState>;
 }
 
 const SignUpForm: React.FC<SignUpFormProps> = ({ control, errors }) => {

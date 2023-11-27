@@ -1,6 +1,6 @@
 import { Box, Container, Typography } from '@mui/material';
 import React from 'react';
-import { PaddContainer } from '../theme/my-theme';
+import { PaddContainer } from '../../theme/my-theme';
 
 
 const Footer = () => {
