@@ -10,6 +10,7 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../firebase-config';
 import User from '../models/User';
 import PersonIcon from '@mui/icons-material/Person';
+import { Grid } from '@mui/material';
 
 interface LoginNavProps {
   user: User | undefined;
@@ -17,7 +18,11 @@ interface LoginNavProps {
   setActive?: (active: string) => void;
 }
 
-const LoginNav: React.FC<LoginNavProps> = ({ user, handleLogout, setActive }) => {
+const LoginNav: React.FC<LoginNavProps> = ({
+  user,
+  handleLogout,
+  setActive,
+}) => {
   const userId = user?.uid;
   console.log('userID', userId);
   console.log('name', user?.displayName);
@@ -34,8 +39,9 @@ const LoginNav: React.FC<LoginNavProps> = ({ user, handleLogout, setActive }) =>
     }
   };
 
-
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -46,43 +52,50 @@ const LoginNav: React.FC<LoginNavProps> = ({ user, handleLogout, setActive }) =>
   };
 
   return (
-    <>
-      {!userId ? (
-        <IconButton>
-          <PersonIcon />
-        </IconButton>
-      ) : ""}
-      {userId ? (
-        <Box sx={{ flexGrow: 0 }}>
-          <Tooltip title='Open'>
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <PersonIcon />
-            </IconButton>
-          </Tooltip>
-          <Menu
-            sx={{ mt: '45px' }}
-            id='menu-appbar'
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right'
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right'
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
-          >
+    <Grid container>
+      <Grid item>
+        {userId ? (
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <PersonIcon />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
               <MenuItem onClick={handleCloseUserMenu}>
                 <Link to={'/profile'}>Profil</Link>
-                <Link onClick={onLogoutClick} to={'/'}>Logout</Link>
+                <Link onClick={onLogoutClick} to={'/'}>
+                  Logout
+                </Link>
               </MenuItem>
-          </Menu>
-        </Box>
-      ) : <Button component={Link} sx={{ my: 2, color: 'black', display: 'block' }} to={'/login'}>Login</Button>}
-    </>
+            </Menu>
+          </Box>
+        ) : (
+          <Button
+            component={Link}
+            sx={{ my: 2, color: 'black', display: 'block', m: '0px 0px 0px 10px', p: '15px 0px' }}
+            to={'/login'}
+          >
+            Login
+          </Button>
+        )}
+      </Grid>
+    </Grid>
   );
 };
 

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import useBlogs from '../hooks/useBlogs';
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import SearchBar from '../components/search';
-import { ReadmoreButton } from '../theme/my-theme';
+import { MainContainer, ReadmoreButton } from '../theme/my-theme';
 
 
 const Home = () => {
@@ -32,8 +32,8 @@ const Home = () => {
 
 
   return (
-    <Container maxWidth='lg'>
-      <Grid container direction={'row-reverse'} spacing={{ sm: 4, md: 8 }}>
+    <MainContainer maxWidth='lg' sx={{p: '70px 0'}}>
+      <Grid container direction="row-reverse" spacing={{ sm: 4, md: 8 }}>
         <Grid item xs={12} sm={6} md={4}>
           <Typography variant='h1'>Welcome, foodlover!</Typography>
           <Typography>
@@ -95,7 +95,7 @@ const Home = () => {
           </Grid>
         </Grid>
       </Grid>
-    </Container>
+    </MainContainer>
   );
 };
 

@@ -47,6 +47,13 @@ const TagButton = styled(Button)(() => ({
   }));
 
 
+
+  const MainContainer = styled(Container)(() => ({
+    padding: '70px 0px',
+  }));
+
+
+
   const ZutatenCard = styled(Card)(() => ({
     margin: '0px 0px 20px 0px',
   }));
@@ -207,4 +214,4 @@ const myTheme = createTheme({
     },
 });
 
-export { IconStyle, TagButton, ReadmoreButton, ZutatenCard, AddButton, PaddContainer, MainImage, myTheme };
+export { IconStyle, MainContainer, TagButton, ReadmoreButton, ZutatenCard, AddButton, PaddContainer, MainImage, myTheme };

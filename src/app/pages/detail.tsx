@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { addDoc, collection, doc, getDocs } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
 import { db } from '../firebase-config';
-import { Card, CardContent, CardMedia, Container, Grid, ListItem, Stack, Typography, } from '@mui/material';
+import { Card, CardContent, CardMedia, Container, Grid, ListItem, Rating, Stack, Typography, } from '@mui/material';
 import AddCommentForm, { CommentForm } from '../components/add-comment-form';
 import { Comment, Comments } from '../models/Comments';
 import useBlogs from '../hooks/useBlogs';
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
-import { TagButton, ZutatenCard } from '../theme/my-theme';
+import { MainContainer, TagButton, ZutatenCard } from '../theme/my-theme';
 import Sharing from '../components/sharing';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 
@@ -83,7 +83,7 @@ const Detail = () => {
   };
 
   return (
-    <Container maxWidth="lg">
+    <MainContainer maxWidth="lg">
       <Grid container spacing={{ sm: 4, md: 8 }}>
         <Grid item xs={12} sm={6} md={8}>
           <Typography variant="h1">{blogs[0]?.title}</Typography>
@@ -100,9 +100,14 @@ const Detail = () => {
           {comments.map((comment) => (
             <Card key={comment.uid} elevation={0} sx={{ marginTop: '20px' }}>
               <CardContent>
-                <Typography variant="h5">
-                  {comment.nickname}
-                </Typography>
+                <Grid container justifyContent={'space-between'}>
+                  <Grid item>
+                  <Typography variant="h5">{comment.nickname}</Typography>
+                  </Grid>
+                  <Grid item>
+                  <Rating size="small" name="simple-controlled" value={comment.rating} />
+                  </Grid>
+                </Grid>
                 <Typography variant="subtitle1">
                   {blogs[0]?.timestamp
                     ? formatTimestamp(blogs[0]?.timestamp)
@@ -150,7 +155,7 @@ const Detail = () => {
           <Sharing blogId={blogId!} title={blogs[0]?.title}/>
         </Grid>
       </Grid>
-    </Container>
+    </MainContainer>
   );
 };
 

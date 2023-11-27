@@ -4,6 +4,7 @@ import SignInForm from './sign-in';
 import React, { useState } from 'react';
 import { Box, Button, Container, CssBaseline, Grid, Link } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import { MainContainer } from 'src/app/theme/my-theme';
 
 interface LoginProps {
   handleSubmit: (cred: AuthFormState) => void;
@@ -30,8 +31,6 @@ export const LoginForm: React.FC<LoginProps> = ({ handleSubmit: submitForm }) =>
     defaultValues: initialState
   });
 
-  // const [isSignUpMode, setIsSignUpMode] = useState(false);
-
   const isSignUpMode = watch('isSignUpMode', false);
   const setSignUpMode = (value: boolean) => {
     setValue('isSignUpMode', value);
@@ -47,7 +46,7 @@ export const LoginForm: React.FC<LoginProps> = ({ handleSubmit: submitForm }) =>
 
   return (
     <div>
-      <Container maxWidth='sm'>
+      <MainContainer maxWidth='sm'>
         <CssBaseline />
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Typography variant='h1'>{!isSignUpMode ? 'Sign-In' : 'Sign-Up'}</Typography>
@@ -86,7 +85,7 @@ export const LoginForm: React.FC<LoginProps> = ({ handleSubmit: submitForm }) =>
             </Grid>
           </Grid>
         </Box>
-      </Container>
+      </MainContainer>
     </div>
   );
 };

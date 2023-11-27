@@ -115,7 +115,7 @@ const BlogForm: React.FC<BlogFormProps> = ({
 
   return (
     <div>
-      <Container component='main' maxWidth='sm'>
+      <Container component='main' maxWidth='sm' sx={{p: '70px 0'}}>
         <Typography variant='h1'>Erfasse ein Rezept</Typography>
         <form onSubmit={handleSubmit}>
           <TextField

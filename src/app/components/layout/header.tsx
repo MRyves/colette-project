@@ -29,8 +29,8 @@ const Header: React.FC<HeaderProps> = ({ user, handleLogout }) => {
                     </Grid>
                 </Container>
             </AppBar>
-            <Container maxWidth="lg" sx={{ borderBottom: '1px solid #000000', borderTop: '1px solid #000000', marginTop: '50px' }}>
-                <Grid container justifyContent={'space-between'}>
+            <Container maxWidth="lg" sx={{ marginTop: '40px' }}>
+                <Grid container justifyContent={'space-between'} sx={{borderBottom: '1px solid #000000', borderTop: '1px solid #000000'}} alignItems={'center'}>
                     <Grid item>
                         <Navigation user={user} />
                     </Grid>

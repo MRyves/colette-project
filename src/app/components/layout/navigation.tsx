@@ -125,13 +125,13 @@ const Navigation: React.FC<NavigationProps> = ({ user, handleLogout, setActive }
             key={index}
             component={Link}
             to={page.to}
-            sx={{ my: 2, color: 'black', display: 'block' }}
+            sx={{ my: 2, color: 'black', m: '0px 40px 0px 0px', p: '15px 0px' }}
           >
             {page.label}
           </Button>
         ))}
         {userId && location.pathname !== '/create' ? (
-        <Button component={Link} sx={{ my: 2, color: 'black', display: 'block' }} to={'/create'}>Erfassen</Button>
+        <Button component={Link} sx={{ my: 2, color: 'black', m: 0, p: '15px 0px' }} to={'/create'}>Erfassen</Button>
         ) : ""}
         </Box>
     </>
