@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Rating, TextField, Typography } from '@mui/material';
-import { db } from '../firebase-config';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 
 
 interface AddCommentFormProps {
@@ -11,20 +9,20 @@ interface AddCommentFormProps {
 export interface CommentForm {
   nickname: string,
   comment: string,
-  //rating: numner,
+  rating: number,
 };
 
 const initialState = {
   nickname: '',
-  comment: ''
+  comment: '',
+  rating: 0,
 };
 
 
 const AddCommentForm: React.FC<AddCommentFormProps> = ({ submitForm }) => {
 
   const [form, setForm] = useState(initialState);
-  const { nickname, comment } = form;
-  const [rating, setRating] = useState(0);
+  const { nickname, comment, rating } = form;
 
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,6 +33,14 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({ submitForm }) => {
     }));
   };
 
+  const handleRatingChange = async (event: React.SyntheticEvent, newValue: number | null) => {
+    // move logic to hook
+    if (newValue !== null) {
+      setForm({...form, rating: newValue});
+    }
+  };
+
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (nickname && comment) {
@@ -44,27 +50,9 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({ submitForm }) => {
   };
 
 
-  const handleRatingChange = async (event: React.SyntheticEvent, newValue: number | null) => {
-    // move logic to hook
-    if (newValue !== null) {
-      setRating(newValue);
-
-      try {
-        const docRef = await addDoc(collection(db, 'bewertungen'), {
-          bewertung: newValue,
-          zeitstempel: serverTimestamp()
-        });
-        console.log('Bewertung erfolgreich hinzugefügt mit ID: ', docRef.id);
-      } catch (error) {
-        console.error('Fehler beim Hinzufügen der Bewertung: ', error);
-      }
-    }
-  };
-
-
   return (
     <div>
-      <Typography variant='h2' sx={{m: '50px 0px 0px 0px'}}>Kommentare</Typography>
+      <Typography variant='h2' sx={{ m: '50px 0px 0px 0px' }}>Kommentare</Typography>
       <form onSubmit={handleSubmit}>
         <Rating
           size='small'

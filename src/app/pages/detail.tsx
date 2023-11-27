@@ -21,17 +21,16 @@ const Detail = () => {
   const [comments, setComments] = useState<Comments>([]);
   console.log(`URL: ${encodeURIComponent(window.location.href)}`);
 
-  const createComment = async (form: any) => {
+  const createComment = async (form: CommentForm) => {
     if (!blogId) return;
 
     try {
-      const comment = form;
       const commentsRef = collection(db, `blogs`, blogId, 'comments');
 
-      await addDoc(commentsRef, {
+      const commentRef = await addDoc(commentsRef, {
         ...form,
       });
-      setComments([...comments, form]);
+      setComments([...comments, { uid: commentRef.id,  ...form}]);
     } catch (err) {
       console.log(err);
     }
@@ -59,6 +58,7 @@ const Detail = () => {
           uid: doc.id,
           nickname: doc.data().nickname,
           comment: doc.data().comment,
+          rating: doc.data().rating || 0,
         }))
       );
       console.log(
