@@ -147,7 +147,7 @@ const Detail = () => {
           ))}
           </Grid>
           <Typography variant="h4">Rezept von {blogs[0]?.author}</Typography>
-          <Sharing />
+          <Sharing blogId={blogId!} title={blogs[0]?.title}/>
         </Grid>
       </Grid>
     </Container>
