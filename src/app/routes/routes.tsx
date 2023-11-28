@@ -8,6 +8,7 @@ import Edit from '../pages/edit';
 import SignIn from '../pages/login';
 import { PrivateRoutes } from '../components/private-routes';
 import Profile from '../pages/profile';
+import Imprint from '../pages/imprint';
 
 const AppRoutes = () => {
 
@@ -23,6 +24,7 @@ const AppRoutes = () => {
       <Route path='/Cooking' element={<Cooking />} />
       <Route path='/detail/:blogId' element={<Detail />} />
       <Route path='/login' element={<SignIn />} />
+      <Route path='/imprint' element={<Imprint />} />
     </Routes>
   );
 };

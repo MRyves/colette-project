@@ -19,6 +19,15 @@ const TagButton = styled(Button)(() => ({
   }));
 
 
+  const FooterButton = styled(Button)(() => ({
+    padding: '0',
+    margin: '0px 40px 0px 0px',
+    a: {
+        color: '#000000',
+        textDecoration: 'none',
+    },
+}));
+
   const IconStyle = {
     color: '#a4a2a1',
   };
@@ -214,4 +223,4 @@ const myTheme = createTheme({
     },
 });
 
-export { IconStyle, MainContainer, TagButton, ReadmoreButton, ZutatenCard, AddButton, PaddContainer, MainImage, myTheme };
+export { IconStyle, FooterButton, MainContainer, TagButton, ReadmoreButton, ZutatenCard, AddButton, PaddContainer, MainImage, myTheme };

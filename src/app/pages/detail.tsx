@@ -95,6 +95,24 @@ const Detail = () => {
             image={blogs[0]?.imgUrl}
             title={blogs[0]?.title}
           />
+          <ZutatenCard elevation={0}>
+            <CardContent component="div">
+              <Grid container justifyContent={'space-between'} alignItems={'center'}>
+                <Grid item>
+                  <Typography variant="h3">Du brauchst</Typography>
+                </Grid>
+                <Grid item>
+                  <ListAltIcon />
+                </Grid>
+              </Grid>
+              {blogs[0]?.ingredients &&
+                blogs[0].ingredients.map((ingredient, index) => (
+                  <ListItem disablePadding divider key={index}>
+                    {ingredient.trim()}
+                  </ListItem>
+                ))}
+            </CardContent>
+          </ZutatenCard>
           <Typography>{blogs[0]?.description}</Typography>
           <AddCommentForm submitForm={createComment} />
           {comments.map((comment) => (
@@ -105,7 +123,7 @@ const Detail = () => {
                   <Typography variant="h5">{comment.nickname}</Typography>
                   </Grid>
                   <Grid item>
-                  <Rating size="small" name="simple-controlled" value={comment.rating} />
+                  <Rating size="small" readOnly value={comment.rating} />
                   </Grid>
                 </Grid>
                 <Typography variant="subtitle1">
@@ -128,24 +146,6 @@ const Detail = () => {
               <Typography>{blogs[0]?.duration} Min.</Typography>
             </Stack>
           </Grid>
-          <ZutatenCard elevation={0}>
-            <CardContent component="div">
-              <Grid container justifyContent={'space-between'} alignItems={'center'}>
-                <Grid item>
-                  <Typography variant="h3">Du brauchst</Typography>
-                </Grid>
-                <Grid item>
-                  <ListAltIcon />
-                </Grid>
-              </Grid>
-              {blogs[0]?.ingredients &&
-                blogs[0].ingredients.map((ingredient, index) => (
-                  <ListItem disablePadding divider key={index}>
-                    {ingredient.trim()}
-                  </ListItem>
-                ))}
-            </CardContent>
-          </ZutatenCard>
           <Grid sx={{ m: '30px 0px 20px 0px' }}>
           {blogs[0]?.tags && blogs[0].tags.map((tags, index) => (
               <TagButton key={index}>{tags.trim()}</TagButton>
