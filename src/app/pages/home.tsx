@@ -33,7 +33,7 @@ const Home = () => {
 
   return (
     <MainContainer maxWidth='lg' sx={{p: '70px 0'}}>
-      <Grid container direction="row-reverse" spacing={{ sm: 4, md: 8 }}>
+      <Grid container direction="row-reverse" spacing={{ sm: 4, md: 6 }}>
         <Grid item xs={12} sm={6} md={4}>
           <Typography variant='h1'>Welcome, foodlover!</Typography>
           <Typography>
@@ -59,23 +59,14 @@ const Home = () => {
                       component='img'
                       image={latestBlog.imgUrl}
                       title={latestBlog.title}
+                      sx={{paddingTop: '7px'}}
                     />
                   </Link>
-                  <Grid container spacing={2} justifyContent={'space-between'}>
-                    <Grid item>
-                      <Typography variant='h3'>
-                        <Link to={`/detail/${latestBlog.uid}`}>
-                          {latestBlog.title}
-                        </Link>
-                      </Typography>
-                    </Grid>
-                    <Grid item>
-                      <Stack direction='row' alignItems='top' gap={1}>
-                        <AccessAlarmIcon color='primary' />
-                        <Typography>{latestBlog.duration} Min.</Typography>
-                      </Stack>
-                    </Grid>
-                  </Grid>
+                  <Typography variant='h3'>
+                    <Link to={`/detail/${latestBlog.uid}`}>
+                      {latestBlog.title}
+                    </Link>
+                  </Typography>
                   <Typography>{latestBlog.lead}</Typography>
                   <Link to={`/detail/${latestBlog.uid}`}>
                     <ReadmoreButton variant='outlined' disableElevation>

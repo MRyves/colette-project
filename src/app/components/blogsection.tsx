@@ -58,19 +58,9 @@ const BlogSection: React.FC<BlogSectionProps> = ({
               />
             </Link>
             <Rating size="small" name="simple-controlled" value={ratingValue} />
-            <Grid container spacing={2} justifyContent={'space-between'}>
-              <Grid item>
-                <Typography variant="h3">
-                  <Link to={`/detail/${item.uid}`}>{item.title}</Link>
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Stack direction="row" alignItems="top" gap={1}>
-                  <AccessAlarmIcon color="secondary" />
-                  <Typography>{item?.duration} Min.</Typography>
-                </Stack>
-              </Grid>
-            </Grid>
+            <Typography variant="h3">
+              <Link to={`/detail/${item.uid}`}>{item.title}</Link>
+            </Typography>
             <Typography>{item.lead}</Typography>
             <Grid container alignItems={'center'}>
               <Grid item xs={10}>

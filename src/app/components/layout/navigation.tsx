@@ -34,7 +34,7 @@ const Navigation: React.FC<NavigationProps> = ({ user, handleLogout, setActive }
   const onLogoutClick = async () => {
     console.log('on logout click');
     try {
-      await signOut(auth); // Benutzer ausloggen
+      await signOut(auth);
       if (handleLogout) {
         handleLogout();
       }

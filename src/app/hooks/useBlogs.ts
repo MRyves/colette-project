@@ -15,6 +15,7 @@ function useBlogs() {
       uid: doc.id,
       title: documentData.title,
       category: documentData.category,
+      niveau: documentData.niveau,
       ingredients: documentData.ingredients,
       lead: documentData.lead,
       description: documentData.description,
@@ -59,6 +60,30 @@ function useBlogs() {
     );
 
     getDocs(categoryQuery)
+      .then((data) => {
+        const blogsData = data.docs.map((doc) => convertDocToBlog(doc));
+        setBlogs(blogsData);
+      })
+      .catch((e) => {
+        setError(e.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+
+
+  const queryNiveauBlog = (niveau: string) => {
+    setLoading(true);
+    const blogsRef = collection(db, 'blogs');
+    const niveauQuery = query(
+      blogsRef,
+      where('niveau', '==', niveau),
+      orderBy('timestamp', 'desc')
+    );
+
+    getDocs(niveauQuery)
       .then((data) => {
         const blogsData = data.docs.map((doc) => convertDocToBlog(doc));
         setBlogs(blogsData);

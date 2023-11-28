@@ -10,7 +10,7 @@ const TagButton = styled(Button)(() => ({
     margin: '0px 5px 5px 0px',
     fontWeight: '700',
     letterSpacing: 0.8,
-    padding: '3px 13px 3px 13px',
+    padding: '6px 13px 3px 13px',
     color: '#ffffff',
     fontFamily: 'Work Sans, sans-serif',
     ":hover": {
@@ -19,6 +19,7 @@ const TagButton = styled(Button)(() => ({
   }));
 
 
+  
   const FooterButton = styled(Button)(() => ({
     padding: '0',
     margin: '0px 40px 0px 0px',
@@ -35,17 +36,13 @@ const TagButton = styled(Button)(() => ({
 
 
   const AddButton = styled(Button)(() => ({
-    backgroundColor: '#8e735b',
-    letterSpacing: 0.8,
-    padding: '0',
+    padding: '15px 0px 0px 0',
     margin: 0,
-    borderRadius: '50%',
-    width: '30px',
-    height: '30px',
-    color: '#ffffff',
-    boxSizing: 'border-box',
+    border: 0,
+    color: '#8e735b',
     ":hover": {
-        backgroundColor: '#000000',
+        border: 0,
+        backgroundColor: '#f5f5f5',
     }
   }));
 
@@ -64,7 +61,7 @@ const TagButton = styled(Button)(() => ({
 
 
   const ZutatenCard = styled(Card)(() => ({
-    margin: '0px 0px 20px 0px',
+    margin: '30px 0px 20px 0px',
   }));
 
 
@@ -158,10 +155,9 @@ const myTheme = createTheme({
             fontSize: 15,
             lineHeight: 1.3,
             marginBottom: 15,
-            fontWeight: 400,
+            fontWeight: 600,
             color: "#8e735b",
             letterSpacing: 0,
-            fontFamily: 'Work Sans, sans-serif',
         },
         h1: {
             fontFamily: 'Josefin Sans, sans-serif',

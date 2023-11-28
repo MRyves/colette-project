@@ -18,7 +18,7 @@ const Cooking = () => {
   return (
     <>
       <MainContainer maxWidth='lg'>
-        <Grid container direction={'row-reverse'} spacing={{ sm: 4, md: 8 }}>
+        <Grid container direction={'row-reverse'} spacing={{ sm: 4, md: 6 }}>
           <Grid item xs={12} sm={6} md={4}>
             <Grid item>
               <Typography>Tags...</Typography>

@@ -20,7 +20,7 @@ const Header: React.FC<HeaderProps> = ({ user, handleLogout }) => {
                     <Grid container justifyContent={'space-between'}>
                         <Grid item>
                             <Link to={'/'}>
-                                <img src="assets/logo.png" alt="Beschreibung des Bildes" style={{ maxWidth: '150px', paddingTop: '40px', paddingBottom: '30px' }} />
+                                <img src="assets/logo.png" alt="Beschreibung des Bildes" style={{ maxWidth: '230px', paddingTop: '25px', paddingBottom: '15px' }} />
                             </Link>
                         </Grid>
                         <Grid item>
