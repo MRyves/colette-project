@@ -6,7 +6,7 @@ import { RootState } from '../store/store';
 import { Link } from 'react-router-dom';
 import useBlogs from '../hooks/useBlogs';
 import SearchBar from '../components/search/search';
-import { MainContainer, ReadmoreButton } from '../theme/my-theme';
+import { MainContainer, ReadmoreButton, myTheme } from '../theme/my-theme';
 import Blog from '../models/Blog';
 import { Stack } from '@mui/system';
 import Tags from '../components/layout/tags';
@@ -90,7 +90,6 @@ const Home = () => {
                     </Typography>
                     <Rating size="small" name="simple-controlled" value={ratingValue} />
                     <Typography>{latestBlog.lead}</Typography>
-
                     <Grid container alignItems={'center'}>
                       <Grid item xs={10}>
                         <Link to={`/detail/${latestBlog.uid}`}>
@@ -103,11 +102,11 @@ const Home = () => {
                         <>
                           <Grid item textAlign={'right'} xs={1}>
                             <Link to={`/edit/${latestBlog.uid}`}>
-                              <EditIcon />
+                              <EditIcon sx={{color: myTheme.palette.primary.main}} />
                             </Link>
                           </Grid>
                           <Grid item textAlign={'right'} xs={1}>
-                            <DeleteOutlinedIcon />
+                            <DeleteOutlinedIcon sx={{color: myTheme.palette.primary.main}} />
                             {/* <DeleteOutlinedIcon
                               onClick={() => handleClickOpen(latestBlog.uid)}
                             ></DeleteOutlinedIcon> */}

@@ -4,7 +4,7 @@ import { Button, Card, CardMedia, Container, createTheme } from "@mui/material";
 
 
 const TagButton = styled(Button)(() => ({
-    backgroundColor: '#c58b64',
+    backgroundColor: myTheme.palette.secondary.main,
     borderRadius: '20px',
     fontSize: '12px',
     margin: '0px 8px 8px 0px',
@@ -13,7 +13,7 @@ const TagButton = styled(Button)(() => ({
     padding: '6px 15px 4px 15px',
     color: '#ffffff',
     ":hover": {
-        backgroundColor: '#5f4a3e',
+        backgroundColor: myTheme.palette.primary.dark,
         color: '#ffffff',
     }
   }));
@@ -28,10 +28,10 @@ const TagButton = styled(Button)(() => ({
     padding: '10px 0px 0px 0',
     margin: 0,
     border: 0,
-    color: '#c58b64',
+    color: myTheme.palette.secondary.main,
     ":hover": {
         border: 0,
-        color: '#5f4a3e',
+        color: myTheme.palette.primary.dark,
     }
   }));
 
@@ -65,9 +65,9 @@ const TagButton = styled(Button)(() => ({
   const ReadmoreButton = styled(Button)(() => ({
     margin: '10px 0px 0px 0px',
     '&:hover': {
-        backgroundColor: '#c58b64',
+        backgroundColor: myTheme.palette.secondary.main,
         color: '#ffffff',
-        borderColor: '#c58b64',
+        borderColor: myTheme.palette.secondary.main,
       },
 }));
 
@@ -82,12 +82,12 @@ const myTheme = createTheme({
         primary: {
             light: '#000000',
             main: '#436c71',
-            dark: '#ffffff',
+            dark: '#5f4a3e',
             contrastText: '#ffffff',
         },
         secondary: {
           light: '#d1b894',
-          main: '#5f4a3e',
+          main: '#c58b64',
           dark: '#c58b64',
           contrastText: '#ffffff',
         },
@@ -136,7 +136,10 @@ const myTheme = createTheme({
                     position: 'fixed',
                     right: '30px',
                     zIndex: 9999,
-                    bottom: '30px'
+                    bottom: '30px',
+                    // '&:hover': {
+                    //     background: myTheme.palette.secondary.main,
+                    //   },
                 }
             }
         },

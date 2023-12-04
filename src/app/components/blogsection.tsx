@@ -12,7 +12,7 @@ import User from '../models/User';
 import DialogDelete from './dialog-delete';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import EditIcon from '@mui/icons-material/Edit';
-import { ReadmoreButton } from '../theme/my-theme';
+import { ReadmoreButton, myTheme } from '../theme/my-theme';
 
 
 
@@ -75,11 +75,12 @@ const BlogSection: React.FC<BlogSectionProps> = ({
                     <>
                       <Grid item xs={1}>
                         <Link to={`/edit/${item.uid}`}>
-                          <EditIcon />
+                          <EditIcon sx={{color: myTheme.palette.primary.main}} />
                         </Link>
                       </Grid>
                       <Grid item textAlign={'right'} xs={1}>
                         <DeleteOutlinedIcon
+                          sx={{color: myTheme.palette.primary.main}}
                           onClick={() => handleClickOpen(item.uid)}
                         ></DeleteOutlinedIcon>
                       </Grid>

@@ -1,10 +1,10 @@
 import { Box, Grid, Link, Typography } from '@mui/material';
 import React from 'react';
-import { FooterContainer } from '../../theme/my-theme';
+import { FooterContainer, myTheme } from '../../theme/my-theme';
 
 const Footer = () => {
   return (
-    <Box sx={{ background: '#c58b64' }}>
+    <Box sx={{ background: myTheme.palette.secondary.main }}>
       <FooterContainer maxWidth="lg">
         <Grid container justifyContent={'space-between'}>
           <Grid item sm={12} md={6}>
