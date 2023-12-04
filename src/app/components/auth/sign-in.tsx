@@ -1,12 +1,10 @@
 import { TextField } from '@mui/material';
 import React from 'react';
-import { Controller, FieldErrors } from 'react-hook-form';
-import { Control } from 'react-hook-form/dist/types/form';
-import { AuthFormState } from './login-form';
+import { Controller } from 'react-hook-form';
 
 interface SignInFormProps {
-  control: Control<AuthFormState, string>;
-  errors: FieldErrors<AuthFormState>;
+  control: any;
+  errors: any;
 }
 
 const SignInForm: React.FC<SignInFormProps> = ({ control, errors }) => {

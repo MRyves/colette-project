@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Rating, TextField, Typography } from '@mui/material';
+import { ReadmoreButton } from '../theme/my-theme';
 
 
 interface AddCommentFormProps {
@@ -52,9 +53,9 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({ submitForm }) => {
 
   return (
     <div>
-      <Typography variant='h2' sx={{ m: '50px 0px 0px 0px' }}>Kommentare</Typography>
       <form onSubmit={handleSubmit}>
         <Rating
+          sx={{margin: '20px 0 0px 0'}}
           size='small'
           name='simple-controlled'
           value={rating}
@@ -85,7 +86,7 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({ submitForm }) => {
           onChange={handleChange}
           autoFocus
         />
-        <Button type='submit' variant='outlined'>Kommentieren</Button>
+        <ReadmoreButton variant="outlined" disableElevation>Kommentieren</ReadmoreButton>
       </form>
     </div>
   );

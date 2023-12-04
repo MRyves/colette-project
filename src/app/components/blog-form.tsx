@@ -6,6 +6,7 @@ import User from '../models/User';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import {
   Autocomplete,
   Container,
@@ -23,7 +24,7 @@ import {
   Slider,
   Stack,
 } from '@mui/material';
-import { AddButton } from '../theme/my-theme';
+import { AddButton, MainContainer } from '../theme/my-theme';
 import { Link } from 'react-router-dom';
 
 interface BlogFormProps {
@@ -134,8 +135,7 @@ const BlogForm: React.FC<BlogFormProps> = ({
   };
 
   return (
-    <div>
-      <Container component="main" maxWidth="sm" sx={{ p: '70px 0' }}>
+      <MainContainer maxWidth="md">
         {!isEditMode ? (
           <Typography variant="h1">Erfasse ein Rezept</Typography>
         ) : (
@@ -271,7 +271,7 @@ const BlogForm: React.FC<BlogFormProps> = ({
             <Grid item xs={1}>
               <AddButton
                 variant="outlined"
-                endIcon={<AddIcon style={{ fontSize: '25px' }} />}
+                endIcon={<AddCircleIcon style={{ fontSize: '35px' }} />}
                 onClick={handleAddListItem}
               ></AddButton>
             </Grid>
@@ -340,8 +340,7 @@ const BlogForm: React.FC<BlogFormProps> = ({
             )}
           </Grid>
         </form>
-      </Container>
-    </div>
+      </MainContainer>
   );
 };
 

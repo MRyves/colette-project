@@ -7,10 +7,10 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
-import { auth } from '../firebase-config';
-import User from '../models/User';
+import { auth } from '../../firebase-config';
+import User from '../../models/User';
 import PersonIcon from '@mui/icons-material/Person';
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 
 interface LoginNavProps {
   user: User | undefined;
@@ -77,18 +77,15 @@ const LoginNav: React.FC<LoginNavProps> = ({
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Link to={'/profile'}>Profil</Link>
-                <Link onClick={onLogoutClick} to={'/'}>
-                  Logout
-                </Link>
-              </MenuItem>
+              <MenuItem component={Link} to={'/profile'} onClick={handleCloseUserMenu}>Profil</MenuItem>
+              <MenuItem component={Link} to={'/'} onClick={onLogoutClick}>Logout</MenuItem>
             </Menu>
           </Box>
         ) : (
           <Button
+            disableRipple
             component={Link}
-            sx={{ my: 2, color: 'black', display: 'block', m: '0px 0px 0px 10px', p: '15px 0px' }}
+            sx={{ display: 'block', p: '0px', color: '#000000' }}
             to={'/login'}
           >
             Login

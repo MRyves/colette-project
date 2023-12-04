@@ -2,8 +2,10 @@ import React from 'react'
 import { AppBar, Container, Grid } from '@mui/material';
 import Navigation from './navigation';
 import User from '../../models/User';
-import LoginNav from '../loginnav';
 import { Link } from 'react-router-dom';
+import LoginNav from './loginnav';
+import Darkmode from '../darkmode';
+
 
 interface HeaderProps {
     user: User | undefined;
@@ -20,17 +22,17 @@ const Header: React.FC<HeaderProps> = ({ user, handleLogout }) => {
                     <Grid container justifyContent={'space-between'}>
                         <Grid item>
                             <Link to={'/'}>
-                                <img src="assets/logo.png" alt="Beschreibung des Bildes" style={{ maxWidth: '230px', paddingTop: '25px', paddingBottom: '15px' }} />
+                                <img src="assets/foodo.png" alt="Foodo" style={{ maxWidth: '230px', paddingTop: '25px', paddingBottom: '15px' }} />
                             </Link>
                         </Grid>
                         <Grid item>
-                            <p>Darkmode</p>
+                            <Darkmode />
                         </Grid>
                     </Grid>
                 </Container>
             </AppBar>
             <Container maxWidth="lg" sx={{ marginTop: '40px' }}>
-                <Grid container justifyContent={'space-between'} sx={{borderBottom: '1px solid #000000', borderTop: '1px solid #000000'}} alignItems={'center'}>
+                <Grid container justifyContent={'space-between'} sx={{borderBottom: '1px solid #353535', borderTop: '1px solid #353535'}} alignItems={'center'}>
                     <Grid item>
                         <Navigation user={user} />
                     </Grid>

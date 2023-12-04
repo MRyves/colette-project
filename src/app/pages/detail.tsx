@@ -2,29 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { addDoc, collection, doc, getDocs } from 'firebase/firestore';
 import { Link, useParams } from 'react-router-dom';
 import { db } from '../firebase-config';
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Grid,
-  ListItem,
-  Rating,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Grid, ListItem, Rating, Typography, } from '@mui/material';
 import AddCommentForm, { CommentForm } from '../components/add-comment-form';
-import { Comment, Comments } from '../models/Comments';
+import { Comments } from '../models/Comments';
 import useBlogs from '../hooks/useBlogs';
-import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import { MainContainer, TagButton, ZutatenCard } from '../theme/my-theme';
 import Sharing from '../components/sharing';
-import ListAltIcon from '@mui/icons-material/ListAlt';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
 const Detail = () => {
+  const currentUser = useSelector((state: RootState) => state.auth.currentUser);
   const { blogId } = useParams();
   const { blogs, querySingleBlog, loading, error } = useBlogs();
+
+  
   // TODO: colette, useComments()
   const [comments, setComments] = useState<Comments>([]);
   console.log(`URL: ${encodeURIComponent(window.location.href)}`);
@@ -90,30 +85,56 @@ const Detail = () => {
   };
 
   return (
-    <MainContainer maxWidth="lg">
-      <Grid container sx={{padding: '0 0 20px 0'}}>
-        <Grid item xs={12} sm={6} md={8}>
-          <Typography variant="h1">{blogs[0]?.title}</Typography>
+    <MainContainer maxWidth='lg'>
+      <Grid container sx={{padding: '0 0 20px 0'}} spacing={{ sm: 4, md: 6 }}>
+        <Grid item xs={12} sm={7} md={8}>
+          <Typography variant="h1" sx={{mb: '0px'}}>{blogs[0]?.title}</Typography>
+          <Grid item sx={{m: '0 0 10px 0'}}>
+            <Rating size="small" readOnly />
+          </Grid>
           <Typography variant="body1">{blogs[0]?.lead}</Typography>
         </Grid>
-      </Grid>
-      <Grid container spacing={{ sm: 4, md: 6 }}>
-        <Grid item xs={12} sm={6} md={8}>
-          <CardMedia component="img" sx={{ m: '7px 0px 30px 0px' }} image={blogs[0]?.imgUrl} title={blogs[0]?.title} />
-          <Grid container>
-            <Grid item>
-              <Link to={`/edit/${blogId}`}>
-                <EditIcon />
-              </Link>
+        {currentUser ? (
+          <Grid item xs={12} sm={5} md={4}>
+            <Grid container spacing={1} justifyContent={'flex-end'}>
+              <Grid item>
+                <Link to={`/edit/${blogId}`}>
+                  <Typography color={'secondary'} fontSize={'14px'}>bearbeiten</Typography>
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link to={`/edit/${blogId}`}>
+                  <EditIcon fontSize='small' />
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item textAlign={'right'} xs={1}>
-              <DeleteOutlinedIcon />
+            <Grid container spacing={1} justifyContent={'flex-end'}>
+              <Grid item>
+                <Typography color={'secondary'} fontSize={'14px'}>löschen</Typography>
+              </Grid>
+              <Grid item>
+                <DeleteOutlinedIcon fontSize='small' />
+              </Grid>
             </Grid>
           </Grid>
-          <Typography>{blogs[0]?.description}</Typography>
-          <AddCommentForm submitForm={createComment} />
+        ) : (
+          ''
+        )}
+      </Grid>
+      <Grid container spacing={{ sm: 4, md: 6 }}>
+        <Grid item xs={12} sm={7} md={8}>
+        <Card elevation={0}>
+          <CardMedia component="img" image={blogs[0]?.imgUrl} title={blogs[0]?.title} />
+          <CardContent>
+            <Typography>{blogs[0]?.description}</Typography>
+          </CardContent>
+          </Card>
+          <Typography variant='h2' sx={{ m: '50px 0px 0px 0px' }}>Kommentare</Typography>
+          {currentUser ? (
+            <AddCommentForm submitForm={createComment} />
+          ) : ""}
           {comments.map((comment) => (
-            <Card key={comment.uid} elevation={0} sx={{ marginTop: '20px' }}>
+            <Card key={comment.uid} elevation={0} sx={{ marginTop: '30px' }}>
               <CardContent>
                 <Grid container justifyContent={'space-between'}>
                   <Grid item>
@@ -133,9 +154,27 @@ const Detail = () => {
             </Card>
           ))}
         </Grid>
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid item xs={12} sm={5} md={4}>
+          <ZutatenCard elevation={0}>
+            <CardContent component="div" sx={{p: '20px'}}>
+              <Grid
+                container
+                justifyContent={'space-between'}
+              >
+                <Grid item>
+                  <Typography variant="h3">Zutaten</Typography>
+                </Grid>
+              </Grid>
+              {blogs[0]?.ingredients &&
+                blogs[0].ingredients.map((ingredient, index) => (
+                  <ListItem key={index}>
+                    {ingredient.trim()}
+                  </ListItem>
+                ))}
+            </CardContent>
+          </ZutatenCard>
           <Grid container>
-            <Grid container alignItems={'center'} justifyContent={'space-between'} sx={{borderBottom: '1px solid #8e735b'}}>
+            <Grid container alignItems={'center'} justifyContent={'space-between'} sx={{borderBottom: '1px solid rgba(0, 0, 0, 0.12)'}}>
               <Grid item>
                 <Typography sx={{fontWeight: '700'}}>Arbeitszeit:</Typography>
               </Grid>
@@ -143,7 +182,7 @@ const Detail = () => {
                 <Typography>{blogs[0]?.duration} Min.</Typography>
               </Grid>
             </Grid>
-            <Grid container alignItems={'center'} justifyContent={'space-between'} sx={{borderBottom: '1px solid #8e735b', p: '10px 0px 0px 0px' }}>
+            <Grid container alignItems={'center'} justifyContent={'space-between'} sx={{borderBottom: '1px solid rgba(0, 0, 0, 0.12)', p: '10px 0px 0px 0px' }}>
               <Grid item>
                 <Typography sx={{fontWeight: '700'}}>Kategorie:</Typography>
               </Grid>
@@ -160,38 +199,14 @@ const Detail = () => {
               </Grid>
             </Grid>
           </Grid>
-          <ZutatenCard elevation={0}>
-            <CardContent component="div">
-              <Grid
-                container
-                justifyContent={'space-between'}
-                alignItems={'center'}
-              >
-                <Grid item>
-                  <Typography variant="h3">Du brauchst</Typography>
-                </Grid>
-                <Grid item>
-                  <ListAltIcon />
-                </Grid>
-              </Grid>
-              {blogs[0]?.ingredients &&
-                blogs[0].ingredients.map((ingredient, index) => (
-                  <ListItem disablePadding key={index}>
-                    {ingredient.trim()}
-                  </ListItem>
-                ))}
-            </CardContent>
-          </ZutatenCard>
-          <Grid sx={{ m: '30px 0px 20px 0px' }}>
+          <Grid sx={{ m: '20px 0px 20px 0px' }}>
             {blogs[0]?.tags &&
               blogs[0].tags.map((tags, index) => (
                 <TagButton key={index}>{tags.trim()}</TagButton>
               ))}
           </Grid>
-          <Typography variant="h4">Rezept von {blogs[0]?.author}</Typography>
-          <Typography variant="subtitle1">
-            {blogs[0]?.timestamp.toDate().toDateString()}
-          </Typography>
+          <Typography><Box fontWeight='700' display='inline'>Rezept von:</Box> {blogs[0]?.author}</Typography>
+          {/* <Typography><Box fontWeight='700' display='inline'>Erfasst am:</Box> {blogs[0]?.timestamp.toDate().toDateString()}</Typography> */}
           <Sharing blogId={blogId!} title={blogs[0]?.title} />
         </Grid>
       </Grid>

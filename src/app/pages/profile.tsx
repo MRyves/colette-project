@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { RootState } from '../store/store';
@@ -10,8 +10,8 @@ const Profile = () => {
   const currentUser = useSelector((state: RootState) => state.auth.currentUser);
 
   return (
-    <MainContainer maxWidth="lg">
-      <Typography variant='h3'>Hallo {currentUser?.displayName || 'Name'}</Typography>
+    <MainContainer maxWidth='lg'>
+      <Typography variant='h1'>Hallo {currentUser?.displayName || 'Name'}</Typography>
       <p>Hier siehst du alle deine bis jetzt verfassten Rezepte:</p>
     </MainContainer>
   );

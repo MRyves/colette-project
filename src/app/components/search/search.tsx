@@ -5,7 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const Search = styled('div')(() => ({
   justifyContent: 'space-between',
-  margin: '30px 0px 30px 0px',
+  margin: '0px 0px 30px 0px',
   display: 'flex',
 }));
 
@@ -18,7 +18,7 @@ const StyledInputBase = styled(InputBase)(() => ({
 }));
 
 const SearchIconWrapper = styled('div')(() => ({
-  backgroundColor: '#000000',
+  backgroundColor: '#c58b64',
   color: '#ffffff',
   padding: '10px',
   pointerEvents: 'none',
@@ -27,6 +27,9 @@ const SearchIconWrapper = styled('div')(() => ({
   justifyContent: 'center',
   width: '50px',
   height: '50px',
+  ":hover": {
+    backgroundColor: '#436c71',
+}
 }));
 
 function SearchBar({ onSearch }: { onSearch: (query: string) => void }) {

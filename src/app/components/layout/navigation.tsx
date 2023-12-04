@@ -104,34 +104,31 @@ const Navigation: React.FC<NavigationProps> = ({ user, handleLogout, setActive }
           }}
         >
           {pages.map((page, index) => (
-            <MenuItem key={index} onClick={handleCloseNavMenu}>
-              <Link to={page.to}>
-                <Typography textAlign='center'>{page.label}</Typography>
-              </Link>
+            <MenuItem component={Link} to={page.to} key={index} onClick={handleCloseNavMenu}>
+                {page.label}
             </MenuItem>
           ))}
           {userId ? (
-            <MenuItem onClick={handleCloseNavMenu}>
-              <Link to={"/create"}>
-                <Typography textAlign='center'>Erfassen</Typography>
-              </Link>
+            <MenuItem component={Link} to={"/create"} onClick={handleCloseNavMenu}>
+                Erfassen
             </MenuItem>
           ) : ""}
         </Menu>
       </Box>
       <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
         {pages.map((page, index) => (
-          <Button
+          <Button 
+            disableRipple
             key={index}
             component={Link}
             to={page.to}
-            sx={{ my: 2, color: 'black', m: '0px 40px 0px 0px', p: '15px 0px' }}
+            sx={{ color: 'black', m: '0px 35px 0px 0px', p: '17px 0px 15px 0px' }}
           >
             {page.label}
           </Button>
         ))}
         {userId && location.pathname !== '/create' ? (
-        <Button component={Link} sx={{ my: 2, color: 'black', m: 0, p: '15px 0px' }} to={'/create'}>Erfassen</Button>
+          <Button disableRipple component={Link} sx={{ color: 'black', m: 0, p: '17px 0px 15px 0px' }} to={'/create'}>Erfassen</Button>
         ) : ""}
         </Box>
     </>

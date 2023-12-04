@@ -1,40 +1,39 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Grid, Link, Typography } from '@mui/material';
 import React from 'react';
-import { FooterButton, PaddContainer } from '../../theme/my-theme';
-import { Link } from 'react-router-dom';
+import { FooterContainer } from '../../theme/my-theme';
 
 const Footer = () => {
   return (
-    <>
-      <Box bgcolor="#cab093">
-        <PaddContainer maxWidth="lg">
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <FooterButton>
-              <Link to={'/imprint'}>
-                <Typography>Impressum</Typography>
-              </Link>
-            </FooterButton>
-            <FooterButton>
-              <Link to={'/backing'}>
-                <Typography>Backen</Typography>
-              </Link>
-            </FooterButton>
-            <FooterButton>
-              <Link to={'/cooking'}>
-                <Typography>Kochen</Typography>
-              </Link>
-            </FooterButton>
-          </Box>
-        </PaddContainer>
-      </Box>
-      <Box bgcolor="#000000">
-        <PaddContainer maxWidth="lg">
-          <Typography variant="body2">
-            © Copyright 2024, Colette Güntensperger
-          </Typography>
-        </PaddContainer>
-      </Box>
-    </>
+    <Box sx={{ background: '#c58b64' }}>
+      <FooterContainer maxWidth="lg">
+        <Grid container justifyContent={'space-between'}>
+          <Grid item sm={12} md={6}>
+            <Grid container spacing={3}>
+              <Grid item>
+                <Link href="/imprint">
+                  <Typography variant="body2">Impressum</Typography>
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/baking">
+                  <Typography variant="body2">Backen</Typography>
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/cooking">
+                  <Typography variant="body2">Kochen</Typography>
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography variant="body2">
+              © Copyright 2024, Colette Güntensperger
+            </Typography>
+          </Grid>
+        </Grid>
+      </FooterContainer>
+    </Box>
   );
 };
 

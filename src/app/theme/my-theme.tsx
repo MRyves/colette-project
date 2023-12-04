@@ -1,34 +1,23 @@
 import styled from "@emotion/styled";
-import { Button, Card, CardMedia, Container, Grid, createTheme } from "@mui/material";
+import { Button, Card, CardMedia, Container, createTheme } from "@mui/material";
 
 
 
 const TagButton = styled(Button)(() => ({
-    backgroundColor: '#8e735b',
+    backgroundColor: '#c58b64',
     borderRadius: '20px',
     fontSize: '12px',
-    margin: '0px 5px 5px 0px',
+    margin: '0px 8px 8px 0px',
     fontWeight: '700',
-    letterSpacing: 0.8,
-    padding: '6px 13px 3px 13px',
+    letterSpacing: 0.7,
+    padding: '6px 15px 4px 15px',
     color: '#ffffff',
-    fontFamily: 'Work Sans, sans-serif',
     ":hover": {
-        backgroundColor: '#593d24',
+        backgroundColor: '#5f4a3e',
+        color: '#ffffff',
     }
   }));
-
-
   
-  const FooterButton = styled(Button)(() => ({
-    padding: '0',
-    margin: '0px 40px 0px 0px',
-    a: {
-        color: '#000000',
-        textDecoration: 'none',
-    },
-}));
-
   const IconStyle = {
     color: '#a4a2a1',
   };
@@ -36,13 +25,13 @@ const TagButton = styled(Button)(() => ({
 
 
   const AddButton = styled(Button)(() => ({
-    padding: '15px 0px 0px 0',
+    padding: '10px 0px 0px 0',
     margin: 0,
     border: 0,
-    color: '#8e735b',
+    color: '#c58b64',
     ":hover": {
         border: 0,
-        backgroundColor: '#f5f5f5',
+        color: '#5f4a3e',
     }
   }));
 
@@ -54,31 +43,67 @@ const TagButton = styled(Button)(() => ({
 
 
 
-  const MainContainer = styled(Container)(() => ({
-    padding: '70px 0px',
-  }));
-
-
-
   const ZutatenCard = styled(Card)(() => ({
-    margin: '30px 0px 20px 0px',
+    margin: '0px 0px 30px 0px',
+    background: '#ffffff',
   }));
 
 
-  const PaddContainer = styled(Container)(() => ({
-    padding: '20px 0px 10px 0px',
+  const FooterContainer = styled(Container)(() => ({
+    paddingTop: '25px',
+    paddingBottom: '10px',
   }));
+
+
+  const MainContainer = styled(Container)(() => ({
+    paddingTop: '60px',
+    paddingBottom: '80px',
+  }));
+
 
 
   const ReadmoreButton = styled(Button)(() => ({
     margin: '10px 0px 0px 0px',
-  }));
+    '&:hover': {
+        backgroundColor: '#c58b64',
+        color: '#ffffff',
+        borderColor: '#c58b64',
+      },
+}));
+
+
 
 
 
   
-
 const myTheme = createTheme({
+    palette: {
+        // mode: mode,
+        primary: {
+            light: '#000000',
+            main: '#436c71',
+            dark: '#ffffff',
+            contrastText: '#ffffff',
+        },
+        secondary: {
+          light: '#d1b894',
+          main: '#5f4a3e',
+          dark: '#c58b64',
+          contrastText: '#ffffff',
+        },
+        background: {
+          default: '#f5f5f5',
+        },
+    },
+    breakpoints: {
+        values: {
+          xs: 0,
+          sm: 600,
+          md: 900,
+          lg: 1300,
+          xl: 1536,
+        },
+    },
     components: {
         MuiCssBaseline: {
             styleOverrides: `
@@ -87,10 +112,31 @@ const myTheme = createTheme({
                 }
             `,
         },
-        MuiCardMedia: {
+        MuiLink: {
             styleOverrides: {
                 root: {
-                    margin: '0 0 15px 0',
+                    textDecoration: 'none',
+                    '&:hover': {
+                        color: '#0000000',
+                        background: 'transparent',
+                      },
+                }
+            }
+        },
+        MuiCardContent: {
+            styleOverrides: {
+                root: {
+                    padding: '30px 20px 40px 20px',
+                }
+            }
+        },
+        MuiFab: {
+            styleOverrides: {
+                root: {
+                    position: 'fixed',
+                    right: '30px',
+                    zIndex: 9999,
+                    bottom: '30px'
                 }
             }
         },
@@ -101,10 +147,22 @@ const myTheme = createTheme({
                 }
             }
         },
+        MuiRating: {
+            styleOverrides: {
+                root: {
+                    paddingBottom: '20px',
+                }
+            }
+        },
         MuiListItem: {
             styleOverrides: {
                 root: {
-                    padding: '10px 0px',
+                    padding: '8px 0px 6px 0px',
+                    borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+                    '&:last-child': {
+                        padding: '8px 0px 0px 0px',
+                        borderBottom: 0,
+                      },
                 }
             }
         },
@@ -112,6 +170,14 @@ const myTheme = createTheme({
             styleOverrides: {
                 root: {
                     margin: '0px 0px 10px 0px',
+                    borderRadius: '0 !important',
+                }
+            }
+        },
+        MuiInputBase: {
+            styleOverrides: {
+                root: {
+                    borderRadius: '0 !important',
                 }
             }
         },
@@ -119,24 +185,48 @@ const myTheme = createTheme({
             styleOverrides: {
                 root: {
                     borderRadius: 0,
-                    fontWeight: 500,
+                    fontWeight: 400,
                     fontSize: 15,
                     letterSpacing: 1.3,
-                    padding: '6px 25px 6px 25px',
-                    fontFamily: 'Work Sans, sans-serif',
-                    borderColor: '#000000',
-                    borderWidth: '1px'
+                    padding: '10px 25px 6px 25px',
+                    fontFamily: 'Josefin Sans, sans-serif',
+                    borderColor: '#c58b64',
+                    borderWidth: '1px',
+                    color: '#c58b64',
+                    '&:hover': {
+                        backgroundColor: 'transparent',
+                        color: '#c58b64',
+                      },
+                },
+            },
+        },
+        MuiMenuItem: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 0,
+                    fontWeight: 400,
+                    fontSize: 15,
+                    textTransform: 'uppercase',
+                    letterSpacing: 1.3,
+                    padding: '14px 20px 10px 20px',
+                    fontFamily: 'Josefin Sans, sans-serif',
+                    margin: 0,
+                    '&:hover': {
+                        backgroundColor: '#c58b64',
+                        color: '#ffffff'
+                      },
                 },
             },
         },
     },
-    typography: {
+        typography: {
         fontFamily: 'Quattrocento, serif',
         body1: {
             fontSize: 18,
             lineHeight: 1.5,
             marginBottom: 10,
             fontWeight: 300,
+            color: '#353535',
         },
         body2: {
             fontSize: 18,
@@ -145,45 +235,47 @@ const myTheme = createTheme({
             color: '#ffffff',
         },
         caption: {
-            fontSize: 25,
+            fontSize: 18,
             lineHeight: 1.3,
             marginBottom: 10,
-            fontWeight: 700,
-            fontFamily: 'Quattrocento, serif',
+            fontWeight: 400,
         },
         subtitle1: {
             fontSize: 15,
             lineHeight: 1.3,
             marginBottom: 15,
             fontWeight: 600,
-            color: "#8e735b",
+            color: "#c58b64",
             letterSpacing: 0,
         },
         h1: {
             fontFamily: 'Josefin Sans, sans-serif',
-            fontSize: 33,
-            marginBottom: 10,
+            fontSize: 40,
+            marginBottom: 20,
             lineHeight: 1.4,
-            fontWeight: 600,
+            fontWeight: 400,
             textTransform: "uppercase",
             letterSpacing: 1.5,
+            color: '#353535'
         },
         h2: {
             fontFamily: 'Josefin Sans, sans-serif',
             fontWeight: 600,
-            fontSize: 30,
+            fontSize: 26,
             marginBottom: 10,
             textTransform: "uppercase",
-            letterSpacing: 1.7
+            letterSpacing: 1.7,
+            color: '#353535'
         },
         h3: {
             fontFamily: 'Josefin Sans, sans-serif',
-            fontWeight: 600,
-            fontSize: 22,
+            fontWeight: 400,
+            fontSize: 24,
             marginBottom: 10,
             marginTop: 4,
             textTransform: "uppercase",
             letterSpacing: 1,
+            color: '#353535',
             a: {
                 color: '#000000',
                 textDecoration: 'none',
@@ -202,21 +294,7 @@ const myTheme = createTheme({
             textTransform: "uppercase",
             letterSpacing: 1,
         },
-    },
-    palette: {
-        primary: {
-            light: '#757ce8',
-            main: '#000000',
-            dark: '#002884',
-            contrastText: '#fff',
         },
-        secondary: {
-          main: '#4f2f20',
-        },
-        background: {
-          default: '#f5f5f5',
-        },
-    },
 });
 
-export { IconStyle, FooterButton, MainContainer, TagButton, ReadmoreButton, ZutatenCard, AddButton, PaddContainer, MainImage, myTheme };
+export { IconStyle, MainContainer, TagButton, ReadmoreButton, ZutatenCard, AddButton, FooterContainer, MainImage, myTheme };
