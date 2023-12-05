@@ -89,7 +89,9 @@ const Home = () => {
                       </Link>
                     </Typography>
                     <Rating size="small" name="simple-controlled" value={ratingValue} />
-                    <Typography>{latestBlog.lead}</Typography>
+                    <Grid sx={{mb: '25px'}} item>
+                      <Typography>{latestBlog.lead}</Typography>
+                    </Grid>
                     <Grid container alignItems={'center'}>
                       <Grid item xs={10}>
                         <Link to={`/detail/${latestBlog.uid}`}>
@@ -99,19 +101,22 @@ const Home = () => {
                         </Link>
                       </Grid>
                       {user?.uid ? (
-                        <>
-                          <Grid item textAlign={'right'} xs={1}>
-                            <Link to={`/edit/${latestBlog.uid}`}>
-                              <EditIcon sx={{color: myTheme.palette.primary.main}} />
-                            </Link>
-                          </Grid>
-                          <Grid item textAlign={'right'} xs={1}>
-                            <DeleteOutlinedIcon sx={{color: myTheme.palette.primary.main}} />
-                            {/* <DeleteOutlinedIcon
-                              onClick={() => handleClickOpen(latestBlog.uid)}
-                            ></DeleteOutlinedIcon> */}
-                          </Grid>
-                        </>
+                        <Grid item xs={2}>
+                          <Grid container alignItems={'center'} justifyContent={'flex-end'} spacing={1}>
+                            <Grid item>
+                                <Link to={`/edit/${latestBlog.uid}`}>
+                                  <EditIcon sx={{color: myTheme.palette.secondary.main}} />
+                                </Link>
+                              </Grid>
+                              <Grid item>
+                                <DeleteOutlinedIcon sx={{color: myTheme.palette.secondary.main}} />
+                                {/* <DeleteOutlinedIcon
+                                  sx={{color: myTheme.palette.secondary.main}}
+                                  onClick={() => handleClickOpen(latestBlog.uid)}
+                                ></DeleteOutlinedIcon> */}
+                              </Grid>
+                            </Grid>
+                        </Grid>
                       ) : (
                         ''
                       )}

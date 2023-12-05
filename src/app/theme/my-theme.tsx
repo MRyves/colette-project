@@ -8,14 +8,14 @@ const myTheme = createTheme({
     palette: {
         primary: {
             light: '#000000',
-            main: '#63493c',
-            dark: '#353535',
+            main: '#e3dad1',
+            dark: '#acbc99',
             contrastText: '#ffffff',
         },
         secondary: {
           light: '#d1b894',
-          main: '#6cafb7',
-          dark: '#366d72',
+          main: '#acbc99',
+          dark: '#4e5f5e',
           contrastText: '#ffffff',
         },
         background: {
@@ -132,12 +132,12 @@ const myTheme = createTheme({
                     letterSpacing: 1.3,
                     padding: '10px 25px 6px 25px',
                     fontFamily: 'Josefin Sans, sans-serif',
-                    borderColor: '#6cafb7',
+                    borderColor: '#acbc99',
                     borderWidth: '1px',
-                    color: '#6cafb7',
+                    color: '#acbc99',
                     '&:hover': {
                         backgroundColor: 'transparent',
-                        color: '#6cafb7',
+                        color: '#acbc99',
                       },
                 },
             },
@@ -154,7 +154,7 @@ const myTheme = createTheme({
                     fontFamily: 'Josefin Sans, sans-serif',
                     margin: 0,
                     '&:hover': {
-                        backgroundColor: '#6cafb7',
+                        backgroundColor: '#acbc99',
                         color: '#ffffff'
                       },
                 },
@@ -168,7 +168,7 @@ const myTheme = createTheme({
             lineHeight: 1.5,
             marginBottom: 10,
             fontWeight: 300,
-            color: '#353535',
+            color: '#4e5f5e',
         },
         body2: {
             fontSize: 18,
@@ -187,7 +187,7 @@ const myTheme = createTheme({
             lineHeight: 1.3,
             marginBottom: 15,
             fontWeight: 600,
-            color: "#6cafb7",
+            color: "#acbc99",
             letterSpacing: 0,
         },
         h1: {
@@ -198,7 +198,7 @@ const myTheme = createTheme({
             fontWeight: 400,
             textTransform: "uppercase",
             letterSpacing: 1.5,
-            color: '#353535'
+            color: '#4e5f5e'
         },
         h2: {
             fontFamily: 'Josefin Sans, sans-serif',
@@ -207,7 +207,7 @@ const myTheme = createTheme({
             marginBottom: 10,
             textTransform: "uppercase",
             letterSpacing: 1.7,
-            color: '#353535'
+            color: '#4e5f5e'
         },
         h3: {
             fontFamily: 'Josefin Sans, sans-serif',
@@ -217,9 +217,9 @@ const myTheme = createTheme({
             marginTop: 4,
             textTransform: "uppercase",
             letterSpacing: 1,
-            color: '#353535',
+            color: '#4e5f5e',
             a: {
-                color: '#000000',
+                color: '#4e5f5e',
                 textDecoration: 'none',
             },
         },
@@ -242,7 +242,7 @@ const myTheme = createTheme({
 
 
 const TagButton = styled(Button)(() => ({
-    backgroundColor: myTheme.palette.secondary.main,
+    backgroundColor: '#acbc99',
     borderRadius: '20px',
     fontSize: '12px',
     margin: '0px 8px 8px 0px',
@@ -251,7 +251,7 @@ const TagButton = styled(Button)(() => ({
     padding: '6px 15px 4px 15px',
     color: '#ffffff',
     ":hover": {
-        backgroundColor: myTheme.palette.secondary.dark,
+        backgroundColor: '#4e5f5e',
         color: '#ffffff',
     }
   }));
@@ -301,11 +301,11 @@ const TagButton = styled(Button)(() => ({
 
 
   const ReadmoreButton = styled(Button)(() => ({
-    margin: '10px 0px 0px 0px',
+    margin: '0px 0px 0px 0px',
     '&:hover': {
-        backgroundColor: myTheme.palette.secondary.main,
+        backgroundColor: '#acbc99',
         color: '#ffffff',
-        borderColor: myTheme.palette.secondary.main,
+        borderColor: '#acbc99',
       },
 }));
 

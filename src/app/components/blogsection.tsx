@@ -62,7 +62,9 @@ const BlogSection: React.FC<BlogSectionProps> = ({
                   <Link to={`/detail/${item.uid}`}>{item.title}</Link>
                 </Typography>
                 <Rating size="small" name="simple-controlled" value={ratingValue} />
-                <Typography>{item.lead}</Typography>
+                <Grid sx={{mb: '25px'}} item>
+                  <Typography>{item.lead}</Typography>
+                </Grid>
                 <Grid container alignItems={'center'}>
                   <Grid item xs={10}>
                     <Link to={`/detail/${item.uid}`}>
@@ -72,19 +74,21 @@ const BlogSection: React.FC<BlogSectionProps> = ({
                     </Link>
                   </Grid>
                   {userId ? (
-                    <>
-                      <Grid item xs={1}>
-                        <Link to={`/edit/${item.uid}`}>
-                          <EditIcon sx={{color: myTheme.palette.primary.main}} />
-                        </Link>
-                      </Grid>
-                      <Grid item textAlign={'right'} xs={1}>
-                        <DeleteOutlinedIcon
-                          sx={{color: myTheme.palette.primary.main}}
-                          onClick={() => handleClickOpen(item.uid)}
-                        ></DeleteOutlinedIcon>
-                      </Grid>
-                    </>
+                  <Grid item xs={2}>
+                    <Grid container alignItems={'center'} justifyContent={'flex-end'} spacing={1}>
+                        <Grid item>
+                            <Link to={`/edit/${item.uid}`}>
+                              <EditIcon sx={{color: myTheme.palette.secondary.main}} />
+                            </Link>
+                          </Grid>
+                          <Grid item>
+                            <DeleteOutlinedIcon
+                              sx={{color: myTheme.palette.secondary.main}}
+                              onClick={() => handleClickOpen(item.uid)}
+                            ></DeleteOutlinedIcon>
+                          </Grid>
+                        </Grid>
+                    </Grid>
                   ) : (
                     ''
                   )}
