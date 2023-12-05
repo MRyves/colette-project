@@ -1,25 +1,23 @@
-import styled from "@emotion/styled";
-import { Button, Card, CardMedia, Container, createTheme } from "@mui/material";
+import { createTheme } from "@mui/material";
 
 
-
-  
-const myTheme = createTheme({
+const darkTheme = createTheme({
     palette: {
+        mode: 'dark',
         primary: {
             light: '#000000',
-            main: '#293133',
+            main: '#000000',
             dark: '#acbc99',
             contrastText: '#ffffff',
         },
         secondary: {
           light: '#d1b894',
-          main: '#95c5b0',
+          main: '#000000',
           dark: '#577e72',
           contrastText: '#ffffff',
         },
         background: {
-          default: '#f5f5f5',
+          default: '#293133',
         },
     },
     breakpoints: {
@@ -168,7 +166,7 @@ const myTheme = createTheme({
             lineHeight: 1.5,
             marginBottom: 10,
             fontWeight: 300,
-            color: '#373737',
+            color: '#ffffff',
         },
         caption: {
             fontSize: 18,
@@ -192,7 +190,7 @@ const myTheme = createTheme({
             fontWeight: 400,
             textTransform: "uppercase",
             letterSpacing: 1.5,
-            color: '#373737'
+            color: '#ffffff'
         },
         h2: {
             fontFamily: 'Josefin Sans, sans-serif',
@@ -201,7 +199,7 @@ const myTheme = createTheme({
             marginBottom: 10,
             textTransform: "uppercase",
             letterSpacing: 1.7,
-            color: '#373737'
+            color: '#ffffff'
         },
         h3: {
             fontFamily: 'Josefin Sans, sans-serif',
@@ -211,7 +209,7 @@ const myTheme = createTheme({
             marginTop: 4,
             textTransform: "uppercase",
             letterSpacing: 1,
-            color: '#373737',
+            color: '#ffffff',
             a: {
                 color: '#373737',
                 textDecoration: 'none',
@@ -235,80 +233,4 @@ const myTheme = createTheme({
 
 
 
-const TagButton = styled(Button)(() => ({
-    backgroundColor: myTheme.palette.secondary.main,
-    borderRadius: '20px',
-    fontSize: '12px',
-    margin: '0px 8px 8px 0px',
-    fontWeight: '700',
-    letterSpacing: 0.7,
-    padding: '6px 15px 4px 15px',
-    color: '#ffffff',
-    ":hover": {
-        backgroundColor: myTheme.palette.secondary.dark,
-        color: '#ffffff',
-    }
-  }));
-  
-  const IconStyle = {
-    color: '#a4a2a1',
-  };
-
-
-
-  const AddButton = styled(Button)(() => ({
-    padding: '10px 0px 0px 0',
-    margin: 0,
-    border: 0,
-    color: myTheme.palette.secondary.main,
-    ":hover": {
-        border: 0,
-        color: myTheme.palette.primary.dark,
-    }
-  }));
-
-
-  const MainImage = styled(CardMedia)(() => ({
-    margin: '0px',
-    padding: '0px',
-  }));
-
-
-
-  const ZutatenCard = styled(Card)(() => ({
-    margin: '0px 0px 30px 0px',
-    background: '#ffffff',
-  }));
-
-
-  const FooterContainer = styled(Container)(() => ({
-    paddingTop: '25px',
-    paddingBottom: '10px',
-  }));
-
-
-  const MainContainer = styled(Container)(() => ({
-    paddingTop: '60px',
-    paddingBottom: '80px',
-  }));
-
-
-
-  const ReadmoreButton = styled(Button)(() => ({
-    margin: '0px 0px 0px 0px',
-    '&:hover': {
-        backgroundColor: myTheme.palette.secondary.main,
-        color: '#ffffff',
-        borderColor: myTheme.palette.secondary.main,
-      },
-}));
-
-
-
-
-
-
-
-
-
-export { IconStyle, MainContainer, TagButton, ReadmoreButton, ZutatenCard, AddButton, FooterContainer, MainImage, myTheme };
+export { darkTheme };

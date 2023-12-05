@@ -58,7 +58,7 @@ export const LoginForm: React.FC<LoginProps> = ({ handleSubmit: submitForm }) =>
             </form>
             <Grid container>
                 <Grid item xs>
-                    <Link href="/forgot" variant="body2">
+                    <Link href="/forgot">
                         <Typography variant="body1">Passwort vergessen?</Typography>
                     </Link>
                 </Grid>
