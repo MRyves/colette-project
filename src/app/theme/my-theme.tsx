@@ -81,7 +81,7 @@ const myTheme = createTheme({
         // mode: mode,
         primary: {
             light: '#000000',
-            main: '#436c71',
+            main: '#63493c',
             dark: '#5f4a3e',
             contrastText: '#ffffff',
         },
