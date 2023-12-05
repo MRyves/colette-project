@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { addDoc, collection, doc, getDocs } from 'firebase/firestore';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { db } from '../firebase-config';
-import { Box, Card, CardContent, CardMedia, Grid, ListItem, Rating, Typography, } from '@mui/material';
+import { Box, Button, Card, CardContent, CardMedia, Grid, ListItem, Rating, Typography } from '@mui/material';
 import AddCommentForm, { CommentForm } from '../components/add-comment-form';
 import { Comments } from '../models/Comments';
 import useBlogs from '../hooks/useBlogs';
@@ -14,11 +14,12 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 
 const Detail = () => {
-  const currentUser = useSelector((state: RootState) => state.auth.currentUser);
   const { blogId } = useParams();
-  const { blogs, querySingleBlog, loading, error } = useBlogs();
+  const navigate = useNavigate();
+  const currentUser = useSelector((state: RootState) => state.auth.currentUser);
+  const { blogs, querySingleBlog, deleteBlog } = useBlogs();
 
-  
+
   // TODO: colette, useComments()
   const [comments, setComments] = useState<Comments>([]);
   console.log(`URL: ${encodeURIComponent(window.location.href)}`);
@@ -31,7 +32,7 @@ const Detail = () => {
       const commentsRef = collection(db, `blogs`, blogId, 'comments');
 
       const commentRef = await addDoc(commentsRef, {
-        ...form,
+        ...form
       });
       setComments([...comments, { uid: commentRef.id, ...form }]);
     } catch (err) {
@@ -61,7 +62,7 @@ const Detail = () => {
           uid: doc.id,
           nickname: doc.data().nickname,
           comment: doc.data().comment,
-          rating: doc.data().rating || 0,
+          rating: doc.data().rating || 0
         }))
       );
       console.log(
@@ -69,13 +70,18 @@ const Detail = () => {
         commentsRaw.docs.map((doc) => ({
           uid: doc.id,
           nickname: doc.data().nickname,
-          comment: doc.data().comment,
+          comment: doc.data().comment
         }))
       );
     } catch (error) {
       console.error('Fehler beim Abrufen von Blogdetails:', error);
     }
   };
+
+  const handleDelete = async () => {
+    await deleteBlog(blogId!);
+    navigate('/');
+  }
 
   const formatTimestamp = (timestamp: any) => {
     if (timestamp && timestamp.toDate) {
@@ -86,13 +92,13 @@ const Detail = () => {
 
   return (
     <MainContainer maxWidth='lg'>
-      <Grid container sx={{padding: '0 0 20px 0'}} spacing={{ sm: 4, md: 6 }}>
+      <Grid container sx={{ padding: '0 0 20px 0' }} spacing={{ sm: 4, md: 6 }}>
         <Grid item xs={12} sm={7} md={8}>
-          <Typography variant="h1" sx={{mb: '0px'}}>{blogs[0]?.title}</Typography>
-          <Grid item sx={{m: '0 0 10px 0'}}>
-            <Rating size="small" readOnly />
+          <Typography variant='h1' sx={{ mb: '0px' }}>{blogs[0]?.title}</Typography>
+          <Grid item sx={{ m: '0 0 10px 0' }}>
+            <Rating size='small' readOnly />
           </Grid>
-          <Typography variant="body1">{blogs[0]?.lead}</Typography>
+          <Typography variant='body1'>{blogs[0]?.lead}</Typography>
         </Grid>
         {currentUser ? (
           <Grid item xs={12} sm={5} md={4}>
@@ -113,7 +119,9 @@ const Detail = () => {
                 <Typography color={'secondary'} fontSize={'14px'}>löschen</Typography>
               </Grid>
               <Grid item>
-                <DeleteOutlinedIcon fontSize='small' />
+                <Button onClick={handleDelete} size='small'>
+                  <DeleteOutlinedIcon fontSize='small' />
+                </Button>
               </Grid>
             </Grid>
           </Grid>
@@ -123,28 +131,28 @@ const Detail = () => {
       </Grid>
       <Grid container spacing={{ sm: 4, md: 6 }}>
         <Grid item xs={12} sm={7} md={8}>
-        <Card elevation={0}>
-          <CardMedia component="img" image={blogs[0]?.imgUrl} title={blogs[0]?.title} />
-          <CardContent>
-            <Typography>{blogs[0]?.description}</Typography>
-          </CardContent>
+          <Card elevation={0}>
+            <CardMedia component='img' image={blogs[0]?.imgUrl} title={blogs[0]?.title} />
+            <CardContent>
+              <Typography>{blogs[0]?.description}</Typography>
+            </CardContent>
           </Card>
           <Typography variant='h2' sx={{ m: '50px 0px 0px 0px' }}>Kommentare</Typography>
           {currentUser ? (
             <AddCommentForm submitForm={createComment} />
-          ) : ""}
+          ) : ''}
           {comments.map((comment) => (
             <Card key={comment.uid} elevation={0} sx={{ marginTop: '30px' }}>
               <CardContent>
                 <Grid container justifyContent={'space-between'}>
                   <Grid item>
-                    <Typography variant="h5">{comment.nickname}</Typography>
+                    <Typography variant='h5'>{comment.nickname}</Typography>
                   </Grid>
                   <Grid item>
-                    <Rating size="small" readOnly value={comment.rating} />
+                    <Rating size='small' readOnly value={comment.rating} />
                   </Grid>
                 </Grid>
-                <Typography variant="subtitle1">
+                <Typography variant='subtitle1'>
                   {blogs[0]?.timestamp
                     ? formatTimestamp(blogs[0]?.timestamp)
                     : ''}
@@ -156,13 +164,13 @@ const Detail = () => {
         </Grid>
         <Grid item xs={12} sm={5} md={4}>
           <ZutatenCard elevation={0}>
-            <CardContent component="div" sx={{p: '20px'}}>
+            <CardContent component='div' sx={{ p: '20px' }}>
               <Grid
                 container
                 justifyContent={'space-between'}
               >
                 <Grid item>
-                  <Typography variant="h3">Zutaten</Typography>
+                  <Typography variant='h3'>Zutaten</Typography>
                 </Grid>
               </Grid>
               {blogs[0]?.ingredients &&
@@ -174,28 +182,30 @@ const Detail = () => {
             </CardContent>
           </ZutatenCard>
           <Grid container>
-            <Grid container alignItems={'center'} justifyContent={'space-between'} sx={{borderBottom: '1px solid rgba(0, 0, 0, 0.12)'}}>
+            <Grid container alignItems={'center'} justifyContent={'space-between'}
+                  sx={{ borderBottom: '1px solid rgba(0, 0, 0, 0.12)' }}>
               <Grid item>
-                <Typography sx={{fontWeight: '700'}}>Arbeitszeit:</Typography>
+                <Typography sx={{ fontWeight: '700' }}>Arbeitszeit:</Typography>
               </Grid>
               <Grid item>
                 <Typography>{blogs[0]?.duration} Min.</Typography>
               </Grid>
             </Grid>
-            <Grid container alignItems={'center'} justifyContent={'space-between'} sx={{borderBottom: '1px solid rgba(0, 0, 0, 0.12)', p: '10px 0px 0px 0px' }}>
+            <Grid container alignItems={'center'} justifyContent={'space-between'}
+                  sx={{ borderBottom: '1px solid rgba(0, 0, 0, 0.12)', p: '10px 0px 0px 0px' }}>
               <Grid item>
-                <Typography sx={{fontWeight: '700'}}>Kategorie:</Typography>
+                <Typography sx={{ fontWeight: '700' }}>Kategorie:</Typography>
               </Grid>
               <Grid item>
-                  <Typography>{blogs[0]?.category}</Typography>
+                <Typography>{blogs[0]?.category}</Typography>
               </Grid>
             </Grid>
             <Grid container alignItems={'center'} justifyContent={'space-between'} sx={{ p: '10px 0px 0px 0px' }}>
               <Grid item>
-                <Typography sx={{fontWeight: '700'}}>Niveau:</Typography>
+                <Typography sx={{ fontWeight: '700' }}>Niveau:</Typography>
               </Grid>
               <Grid item>
-                  <Typography>{blogs[0]?.niveau}</Typography>
+                <Typography>{blogs[0]?.niveau}</Typography>
               </Grid>
             </Grid>
           </Grid>
