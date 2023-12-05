@@ -86,6 +86,7 @@ const Navigation: React.FC<NavigationProps> = ({ user, handleLogout, setActive }
           <MenuIcon />
         </IconButton>
         <Menu
+          elevation={0}
           id='menu-appbar'
           anchorEl={anchorElNav}
           anchorOrigin={{

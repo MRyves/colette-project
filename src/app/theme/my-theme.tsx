@@ -159,7 +159,6 @@ const myTheme = createTheme({
             styleOverrides: {
                 root: {
                     borderRadius: 0,
-                    background: '#6cafb7',
                 }
             }
         },
@@ -222,14 +221,13 @@ const myTheme = createTheme({
                     borderRadius: 0,
                     fontWeight: 400,
                     fontSize: 15,
-                    color: '#ffffff',
                     textTransform: 'uppercase',
                     letterSpacing: 1.3,
                     padding: '14px 20px 10px 20px',
                     fontFamily: 'Josefin Sans, sans-serif',
                     margin: 0,
                     '&:hover': {
-                        backgroundColor: '#366d72',
+                        backgroundColor: '#6cafb7',
                         color: '#ffffff'
                       },
                 },
