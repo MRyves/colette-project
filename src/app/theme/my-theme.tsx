@@ -13,7 +13,7 @@ const TagButton = styled(Button)(() => ({
     padding: '6px 15px 4px 15px',
     color: '#ffffff',
     ":hover": {
-        backgroundColor: myTheme.palette.primary.dark,
+        backgroundColor: myTheme.palette.secondary.dark,
         color: '#ffffff',
     }
   }));
@@ -82,13 +82,13 @@ const myTheme = createTheme({
         primary: {
             light: '#000000',
             main: '#63493c',
-            dark: '#5f4a3e',
+            dark: '#353535',
             contrastText: '#ffffff',
         },
         secondary: {
           light: '#d1b894',
-          main: '#c58b64',
-          dark: '#c58b64',
+          main: '#6cafb7',
+          dark: '#366d72',
           contrastText: '#ffffff',
         },
         background: {
@@ -193,12 +193,12 @@ const myTheme = createTheme({
                     letterSpacing: 1.3,
                     padding: '10px 25px 6px 25px',
                     fontFamily: 'Josefin Sans, sans-serif',
-                    borderColor: '#c58b64',
+                    borderColor: '#6cafb7',
                     borderWidth: '1px',
-                    color: '#c58b64',
+                    color: '#6cafb7',
                     '&:hover': {
                         backgroundColor: 'transparent',
-                        color: '#c58b64',
+                        color: '#6cafb7',
                       },
                 },
             },
@@ -215,7 +215,7 @@ const myTheme = createTheme({
                     fontFamily: 'Josefin Sans, sans-serif',
                     margin: 0,
                     '&:hover': {
-                        backgroundColor: '#c58b64',
+                        backgroundColor: '#6cafb7',
                         color: '#ffffff'
                       },
                 },
