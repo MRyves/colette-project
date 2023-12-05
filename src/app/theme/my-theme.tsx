@@ -187,7 +187,7 @@ const myTheme = createTheme({
             lineHeight: 1.3,
             marginBottom: 15,
             fontWeight: 600,
-            color: "#c58b64",
+            color: "#d0895d",
             letterSpacing: 0,
         },
         h1: {
