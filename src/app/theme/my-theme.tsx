@@ -100,7 +100,7 @@ const myTheme = createTheme({
             styleOverrides: {
                 root: {
                     padding: '8px 0px 6px 0px',
-                    borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+                    borderBottom: '1px solid #ffffff',
                     '&:last-child': {
                         padding: '8px 0px 0px 0px',
                         borderBottom: 0,
@@ -283,7 +283,7 @@ const TagButton = styled(Button)(() => ({
 
   const ZutatenCard = styled(Card)(() => ({
     margin: '0px 0px 30px 0px',
-    background: '#ffffff',
+    background: myTheme.palette.primary.main,
   }));
 
 
