@@ -112,6 +112,7 @@ const myTheme = createTheme({
                 }
             `,
         },
+        
         MuiLink: {
             styleOverrides: {
                 root: {
@@ -137,9 +138,6 @@ const myTheme = createTheme({
                     right: '30px',
                     zIndex: 9999,
                     bottom: '30px',
-                    // '&:hover': {
-                    //     background: myTheme.palette.secondary.main,
-                    //   },
                 }
             }
         },
@@ -154,6 +152,21 @@ const myTheme = createTheme({
             styleOverrides: {
                 root: {
                     paddingBottom: '20px',
+                }
+            }
+        },
+        MuiPaper: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 0,
+                    background: '#6cafb7',
+                }
+            }
+        },
+        MuiList: {
+            styleOverrides: {
+                root: {
+                    padding: 0,
                 }
             }
         },
@@ -209,13 +222,14 @@ const myTheme = createTheme({
                     borderRadius: 0,
                     fontWeight: 400,
                     fontSize: 15,
+                    color: '#ffffff',
                     textTransform: 'uppercase',
                     letterSpacing: 1.3,
                     padding: '14px 20px 10px 20px',
                     fontFamily: 'Josefin Sans, sans-serif',
                     margin: 0,
                     '&:hover': {
-                        backgroundColor: '#6cafb7',
+                        backgroundColor: '#366d72',
                         color: '#ffffff'
                       },
                 },
