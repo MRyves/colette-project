@@ -8,13 +8,15 @@ const myTheme = createTheme({
     palette: {
         primary: {
             light: '#000000',
-            main: '#e3dad1',
+            main: '#293133',
+            // main: '#000000',
             dark: '#acbc99',
             contrastText: '#ffffff',
         },
         secondary: {
           light: '#d1b894',
           main: '#80b4bd',
+        //   main: '#ebcc82',
           dark: '#487178',
           contrastText: '#ffffff',
         },
@@ -100,7 +102,7 @@ const myTheme = createTheme({
             styleOverrides: {
                 root: {
                     padding: '8px 0px 6px 0px',
-                    borderBottom: '1px solid #ffffff',
+                    borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
                     '&:last-child': {
                         padding: '8px 0px 0px 0px',
                         borderBottom: 0,
@@ -283,7 +285,7 @@ const TagButton = styled(Button)(() => ({
 
   const ZutatenCard = styled(Card)(() => ({
     margin: '0px 0px 30px 0px',
-    background: myTheme.palette.primary.main,
+    background: '#ffffff',
   }));
 
 
