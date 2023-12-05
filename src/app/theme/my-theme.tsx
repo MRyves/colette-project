@@ -9,15 +9,13 @@ const myTheme = createTheme({
         primary: {
             light: '#000000',
             main: '#293133',
-            // main: '#000000',
             dark: '#acbc99',
             contrastText: '#ffffff',
         },
         secondary: {
           light: '#d1b894',
-          main: '#80b4bd',
-        //   main: '#ebcc82',
-          dark: '#487178',
+          main: '#95c5b0',
+          dark: '#577e72',
           contrastText: '#ffffff',
         },
         background: {
@@ -134,12 +132,12 @@ const myTheme = createTheme({
                     letterSpacing: 1.3,
                     padding: '10px 25px 6px 25px',
                     fontFamily: 'Josefin Sans, sans-serif',
-                    borderColor: '#80b4bd',
+                    borderColor: '#95c5b0',
                     borderWidth: '1px',
-                    color: '#80b4bd',
+                    color: '#95c5b0',
                     '&:hover': {
                         backgroundColor: 'transparent',
-                        color: '#80b4bd',
+                        color: '#95c5b0',
                       },
                 },
             },
@@ -156,7 +154,7 @@ const myTheme = createTheme({
                     fontFamily: 'Josefin Sans, sans-serif',
                     margin: 0,
                     '&:hover': {
-                        backgroundColor: '#80b4bd',
+                        backgroundColor: '#95c5b0',
                         color: '#ffffff'
                       },
                 },
