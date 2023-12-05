@@ -8,7 +8,6 @@ import { Comments } from '../models/Comments';
 import useBlogs from '../hooks/useBlogs';
 import { MainContainer, TagButton, ZutatenCard } from '../theme/my-theme';
 import Sharing from '../components/sharing';
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { useSelector } from 'react-redux';
@@ -25,6 +24,7 @@ const Detail = () => {
   console.log(`URL: ${encodeURIComponent(window.location.href)}`);
 
   const createComment = async (form: CommentForm) => {
+    console.log('creating comment: ', form);
     if (!blogId) return;
 
     try {

@@ -24,6 +24,7 @@ function useBlogs() {
       author: documentData.author,
       imgUrl: documentData.imgUrl,
       timestamp: documentData.timestamp,
+      userId: documentData.userId,
     } as Blog;
   };
 

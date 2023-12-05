@@ -86,7 +86,7 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({ submitForm }) => {
           onChange={handleChange}
           autoFocus
         />
-        <ReadmoreButton variant="outlined" disableElevation>Kommentieren</ReadmoreButton>
+        <ReadmoreButton type='submit' variant="outlined" disableElevation>Kommentieren</ReadmoreButton>
       </form>
     </div>
   );

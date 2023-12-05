@@ -17,8 +17,8 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path='/' element={<Home />} />
-      <Route path='/profile' element={<Profile />} />
       <Route element={<PrivateRoutes />}>
+        <Route path='/profile' element={<Profile />} />
         <Route path='/create' element={<Create />} />
         <Route path='/edit/:blogId' element={<Edit />} />
       </Route>
