@@ -14,4 +14,6 @@ export default interface Blog {
   duration: string;
   description: string;
   ingredients: string[];
+
+  avgRating?: number;
 }

@@ -81,7 +81,7 @@ const Detail = () => {
   const handleDelete = async () => {
     await deleteBlog(blogId!);
     navigate('/');
-  }
+  };
 
   const formatTimestamp = (timestamp: any) => {
     if (timestamp && timestamp.toDate) {
@@ -96,7 +96,7 @@ const Detail = () => {
         <Grid item xs={12} sm={7} md={8}>
           <Typography variant='h1' sx={{ mb: '0px' }}>{blogs[0]?.title}</Typography>
           <Grid item sx={{ m: '0 0 10px 0' }}>
-            <Rating size='small' readOnly />
+            {blogs[0]?.avgRating ? <Rating size='small' readOnly value={blogs[0]?.avgRating} /> : ''}
           </Grid>
           <Typography variant='body1'>{blogs[0]?.lead}</Typography>
         </Grid>
