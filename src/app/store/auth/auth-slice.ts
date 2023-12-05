@@ -1,7 +1,7 @@
 import User from '../../models/User';
 import { createAsyncThunk, createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
 import { AuthFormState } from '../../components/auth/login-form';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, sendEmailVerification } from 'firebase/auth';
 import { auth } from '../../firebase-config';
 
 interface AuthState {
@@ -73,6 +73,9 @@ export const login = createAsyncThunk<
         await updateProfile(user, {
           displayName: displayName
         });
+
+        await sendEmailVerification(user);
+
         return { displayName };
       } catch (error) {
         console.error('Error creating user:', error);

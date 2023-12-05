@@ -33,7 +33,8 @@ const Tags: React.FC<TagsProps> = ({ blog, ratingValue }) => {
         <Grid item xs={8.3} alignItems={'center'}>
             <Link to={`/detail/${blog.uid}`} style={linkStyles}>
                 <Typography sx={{marginBottom: '3px', fontWeight: 700}}>{blog.title}</Typography>
-                <Rating sx={{marginBottom: '3px', padding: 0}} size="small" name="simple-controlled" value={ratingValue} />
+                {/* <Rating sx={{marginBottom: '3px', padding: 0}} size="small" name="simple-controlled" value={ratingValue} /> */}
+                {blog.avgRating ? <Rating size='small' name='simple-controlled' value={blog.avgRating} /> : ''}
             </Link>
         </Grid>
       </Grid>
