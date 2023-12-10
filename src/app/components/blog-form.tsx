@@ -5,27 +5,13 @@ import Button from '@mui/material/Button';
 import User from '../models/User';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import {
-  Autocomplete,
-  Container,
-  FormControl,
-  FormControlLabel,
-  Grid,
-  IconButton,
-  List,
-  ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
-  Radio,
-  RadioGroup,
-  SelectChangeEvent,
-  Slider,
-  Stack,
-} from '@mui/material';
-import { AddButton, MainContainer } from '../theme/my-theme';
+import { Autocomplete, FormControl, FormControlLabel, Grid, IconButton, ListItemSecondaryAction, ListItemText, Radio, RadioGroup, SelectChangeEvent, Stack, } from '@mui/material';
+import { AddButton, AddList, AddListItem, MainContainer } from '../theme/my-theme';
 import { Link } from 'react-router-dom';
+
+
+
 
 interface BlogFormProps {
   user?: User;
@@ -169,7 +155,7 @@ const BlogForm: React.FC<BlogFormProps> = ({
           />
           <FormControl sx={{m: '0px 0px 20px 0px'}}>
             <RadioGroup
-              row
+            row
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
               value={category}
@@ -177,13 +163,13 @@ const BlogForm: React.FC<BlogFormProps> = ({
             >
               <FormControlLabel
                 value="Kochen"
-                control={<Radio />}
-                label={<Typography sx={{ m: '0px' }}>Kochen</Typography>}
+                control={<Radio required={true} />}
+                label="Kochen"
                 />
               <FormControlLabel
                 value="Backen"
-                control={<Radio />}
-                label={<Typography sx={{ m: '0px' }}>Backen</Typography>}
+                control={<Radio required={true} />}
+                label="Backen"
               />
             </RadioGroup>
           </FormControl>
@@ -227,24 +213,24 @@ const BlogForm: React.FC<BlogFormProps> = ({
             >
               <FormControlLabel
                 value="Einfach"
-                control={<Radio />}
-                label={<Typography sx={{ m: '0px' }}>Einfach</Typography>}
+                control={<Radio required={true} />}
+                label="Einfach"
               />
               <FormControlLabel
                 value="Mittel"
-                control={<Radio />}
-                label={<Typography sx={{ m: '0px' }}>Mittel</Typography>}
+                control={<Radio required={true} />}
+                label="Mittel"
               />
               <FormControlLabel
                 value="Schwierig"
-                control={<Radio />}
-                label={<Typography sx={{ m: '0px' }}>Schwierig</Typography>}
+                control={<Radio required={true} />}
+                label="Schwierig"
               />
             </RadioGroup>
           </FormControl>
-          <List>
+          <AddList>
             {form.ingredients.map((item, index) => (
-              <ListItem disablePadding divider key={index}>
+              <AddListItem disablePadding key={index}>
                 <ListItemText primary={item} />
                 <ListItemSecondaryAction>
                   <IconButton
@@ -255,10 +241,10 @@ const BlogForm: React.FC<BlogFormProps> = ({
                     <DeleteIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
-              </ListItem>
+              </AddListItem>
             ))}
-          </List>
-          <Grid container>
+          </AddList>
+          <Grid container justifyContent={'space-between'}>
             <Grid item xs={11}>
               <TextField
                 fullWidth
@@ -268,7 +254,7 @@ const BlogForm: React.FC<BlogFormProps> = ({
                 onChange={(e) => setListItemText(e.target.value)}
               />
             </Grid>
-            <Grid item xs={1}>
+            <Grid item xs={1} textAlign={'right'}>
               <AddButton
                 variant="outlined"
                 endIcon={<AddCircleIcon style={{ fontSize: '35px' }} />}
@@ -315,7 +301,7 @@ const BlogForm: React.FC<BlogFormProps> = ({
                   variant="outlined"
                   disabled={isSubmitDisabled}
                 >
-                  Erstellen
+                  Erfassen
                 </Button>
               ) : (
                 <Button
@@ -345,23 +331,19 @@ const BlogForm: React.FC<BlogFormProps> = ({
 };
 
 const tags = [
+  { tagtitle: 'Süss' },
+  { tagtitle: 'Salzig' },
   { tagtitle: 'Frühling' },
   { tagtitle: 'Sommer' },
   { tagtitle: 'Herbst' },
   { tagtitle: 'Winter' },
-  { tagtitle: 'Gebäck' },
-  { tagtitle: 'Weihnachten' },
-  { tagtitle: 'Ostern' },
-  { tagtitle: 'Halloween' },
-  { tagtitle: 'Geburtstag' },
-  { tagtitle: 'Vegetarisch' },
-  { tagtitle: 'Vegan' },
-  { tagtitle: 'Frühstück' },
   { tagtitle: 'Hauptgang' },
   { tagtitle: 'Apéro' },
   { tagtitle: 'Dessert' },
-  { tagtitle: 'Süss' },
-  { tagtitle: 'International' },
+  { tagtitle: 'Gebäck' },
+  { tagtitle: 'Weihnachten' },
+  { tagtitle: 'Vegetarisch' },
+  { tagtitle: 'Vegan' },
 ];
 
 export default BlogForm;

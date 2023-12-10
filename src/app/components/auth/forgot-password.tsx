@@ -26,12 +26,6 @@ const ForgotForm: React.FC<ForgotFormProps> = ({handleResetPassword, message}) =
     <MainContainer maxWidth='md'>
       <Typography variant='h1'>Passwort vergessen</Typography>
       <form onSubmit={handleSubmit(({email}) => handleResetPassword(email))}>
-        {/*<input*/}
-        {/*  type='email'*/}
-        {/*  placeholder='Gib deine E-Mail-Adresse ein'*/}
-        {/*  value={email}*/}
-        {/*  onChange={handleEmailChange}*/}
-        {/*/>*/}
         <Controller
           name='email'
           control={control}

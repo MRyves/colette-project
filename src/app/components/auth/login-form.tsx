@@ -4,7 +4,7 @@ import SignInForm from "./sign-in";
 import React, { useState } from "react";
 import { Button, Grid, Link } from "@mui/material";
 import { useForm } from 'react-hook-form';
-import { MainContainer } from "../../theme/my-theme";
+import { MainContainer, ReadmoreButton } from "../../theme/my-theme";
 
 interface LoginProps {
     handleSubmit: (cred: AuthFormState) => void;
@@ -52,9 +52,9 @@ export const LoginForm: React.FC<LoginProps> = ({ handleSubmit: submitForm }) =>
                     <SignUpForm control={control} errors={errors} />
                 )}
                 <SignInForm control={control} errors={errors} />
-                <Button type="submit" fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}>
+                <ReadmoreButton fullWidth type="submit" variant='outlined' sx={{ margin: '24px 0px 16px 0px !important' }} disableElevation>
                     {!isSignUpMode ? 'Anmelden' : 'Registrieren'}
-                </Button>
+                </ReadmoreButton>
             </form>
             <Grid container>
                 <Grid item xs>

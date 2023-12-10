@@ -5,12 +5,13 @@ import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase-config';
 import User from '../../models/User';
 import PersonIcon from '@mui/icons-material/Person';
-import { Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
+import { myTheme } from '../../theme/my-theme';
 
 interface LoginNavProps {
   user: User | undefined;
@@ -56,9 +57,20 @@ const LoginNav: React.FC<LoginNavProps> = ({
       <Grid item>
         {userId ? (
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <PersonIcon />
+            <Tooltip arrow title="Open">
+              <IconButton
+                disableRipple
+                onClick={handleOpenUserMenu}
+                sx={{ p: 0 }}
+              >
+                <PersonIcon 
+                  sx={{ 
+                    color: myTheme.palette.primary.main,
+                    transition: '.3s ease-out',
+                    '&:hover': {
+                      color: myTheme.palette.secondary.main,
+                    },
+                  }} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -78,15 +90,36 @@ const LoginNav: React.FC<LoginNavProps> = ({
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem component={Link} to={'/profile'} onClick={handleCloseUserMenu}>Profil</MenuItem>
-              <MenuItem component={Link} to={'/'} onClick={onLogoutClick}>Logout</MenuItem>
+              <MenuItem
+                component={NavLink}
+                sx={{
+                  '&.active': {
+                    background: myTheme.palette.primary.main,
+                    color: '#ffffff',
+                  },
+                }}
+                to={'/profile'}
+                onClick={handleCloseUserMenu}
+              >
+                Profil
+              </MenuItem>
+              <MenuItem component={NavLink} to={'/'} onClick={onLogoutClick}>
+                Logout
+              </MenuItem>
             </Menu>
           </Box>
         ) : (
           <Button
             disableRipple
             component={Link}
-            sx={{ display: 'block', p: '0px', color: '#000000' }}
+            sx={{
+              display: 'block',
+              p: '0px',
+              '&:hover': {
+                background: 'transparent',
+                color: myTheme.palette.secondary.main,
+              },
+            }}
             to={'/login'}
           >
             Login

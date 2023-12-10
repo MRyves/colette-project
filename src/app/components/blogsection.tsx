@@ -48,10 +48,10 @@ const BlogSection: React.FC<BlogSectionProps> = ({
               />
             </Link>
             <CardContent>
-              <Typography variant='h3'>
+              <Typography variant='h2'>
                 <Link to={`/detail/${item.uid}`}>{item.title}</Link>
               </Typography>
-              {item.avgRating ? <Rating size='small' name='simple-controlled' value={item.avgRating} /> : ''}
+              {item.avgRating ? <Rating readOnly size='small' name='simple-controlled' value={item.avgRating} /> : ''}
               <Grid sx={{ mb: '25px' }} item>
                 <Typography>{item.lead}</Typography>
               </Grid>
@@ -66,14 +66,27 @@ const BlogSection: React.FC<BlogSectionProps> = ({
                 {userId ? (
                   <Grid item xs={2}>
                     <Grid container alignItems={'center'} justifyContent={'flex-end'} spacing={1}>
-                      <Grid item>
+                      <Grid item xs={6}>
                         <Link to={`/edit/${item.uid}`}>
-                          <EditIcon sx={{ color: myTheme.palette.secondary.main }} />
+                          <EditIcon 
+                            sx={{ 
+                              color: myTheme.palette.secondary.main,
+                              transition: '.3s ease-out',
+                              '&:hover': {
+                                color: myTheme.palette.primary.main,
+                              },
+                                      }} />
                         </Link>
                       </Grid>
-                      <Grid item>
+                      <Grid item xs={6}>
                         <DeleteOutlinedIcon
-                          sx={{ color: myTheme.palette.secondary.main }}
+                          sx={{ 
+                            color: myTheme.palette.secondary.main,
+                            transition: '.3s ease-out',
+                            '&:hover': {
+                              color: myTheme.palette.primary.main,
+                            },
+                                  }}
                           onClick={() => handleClickOpen(item.uid)}
                         ></DeleteOutlinedIcon>
                       </Grid>

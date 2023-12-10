@@ -1,18 +1,15 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase-config';
 import User from '../../models/User';
-
-
-
+import { myTheme } from '../../theme/my-theme';
 
 interface NavigationProps {
   user: User | undefined;
@@ -26,7 +23,11 @@ const pages = [
   { label: 'Backen', to: '/baking' },
 ];
 
-const Navigation: React.FC<NavigationProps> = ({ user, handleLogout, setActive }) => {
+const Navigation: React.FC<NavigationProps> = ({
+  user,
+  handleLogout,
+  setActive,
+}) => {
   const userId = user?.uid;
   console.log('userID', userId);
   console.log('name', user?.displayName);
@@ -49,8 +50,12 @@ const Navigation: React.FC<NavigationProps> = ({ user, handleLogout, setActive }
     }
   };
 
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null
+  );
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -68,70 +73,116 @@ const Navigation: React.FC<NavigationProps> = ({ user, handleLogout, setActive }
     setAnchorElUser(null);
   };
 
-
   const location = useLocation();
-
 
   return (
     <>
       <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
         <IconButton
-          size='large'
-          aria-label='account of current user'
-          aria-controls='menu-appbar'
-          aria-haspopup='true'
+          size="large"
+          disableRipple
+          aria-label="account of current user"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
           onClick={handleOpenNavMenu}
-          color='inherit'
+          color="inherit"
         >
           <MenuIcon />
         </IconButton>
         <Menu
           elevation={0}
-          id='menu-appbar'
+          id="menu-appbar"
           anchorEl={anchorElNav}
           anchorOrigin={{
             vertical: 'bottom',
-            horizontal: 'left'
+            horizontal: 'left',
           }}
           keepMounted
           transformOrigin={{
             vertical: 'top',
-            horizontal: 'left'
+            horizontal: 'left',
           }}
           open={Boolean(anchorElNav)}
           onClose={handleCloseNavMenu}
           sx={{
-            display: { xs: 'block', md: 'none' }
+            display: { xs: 'block', md: 'none' },
           }}
         >
           {pages.map((page, index) => (
-            <MenuItem component={Link} to={page.to} key={index} onClick={handleCloseNavMenu}>
-                {page.label}
+            <MenuItem
+              component={NavLink}
+              to={page.to}
+              key={index}
+              onClick={handleCloseNavMenu}
+              sx={{
+                '&.active': {
+                  background: myTheme.palette.secondary.main,
+                  color: '#ffffff'
+                }
+    
+              }}
+            >
+              {page.label}
             </MenuItem>
           ))}
           {userId ? (
-            <MenuItem component={Link} to={"/create"} onClick={handleCloseNavMenu}>
-                Erfassen
+            <MenuItem
+              component={Link}
+              to={'/create'}
+              onClick={handleCloseNavMenu}
+            >
+              Erfassen
             </MenuItem>
-          ) : ""}
+          ) : (
+            ''
+          )}
         </Menu>
       </Box>
       <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
         {pages.map((page, index) => (
-          <Button 
+          <Button
             disableRipple
             key={index}
-            component={Link}
+            component={NavLink}
             to={page.to}
-            sx={{ color: 'black', m: '0px 35px 0px 0px', p: '17px 0px 15px 0px' }}
+            sx={{
+              m: '0px 35px 0px 0px',
+              p: '17px 0px 15px 0px',
+              '&.active': {
+                color: myTheme.palette.secondary.main,
+              },
+              '&:hover': {
+                background: 'transparent',
+                color: myTheme.palette.secondary.main,
+              }
+              }}
           >
             {page.label}
           </Button>
         ))}
         {userId && location.pathname !== '/create' ? (
-          <Button disableRipple component={Link} sx={{ color: 'black', m: 0, p: '17px 0px 15px 0px' }} to={'/create'}>Erfassen</Button>
-        ) : ""}
-        </Box>
+          <Button
+            disableRipple
+            component={NavLink}
+            sx={{
+              m: 0,
+              p: '17px 0px 15px 0px',
+            '&.active': {
+              color: myTheme.palette.secondary.main,
+            },
+            '&:hover': {
+              background: 'transparent',
+              color: myTheme.palette.secondary.main,
+            }
+          }}
+            to={'/create'}
+          >
+            Erfassen
+          </Button>
+        ) : (
+          ''
+        )}
+      </Box>
     </>
   );
 };

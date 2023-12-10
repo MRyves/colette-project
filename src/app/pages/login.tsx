@@ -24,7 +24,7 @@ const SignIn: React.FC = () => {
   return (
     <>
     <LoginForm handleSubmit={(cred) => dispatch(login(cred))}></LoginForm>
-      {`${loading}`}
+      {/* {`${loading}`} */}
     </>
   );
 };

@@ -1,12 +1,14 @@
-import { Button, Container, Typography } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import React, { useEffect, useMemo, useState } from 'react';
 import BlogForm, { BlogFormState } from '../components/blog-form';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import useBlogs from '../hooks/useBlogs';
-// import blogsService from '../services/blogs.service';
 import blogsService from '../services/blogs.service';
+import CircularProgress from '@mui/material/CircularProgress';
+
+
 
 const EditBlog = () => {
   const navigate = useNavigate();
@@ -53,7 +55,9 @@ const EditBlog = () => {
           initialFormState={blogForm}
         ></BlogForm>
       ) : (
-        <>'Loading</>
+        <Box sx={{ display: 'flex', p: '100px 0', justifyContent: 'center' }}>
+          <CircularProgress />
+        </Box>
       )}
     </Container>
   );

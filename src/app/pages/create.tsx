@@ -35,20 +35,6 @@ const Create = () => {
 
 
 
-  // const [imgUrl, setImageUrl] = useState<string>("");
-
-  // const createBlogPost = async (form: BlogFormState) => {
-  //   try {
-  //     await createBlog(form, user, imgUrl);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // }
-
-
-
-
-
   useEffect(() => {
     const uploadFile = () => {
         if (file) {

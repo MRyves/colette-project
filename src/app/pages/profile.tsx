@@ -20,9 +20,10 @@ const Profile = () => {
   return (
     <MainContainer maxWidth='lg'>
       <Typography variant='h1'>Hallo {currentUser?.displayName || 'Name'}</Typography>
-      <p>Hier siehst du alle deine bis jetzt verfassten Rezepte:</p>
-
-      <BlogSection blogs={filteredBlogs} handleDelete={() => {}} />
+      <Typography variant='body1' sx={{mb: '40px'}}>Hier siehst du alle deine bis jetzt verfassten Rezepte:</Typography>
+      <BlogSection blogs={filteredBlogs} handleDelete={() => {
+        //
+      }} />
     </MainContainer>
   );
 };

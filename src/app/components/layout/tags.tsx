@@ -2,7 +2,7 @@ import React from 'react';
 import { CardMedia, Grid, Rating, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Blog from '../../models/Blog';
-import { Box } from '@mui/system';
+import { myTheme } from '../../theme/my-theme';
 
 interface TagsProps {
     blog: Blog;
@@ -19,7 +19,7 @@ const Tags: React.FC<TagsProps> = ({ blog, ratingValue }) => {
 
   return (
     <div key={blog.uid}>
-      <Grid container alignItems={'center'} sx={{ borderBottom: '1px solid #d5d4d4', p: '13px 0px' }} justifyContent={'space-between'}>
+      <Grid container alignItems={'center'} sx={{ borderColor: myTheme.palette.primary.light, borderStyle: 'solid', borderWidth: 0, borderBottomWidth: '1px', p: '13px 0px' }} justifyContent={'space-between'}>
         <Grid item xs={3}>
           <Link to={`/detail/${blog.uid}`}>
             <CardMedia
@@ -33,8 +33,7 @@ const Tags: React.FC<TagsProps> = ({ blog, ratingValue }) => {
         <Grid item xs={8.3} alignItems={'center'}>
             <Link to={`/detail/${blog.uid}`} style={linkStyles}>
                 <Typography sx={{marginBottom: '3px', fontWeight: 700}}>{blog.title}</Typography>
-                {/* <Rating sx={{marginBottom: '3px', padding: 0}} size="small" name="simple-controlled" value={ratingValue} /> */}
-                {blog.avgRating ? <Rating size='small' name='simple-controlled' value={blog.avgRating} /> : ''}
+                {blog.avgRating ? <Rating readOnly sx={{p: 0}} size='small' name='simple-controlled' value={blog.avgRating} /> : ''}
             </Link>
         </Grid>
       </Grid>

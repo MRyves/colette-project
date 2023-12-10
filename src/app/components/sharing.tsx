@@ -44,7 +44,7 @@ const Sharing:React.FC<SharingProps> = ({blogId, title}) => {
       </Grid>
       <Grid item>
         <Link to={emailLink}>
-        <AlternateEmailIcon style={IconStyle} sx={{ fontSize: 30 }} />
+          <AlternateEmailIcon style={IconStyle} sx={{ fontSize: 30 }} />
         </Link>
       </Grid>
     </Grid>

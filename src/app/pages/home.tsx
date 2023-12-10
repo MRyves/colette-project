@@ -64,12 +64,12 @@ const Home = () => {
                     />
                   </Link>
                   <CardContent>
-                    <Typography variant='h3'>
+                    <Typography variant='h2'>
                       <Link to={`/detail/${latestBlog.uid}`}>
                         {latestBlog.title}
                       </Link>
                     </Typography>
-                    {latestBlog.avgRating ? <Rating size="small" name="simple-controlled" value={latestBlog.avgRating} /> : ''}
+                    {latestBlog.avgRating ? <Rating readOnly size="small" name="simple-controlled" value={latestBlog.avgRating} /> : ''}
                     <Grid sx={{mb: '25px'}} item>
                       <Typography>{latestBlog.lead}</Typography>
                     </Grid>
@@ -91,10 +91,6 @@ const Home = () => {
                               </Grid>
                               <Grid item>
                                 <DeleteOutlinedIcon sx={{color: myTheme.palette.secondary.main}} />
-                                {/* <DeleteOutlinedIcon
-                                  sx={{color: myTheme.palette.secondary.main}}
-                                  onClick={() => handleClickOpen(latestBlog.uid)}
-                                ></DeleteOutlinedIcon> */}
                               </Grid>
                             </Grid>
                         </Grid>
@@ -117,7 +113,7 @@ const Home = () => {
         </Grid>
         <Grid item xs={12} sm={5} md={4}>
           <SearchBar onSearch={handleSearch} />
-          <Typography variant='h3'>Weihnachten</Typography>
+          <Typography variant='h2'>Weihnachten</Typography>
           {filteredBlogs.map((blog: Blog) => (
             <div key={blog.uid}>
               <Tags blog={blog} ratingValue={0} />

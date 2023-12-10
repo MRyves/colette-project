@@ -1,22 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import useBlogs from '../hooks/useBlogs';
 import BlogSection from '../components/blogsection';
 import { Grid, Stack, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
-import { MainContainer, MainImage } from '../theme/my-theme';
+import { MainContainer } from '../theme/my-theme';
 import { Container } from '@mui/system';
+import Tags from '../components/layout/tags';
+import Blog from '../models/Blog';
 
 const Baking = () => {
   const { blogs, queryBlogs, deleteBlog, loading, error } = useBlogs();
   const user = useSelector((state: RootState) => state.auth.currentUser);
+  const filteredBlogs = useMemo(() => blogs.filter(blog => blog.tags.includes('Süss')), [blogs]);
 
   useEffect(() => {
     queryBlogs({ category: 'Backen' });
   }, []);
 
   return (
-    <>
     <MainContainer maxWidth='lg'>
         <Stack sx={{ m: '0 0 40px 0' }}>
           <Typography variant="h1">Backen</Typography>
@@ -36,22 +38,16 @@ const Baking = () => {
           </Grid>
           <Grid item xs={12} sm={5} md={4}>
             <Grid item>
-              <Typography>Tags...</Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="body1">Irgend ein Inhalt...</Typography>
+              <Typography variant='h2'>Süss</Typography>
+              {filteredBlogs.map((blog: Blog) => (
+                <div key={blog.uid}>
+                  <Tags blog={blog} ratingValue={0} />
+                </div>
+              ))}
             </Grid>
           </Grid>
         </Grid>
       </MainContainer>
-      <MainImage>
-        <img
-          src="assets/baking.jpg"
-          alt="Backen"
-          style={{ maxWidth: '100%' }}
-        />
-      </MainImage>
-    </>
   );
 };
 

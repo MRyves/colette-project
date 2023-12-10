@@ -14,7 +14,7 @@ interface HeaderProps {
 
   
 const Header: React.FC<HeaderProps> = ({ user, handleLogout }) => {
-
+    
     return (
         <>
             <AppBar position="static" elevation={0}>
@@ -22,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({ user, handleLogout }) => {
                     <Grid container justifyContent={'space-between'}>
                         <Grid item>
                             <Link to={'/'}>
-                                <img src="assets/foodo.png" alt="Foodo" style={{ maxWidth: '230px', paddingTop: '15px', paddingBottom: '10px' }} />
+                                <img src="assets/logo-negativ.png" alt="Chuchiblog" style={{ maxWidth: '300px', paddingTop: '20px', paddingBottom: '15px' }} />
                             </Link>
                         </Grid>
                         <Grid item>
