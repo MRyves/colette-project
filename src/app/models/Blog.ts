@@ -1,10 +1,10 @@
+import { FieldValue, Timestamp } from '@firebase/firestore';
+
 export default interface Blog {
   readonly uid: string;
   readonly userId: string;
   imgUrl: string;
-  timestamp: {
-    toDate(): Date;
-  };
+  timestamp: FieldValue | Timestamp;
   title: string;
   author: string;
   lead: string;

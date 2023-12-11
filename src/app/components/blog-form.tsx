@@ -92,7 +92,7 @@ const BlogForm: React.FC<BlogFormProps> = ({
     }));
   };
 
-  const handleTagsChange = (event: any, newValue: { tagtitle: string }[]) => {
+  const handleTagsChange = (event: React.SyntheticEvent, newValue: { tagtitle: string }[]) => {
     setForm((prevForm) => ({
       ...prevForm,
       tags: newValue.map((tag) => tag.tagtitle),

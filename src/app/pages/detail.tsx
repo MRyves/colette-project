@@ -10,6 +10,8 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import useComments from '../hooks/useComments';
+import { FieldValue, Timestamp } from '@firebase/firestore';
+
 
 const Detail = () => {
   const { blogId } = useParams();
@@ -33,8 +35,8 @@ const Detail = () => {
     navigate('/');
   };
 
-  const formatTimestamp = (timestamp: any) => {
-    if (timestamp && timestamp.toDate) {
+  const formatTimestamp = (timestamp: FieldValue | Timestamp) => {
+    if (timestamp && timestamp instanceof Timestamp) {
       return timestamp.toDate().toLocaleString();
     }
     return '';
