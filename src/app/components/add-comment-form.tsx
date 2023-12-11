@@ -4,11 +4,9 @@ import { Comment } from '../models/Comments';
 import { Rating, TextField } from '@mui/material';
 
 
-
 interface AddCommentFormProps {
   submitForm: (form: Comment) => void;
 }
-
 
 const initialState: Comment = {
   nickname: '',
@@ -33,7 +31,7 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({ submitForm }) => {
 
   const handleRatingChange = async (event: React.SyntheticEvent, newValue: number | null) => {
     // move logic to hook
-    if (newValue !== null) {
+    if (newValue !== null && newValue !== 0) {
       setForm({...form, rating: newValue});
     }
   };
@@ -41,7 +39,7 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({ submitForm }) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (nickname && comment) {
+    if (nickname && comment && rating) {
       submitForm(form);
       setForm(initialState);
     }
@@ -56,6 +54,7 @@ const AddCommentForm: React.FC<AddCommentFormProps> = ({ submitForm }) => {
           size='small'
           name='simple-controlled'
           value={rating}
+          max={5}
           onChange={handleRatingChange}
         />
         <TextField
