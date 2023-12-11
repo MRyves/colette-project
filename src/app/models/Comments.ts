@@ -1,5 +1,6 @@
 export interface Comment {
-  readonly uid: string;
+  readonly uid?: string;
+  readonly authorId?: string;
   nickname: string;
   comment: string;
   rating: number;

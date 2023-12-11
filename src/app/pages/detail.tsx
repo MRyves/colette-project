@@ -1,82 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { addDoc, collection, doc, getDocs } from 'firebase/firestore';
+import React, { useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { db } from '../firebase-config';
-import { Box, Button, Card, CardContent, CardMedia, Grid, ListItem, Rating, Typography } from '@mui/material';
-import AddCommentForm, { CommentForm } from '../components/add-comment-form';
-import { Comments } from '../models/Comments';
+import { Box, Card, CardContent, CardMedia, Grid, ListItem, Rating, Typography } from '@mui/material';
+import AddCommentForm from '../components/add-comment-form';
 import useBlogs from '../hooks/useBlogs';
-import { DeleteButton, MainContainer, StyledTagButton, ZutatenCard, myTheme } from '../theme/my-theme';
+import { MainContainer, myTheme, StyledTagButton, ZutatenCard } from '../theme/my-theme';
 import Sharing from '../components/sharing';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
+import useComments from '../hooks/useComments';
 
 const Detail = () => {
   const { blogId } = useParams();
   const navigate = useNavigate();
   const currentUser = useSelector((state: RootState) => state.auth.currentUser);
+
   const { blogs, querySingleBlog, deleteBlog } = useBlogs();
 
+  const { comments, queryComments, createComment, deleteComment } = useComments();
 
-  // TODO: colette, useComments()
-  const [comments, setComments] = useState<Comments>([]);
-  console.log(`URL: ${encodeURIComponent(window.location.href)}`);
-
-  const createComment = async (form: CommentForm) => {
-    console.log('creating comment: ', form);
-    if (!blogId) return;
-
-    try {
-      const commentsRef = collection(db, `blogs`, blogId, 'comments');
-
-      const commentRef = await addDoc(commentsRef, {
-        ...form
-      });
-      setComments([...comments, { uid: commentRef.id, ...form }]);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   useEffect(() => {
     if (blogId) {
       querySingleBlog(blogId);
-      getComments();
+      queryComments(blogId);
     }
   }, [blogId]);
-
-  const getComments = async () => {
-    if (!blogId) {
-      return;
-    }
-
-    const blogRef = doc(db, 'blogs', blogId);
-    const commentsRef = collection(db, `blogs`, blogId, 'comments');
-
-    try {
-      const commentsRaw = await getDocs(commentsRef);
-      setComments(
-        commentsRaw.docs.map((doc) => ({
-          uid: doc.id,
-          nickname: doc.data().nickname,
-          comment: doc.data().comment,
-          rating: doc.data().rating || 0
-        }))
-      );
-      console.log(
-        'comments: ',
-        commentsRaw.docs.map((doc) => ({
-          uid: doc.id,
-          nickname: doc.data().nickname,
-          comment: doc.data().comment
-        }))
-      );
-    } catch (error) {
-      console.error('Fehler beim Abrufen von Blogdetails:', error);
-    }
-  };
 
   const handleDelete = async () => {
     await deleteBlog(blogId!);
@@ -101,30 +51,30 @@ const Detail = () => {
           <Typography variant='body1'>{blogs[0]?.lead}</Typography>
         </Grid>
         {currentUser ? (
-        <Grid item xs={12} sm={5} md={4}>
-        <Grid container alignItems={'center'} justifyContent={'flex-end'} spacing={1}>
+          <Grid item xs={12} sm={5} md={4}>
+            <Grid container alignItems={'center'} justifyContent={'flex-end'} spacing={1}>
               <Grid item>
                 <Link to={`/edit/${blogId}`}>
-                  <EditIcon sx={{ 
+                  <EditIcon sx={{
                     color: myTheme.palette.secondary.main,
                     transition: '.3s ease-out',
                     '&:hover': {
-                      color: myTheme.palette.primary.main,
-                    },
+                      color: myTheme.palette.primary.main
+                    }
                   }} />
                 </Link>
               </Grid>
               <Grid item>
-                  <DeleteOutlinedIcon
-                    sx={{ 
-                      color: myTheme.palette.secondary.main,
-                      transition: '.3s ease-out',
-                      '&:hover': {
-                        color: myTheme.palette.primary.main,
-                      },
-                            }}
-                    onClick={handleDelete}
-                  ></DeleteOutlinedIcon>
+                <DeleteOutlinedIcon
+                  sx={{
+                    color: myTheme.palette.secondary.main,
+                    transition: '.3s ease-out',
+                    '&:hover': {
+                      color: myTheme.palette.primary.main
+                    }
+                  }}
+                  onClick={handleDelete}
+                ></DeleteOutlinedIcon>
               </Grid>
             </Grid>
           </Grid>
@@ -142,7 +92,7 @@ const Detail = () => {
           </Card>
           <Typography variant='h3' sx={{ m: '50px 0px 0px 0px' }}>Kommentare</Typography>
           {currentUser ? (
-            <AddCommentForm submitForm={createComment} />
+            <AddCommentForm submitForm={(comment) => createComment(blogId!, {...comment, authorId: currentUser.uid})} />
           ) : ''}
           {comments.map((comment) => (
             <Card key={comment.uid} elevation={0} sx={{ marginTop: '30px' }}>
@@ -161,7 +111,7 @@ const Detail = () => {
                     : ''}
                 </Typography>
                 <Typography>{comment.comment}</Typography>
-                <DeleteOutlinedIcon />
+                {currentUser?.uid === comment.authorId ? <DeleteOutlinedIcon onClick={() => deleteComment(blogId!, comment.uid!)} />: ''}
               </CardContent>
             </Card>
           ))}

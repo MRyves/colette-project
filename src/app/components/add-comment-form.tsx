@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
-import { Button, Rating, TextField, Typography } from '@mui/material';
 import { ReadmoreButton } from '../theme/my-theme';
+import { Comment } from '../models/Comments';
+import { Rating, TextField } from '@mui/material';
+
 
 
 interface AddCommentFormProps {
-  submitForm: (form: CommentForm) => void;
+  submitForm: (form: Comment) => void;
 }
 
-export interface CommentForm {
-  nickname: string,
-  comment: string,
-  rating: number,
-};
 
-const initialState = {
+const initialState: Comment = {
   nickname: '',
   comment: '',
   rating: 0,

@@ -2,7 +2,7 @@ import Blog from '../models/Blog';
 import { useState } from 'react';
 import { collection, doc, getDoc, getDocs, orderBy, query,  where } from 'firebase/firestore';
 import { db } from '../firebase-config';
-import { deleteBlogFirestore } from '../services/delete.service';
+import blogsService from '../services/blogs.service';
 
 
 function useBlogs() {
@@ -38,6 +38,7 @@ function useBlogs() {
         setBlogs(blogsData);
       })
       .catch((e) => {
+        setBlogs([]);
         setError(e.message);
       });
   }
@@ -74,35 +75,6 @@ function useBlogs() {
         setLoading(false);
       });
   };
-
-
-
-  const queryNiveauBlog = (niveau: string) => {
-    setLoading(true);
-    const blogsRef = collection(db, 'blogs');
-    const niveauQuery = query(
-      blogsRef,
-      where('niveau', '==', niveau),
-      orderBy('timestamp', 'desc')
-    );
-
-
-    
-    getDocs(niveauQuery)
-      .then((data) => {
-        const blogsData = data.docs.map((doc) => convertDocToBlog(doc));
-        setBlogs(blogsData);
-      })
-      .catch((e) => {
-        setError(e.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  
-
   const queryBlogs = ({ uid, category, searchQuery }: { uid?: string; category?: string; searchQuery?: string } = {}) => {
     setLoading(true);
     if (!uid && !category && !searchQuery) {
@@ -143,7 +115,7 @@ function useBlogs() {
 
   const deleteBlog = async (uid: string) => {
     try {
-      await deleteBlogFirestore(uid);
+      await blogsService.deleteBlog(uid);
       setBlogs((prevBlogs) => prevBlogs.filter((blog) => blog.uid !== uid));
     } catch (e) {
       setError((e as Error).message);

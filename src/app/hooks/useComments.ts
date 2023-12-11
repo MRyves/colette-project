@@ -1,57 +1,79 @@
-// import { collection, addDoc, getDocs } from 'firebase/firestore';
-// import { useState } from 'react';
-// import { db } from '../firebase-config';
+import {  collection, getDoc, getDocs } from 'firebase/firestore';
+import { useState } from 'react';
+import { db } from '../firebase-config';
+import { Comment, Comments } from '../models/Comments';
+import { QueryDocumentSnapshot, DocumentSnapshot } from '@firebase/firestore';
+import commentService from '../services/comments.service';
 
-// function useComments() {
-//     const [comments, setComments] = useState<{ uid: string; nickname: string; comment: string; }[] | null>(null);
-//     const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState<string | null>(null);
+function useComments() {
 
-//   const queryAllComments = (blogId: string) => {
-//     const commentsRef = collection(db, 'blogs', blogId, 'comments');
-//     getDocs(commentsRef)
-//       .then((data) => {
-//         const commentsData: { uid: string; nickname: string; comment: string; }[] = data.docs.map((doc) => ({
-//           uid: doc.id,
-//           ...doc.data(),
-//         }));
-//         setComments(commentsData);
-//       })
-//       .catch((e) => {
-//         setError(e.message);
-//       });
-//   };
-//   const createComment = async (blogId: string, form: { nickname: string; comment: string }) => {
-//     if (!blogId) return;
+  const [comments, setComments] = useState<Comments>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-//     try {
-//       const comment = form;
-//       const commentsRef = collection(db, 'blogs', blogId, 'comments');
+  const mapToComment = (doc: QueryDocumentSnapshot | DocumentSnapshot) => {
+    const documentData = doc?.data();
+    if (!documentData) {
+      return {} as Comment;
+    }
 
-//       await addDoc(commentsRef, {
-//         ...form,
-//       });
-//       setComments((prevComments) => [...prevComments, comment]);
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
+    return {
+      uid: doc.id,
+      authorId: documentData.authorId,
+      comment: documentData.comment,
+      nickname: documentData.nickname,
+      rating: documentData.rating
+    } as Comment;
+  };
+  const queryAllComments = (blogId: string) => {
+    const commentsRef = collection(db, 'blogs', blogId, 'comments');
+    getDocs(commentsRef)
+      .then((data) => {
+        const comments = data.docs.map(mapToComment);
+        setComments(comments);
+      })
+      .catch((e) => {
+        setComments([]);
+        setError(e.message);
+      });
+  };
+  const createComment = async (blogId: string, comment: Comment) => {
+    if (!blogId) return;
+    try {
+      const savedCommentRef = await commentService.create(blogId, comment);
+      const savedComment = await getDoc(savedCommentRef);
+      setComments((prevComments) => [...prevComments, mapToComment(savedComment)]);
+    } catch (err) {
+      console.error(err);
+      setError((err as Error).message);
+    }
+  };
 
-//   const getComments = (blogId: string) => {
-//     if (!blogId) {
-//       return;
-//     }
+  const deleteComment = async (blogId: string, uid: string) => {
+    try {
+      await commentService.delete(blogId, uid);
+      setComments((prevComments) => prevComments.filter((c) => c.uid !== uid));
+    } catch (e) {
+      setError((e as Error).message);
+    }
+  };
 
-//     queryAllComments(blogId);
-//   };
+  const queryComments = (blogId: string) => {
+    if (!blogId) {
+      return;
+    }
 
-//   return {
-//     comments,
-//     createComment,
-//     getComments,
-//     loading,
-//     error,
-//   };
-// }
+    queryAllComments(blogId);
+  };
 
-// export default useComments;
+  return {
+    comments,
+    queryComments,
+    createComment,
+    deleteComment,
+    loading,
+    error
+  };
+}
+
+export default useComments;
