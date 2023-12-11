@@ -5,6 +5,7 @@ import { db } from '../firebase-config';
 export default {
 
   async updateBlog(uid: string, blog: Partial<Blog>) {
+    console.log({blog});
     const blogRef = doc(db, 'blogs', uid);
     await updateDoc(blogRef, blog);
   },

@@ -6,10 +6,11 @@ import DialogDelete from './dialog-delete';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import EditIcon from '@mui/icons-material/Edit';
 import { myTheme, ReadmoreButton } from '../theme/my-theme';
+import Blog from '../models/Blog';
 
 
 interface BlogSectionProps {
-  blogs: any[];
+  blogs: Blog[];
   user?: User;
   handleDelete: (uid: string) => void;
 }
@@ -37,37 +38,37 @@ const BlogSection: React.FC<BlogSectionProps> = ({
 
   return (
     <Grid container spacing={4}>
-      {blogs?.map((item) => (
-        <Grid item xs={12} sm={12} md={6} key={item.uid}>
+      {blogs?.map((blog) => (
+        <Grid item xs={12} sm={12} md={6} key={blog.uid}>
           <Card elevation={0}>
-            <Link to={`/detail/${item.uid}`}>
+            <Link to={`/detail/${blog.uid}`}>
               <CardMedia
                 component='img'
-                image={item.imgUrl}
-                title={item.title}
+                image={blog.imgUrl}
+                title={blog.title}
               />
             </Link>
             <CardContent>
               <Typography variant='h2'>
-                <Link to={`/detail/${item.uid}`}>{item.title}</Link>
+                <Link to={`/detail/${blog.uid}`}>{blog.title}</Link>
               </Typography>
-              {item.avgRating ? <Rating readOnly size='small' name='simple-controlled' value={item.avgRating} /> : ''}
+              {blog.avgRating ? <Rating readOnly size='small' name='simple-controlled' value={blog.avgRating} /> : ''}
               <Grid sx={{ mb: '25px' }} item>
-                <Typography>{item.lead}</Typography>
+                <Typography>{blog.lead}</Typography>
               </Grid>
               <Grid container alignItems={'center'}>
                 <Grid item xs={10}>
-                  <Link to={`/detail/${item.uid}`}>
+                  <Link to={`/detail/${blog.uid}`}>
                     <ReadmoreButton variant='outlined' disableElevation>
                       Zum Rezept
                     </ReadmoreButton>
                   </Link>
                 </Grid>
-                {userId ? (
+                {userId === blog.userId ? (
                   <Grid item xs={2}>
                     <Grid container alignItems={'center'} justifyContent={'flex-end'} spacing={1}>
                       <Grid item xs={6}>
-                        <Link to={`/edit/${item.uid}`}>
+                        <Link to={`/edit/${blog.uid}`}>
                           <EditIcon 
                             sx={{ 
                               color: myTheme.palette.secondary.main,
@@ -87,7 +88,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({
                               color: myTheme.palette.primary.main,
                             },
                                   }}
-                          onClick={() => handleClickOpen(item.uid)}
+                          onClick={() => handleClickOpen(blog.uid)}
                         ></DeleteOutlinedIcon>
                       </Grid>
                     </Grid>

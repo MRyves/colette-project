@@ -26,7 +26,7 @@ function useBlogs() {
       imgUrl: documentData.imgUrl,
       timestamp: documentData.timestamp,
       userId: documentData.userId,
-      avgRating: documentData.avgRating,
+      avgRating: documentData.avgRating || 0,
     } as Blog;
   };
 

@@ -21,6 +21,7 @@ const Create = () => {
     try {
       await addDoc(collection(db, "blogs"), {
           ...form,
+          avgRating: 0,
           imgUrl,
           timestamp: serverTimestamp(),
           author: user?.displayName,

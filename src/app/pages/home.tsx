@@ -81,7 +81,7 @@ const Home = () => {
                           </ReadmoreButton>
                         </Link>
                       </Grid>
-                      {user?.uid ? (
+                      {user?.uid === latestBlog.userId ? (
                         <Grid item xs={2}>
                           <Grid container alignItems={'center'} justifyContent={'flex-end'} spacing={1}>
                             <Grid item>
@@ -90,7 +90,7 @@ const Home = () => {
                                 </Link>
                               </Grid>
                               <Grid item>
-                                <DeleteOutlinedIcon sx={{color: myTheme.palette.secondary.main}} />
+                                <DeleteOutlinedIcon sx={{color: myTheme.palette.secondary.main}} onClick={() => handleDelete(latestBlog.uid)} />
                               </Grid>
                             </Grid>
                         </Grid>
