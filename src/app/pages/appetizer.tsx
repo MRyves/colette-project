@@ -22,13 +22,11 @@ const Appetizer = () => {
     <MainContainer maxWidth='lg'>
         <Stack sx={{ m: '0 0 40px 0' }}>
           <Typography variant="h1">Vorspeise</Typography>
-          <Typography>
-            Coming soon...
-          </Typography>
+          <Typography>Vorspeisen bieten auch die Möglichkeit, mit Aromen und Texturen zu experimentieren. Sie können süß, salzig, sauer oder scharf sein, knusprig, zart oder cremig. Die Kombination von Zutaten in einer Vorspeise eröffnet die Möglichkeit, neue Geschmackserlebnisse zu schaffen und Gäste zu überraschen.</Typography>
         </Stack>
-        <Grid container spacing={{ md: 4, lg: 6 }}>
+        <Grid container columnSpacing={{ md: 4, lg: 6 }}>
           <Grid item xs={12} md={7} lg={8}>
-            <Grid container spacing={4}>
+            <Grid container columnSpacing={4}>
             <Grid item>
               {blogs.length > 0 ? (
                 <BlogSection

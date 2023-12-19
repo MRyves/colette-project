@@ -31,7 +31,7 @@ const Home = () => {
     <MainContainer maxWidth="lg">
       <Stack sx={{ m: '0 0 40px 0' }}>
         <Typography variant="h1">Welcome, foodlover!</Typography>
-        <Typography>
+        <Typography variant='body1'>
           Begleite uns in unserer Küche, während wir die Aromen der Welt
           entdecken und lernen, wie man aus einfachen Zutaten magische Gerichte
           zaubert. Wir glauben daran, dass gutes Essen Menschen zusammenbringt
@@ -40,11 +40,12 @@ const Home = () => {
           feiern! Willkommen in unserer kulinarischen Welt, in der Geschmack,
           Kreativität und Genuss an erster Stelle stehen.
         </Typography>
+        <Typography variant='body1'>Es gibt kaum etwas Besseres, als gemeinsam mit Freunden und Familie in der Küche zu stehen, Rezepte auszuprobieren und dabei über das Leben zu plaudern. Unsere Schürzen sind unsere Rüstungen, und der Herd ist unser Schlachtfeld, auf dem wir mit Aromen jonglieren und Zutaten tanzen lassen, um Geschmacksexplosionen zu erzeugen.</Typography>
       </Stack>
-      <Grid container spacing={{ md: 4, lg: 6 }}>
+      <Grid container columnSpacing={{ md: 4, lg: 6 }}>
         <Grid item xs={12} md={7} lg={8} sx={{ paddingBottom: '30px' }}>
-          <Grid container spacing={4}>
-            <Grid item>
+          <Grid container columnSpacing={4}>
+            <Grid item sx={{mb: '30px'}}>
               <LatestBlog
                   blogs={blogs}
                   user={user}

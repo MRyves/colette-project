@@ -27,9 +27,9 @@ const Apero = () => {
 
           </Typography>
         </Stack>
-        <Grid container spacing={{ md: 4, lg: 6 }}>
+        <Grid container columnSpacing={{ md: 4, lg: 6 }}>
           <Grid item xs={12} md={7} lg={8}>
-            <Grid container spacing={4}>
+            <Grid container columnSpacing={4}>
             <Grid item>
               {blogs.length > 0 ? (
                 <BlogSection

@@ -22,18 +22,11 @@ const Dessert = () => {
     <MainContainer maxWidth='lg'>
         <Stack sx={{ m: '0 0 40px 0' }}>
           <Typography variant="h1">Dessert</Typography>
-          <Typography>
-            In der Küche treffen Kulturen und Traditionen aufeinander. Jede
-            Region der Welt hat ihre eigenen einzigartigen Gerichte und
-            Zubereitungstechniken, die von Generation zu Generation
-            weitergegeben werden. Das Kochen ermöglicht uns, die Welt zu
-            erkunden, indem wir verschiedene Küchen und kulinarische Traditionen
-            kennenlernen und ausprobieren.
-          </Typography>
+          <Typography>Desserts sind das süße Finale eines jeden Mahls und eine wahre Freude für die Sinne. Sie bieten eine verlockende Möglichkeit, den Geschmackssinn zu verwöhnen und den Genuss einer Mahlzeit zu krönen. Egal, ob Sie ein einfaches Eis genießen oder ein aufwendiges, kunstvoll dekoriertes Dessert probieren, die Welt der Desserts bietet eine Fülle von Möglichkeiten, die für jeden Gaumen etwas bereithalten.</Typography>
         </Stack>
-        <Grid container spacing={{ md: 4, lg: 6 }}>
+        <Grid container columnSpacing={{ md: 4, lg: 6 }}>
           <Grid item xs={12} md={7} lg={8}>
-            <Grid container spacing={4}>
+            <Grid container columnSpacing={4}>
             <Grid item>
               {blogs.length > 0 ? (
                 <BlogSection

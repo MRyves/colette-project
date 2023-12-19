@@ -228,12 +228,15 @@ const myTheme = createTheme({
         },
         h1: {
             fontFamily: 'Josefin Sans, sans-serif',
-            fontSize: 35,
+            fontSize: 25,
             marginBottom: 20,
             lineHeight: 1.4,
             fontWeight: 400,
             textTransform: "uppercase",
             letterSpacing: 1,
+            '@media (min-width:600px)': {
+                fontSize: '35px',
+            },
         },
         h2: {
             fontFamily: 'Josefin Sans, sans-serif',
@@ -285,7 +288,7 @@ const StyledTagButton = styled(Button)(() => ({
     margin: '0px 8px 8px 0px',
     fontWeight: '700',
     letterSpacing: 0.7,
-    padding: '7px 15px 4px 15px',
+    padding: '5px 12px 2px 12px',
     '&.Mui-disabled': {
         color: Colors.white
       },
