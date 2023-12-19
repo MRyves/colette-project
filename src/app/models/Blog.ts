@@ -1,18 +1,22 @@
 import { FieldValue, Timestamp } from '@firebase/firestore';
+import { Ingredient } from '../components/blog-form';
 
 export default interface Blog {
   readonly uid: string;
   readonly userId: string;
-  imgUrl: string;
-  timestamp: FieldValue | Timestamp;
   title: string;
-  author: string;
   lead: string;
   category: string;
-  niveau: string;
-  tags: string[];
   duration: string;
+  quantity: string;
+  tags: string[];
+  level: string;
+  ingredients: Ingredient[];
   description: string;
-  ingredients: string[];
+  additional: string;
+
+  imgUrl: string;
+  timestamp: FieldValue | Timestamp;
+  author: string;
   avgRating?: number;
 }

@@ -39,7 +39,7 @@ const ForgotForm: React.FC<ForgotFormProps> = ({handleResetPassword, message}) =
                 autoFocus
                 margin='normal'
                 type='email'
-                placeholder='E-Mail'
+                label='E-Mail'
                 autoComplete='email'
               />
               {errors.email && <p>{errors.email.message}</p>}

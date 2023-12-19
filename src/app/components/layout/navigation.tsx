@@ -9,7 +9,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase-config';
 import User from '../../models/User';
-import { myTheme } from '../../theme/my-theme';
+import { Colors } from '../../theme/my-theme';
 
 interface NavigationProps {
   user: User | undefined;
@@ -18,9 +18,11 @@ interface NavigationProps {
 }
 
 const pages = [
-  { label: 'Startseite', to: '/' },
-  { label: 'Kochen', to: '/cooking' },
-  { label: 'Backen', to: '/baking' },
+  { label: 'Apéro', to: '/apero' },
+  { label: 'Vorspeise', to: '/vorspeise' },
+  { label: 'Hauptgang', to: '/hauptgang' },
+  { label: 'Dessert', to: '/dessert' },
+  { label: 'Backen', to: '/backen' },
 ];
 
 const Navigation: React.FC<NavigationProps> = ({
@@ -116,8 +118,8 @@ const Navigation: React.FC<NavigationProps> = ({
               onClick={handleCloseNavMenu}
               sx={{
                 '&.active': {
-                  background: myTheme.palette.secondary.main,
-                  color: '#ffffff'
+                  background: Colors.secondary.main,
+                  color: Colors.white
                 }
     
               }}
@@ -130,6 +132,7 @@ const Navigation: React.FC<NavigationProps> = ({
               component={Link}
               to={'/create'}
               onClick={handleCloseNavMenu}
+              sx={{ color: Colors.secondary.main }}
             >
               Erfassen
             </MenuItem>
@@ -146,14 +149,14 @@ const Navigation: React.FC<NavigationProps> = ({
             component={NavLink}
             to={page.to}
             sx={{
-              m: '0px 35px 0px 0px',
+              m: '0px 30px 0px 0px',
               p: '17px 0px 15px 0px',
               '&.active': {
-                color: myTheme.palette.secondary.main,
+                color: Colors.secondary.main,
               },
               '&:hover': {
                 background: 'transparent',
-                color: myTheme.palette.secondary.main,
+                color: Colors.secondary.main,
               }
               }}
           >
@@ -167,12 +170,13 @@ const Navigation: React.FC<NavigationProps> = ({
             sx={{
               m: 0,
               p: '17px 0px 15px 0px',
+              color: Colors.secondary.main,
             '&.active': {
-              color: myTheme.palette.secondary.main,
+              color: Colors.secondary.main,
             },
             '&:hover': {
               background: 'transparent',
-              color: myTheme.palette.secondary.main,
+              color: Colors.black,
             }
           }}
             to={'/create'}

@@ -11,7 +11,7 @@ import { auth } from '../../firebase-config';
 import User from '../../models/User';
 import PersonIcon from '@mui/icons-material/Person';
 import { Grid } from '@mui/material';
-import { myTheme } from '../../theme/my-theme';
+import { Colors } from '../../theme/my-theme';
 
 interface LoginNavProps {
   user: User | undefined;
@@ -65,10 +65,10 @@ const LoginNav: React.FC<LoginNavProps> = ({
               >
                 <PersonIcon 
                   sx={{ 
-                    color: myTheme.palette.primary.main,
+                    color: Colors.secondary.main,
                     transition: '.3s ease-out',
                     '&:hover': {
-                      color: myTheme.palette.secondary.main,
+                      color: Colors.primary.main,
                     },
                   }} />
               </IconButton>
@@ -94,7 +94,7 @@ const LoginNav: React.FC<LoginNavProps> = ({
                 component={NavLink}
                 sx={{
                   '&.active': {
-                    background: myTheme.palette.primary.main,
+                    background: Colors.primary.main,
                     color: '#ffffff',
                   },
                 }}
@@ -117,7 +117,7 @@ const LoginNav: React.FC<LoginNavProps> = ({
               p: '0px',
               '&:hover': {
                 background: 'transparent',
-                color: myTheme.palette.secondary.main,
+                color: Colors.secondary.main,
               },
             }}
             to={'/login'}

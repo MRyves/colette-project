@@ -6,12 +6,15 @@ import User from '../models/User';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { Autocomplete, FormControl, FormControlLabel, Grid, IconButton, ListItemSecondaryAction, ListItemText, Radio, RadioGroup, SelectChangeEvent, Stack, } from '@mui/material';
+import { Autocomplete, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, IconButton, InputLabel, ListItemSecondaryAction, ListItemText, MenuItem, Radio, RadioGroup, Select, SelectChangeEvent, Stack, } from '@mui/material';
 import { AddButton, AddList, AddListItem, MainContainer } from '../theme/my-theme';
 import { Link } from 'react-router-dom';
 
 
-
+export interface Ingredient {
+  name: string;
+  amount: string;
+}
 
 interface BlogFormProps {
   user?: User;
@@ -23,14 +26,15 @@ interface BlogFormProps {
 
 export interface BlogFormState {
   title: string;
-  category: string;
-  niveau: string;
   lead: string;
-  description: string;
-  tags: string[];
-  ingredients: string[];
+  category: string;
   duration: string;
-
+  quantity: string;
+  tags: string[];
+  level: string;
+  ingredients: Ingredient[];
+  description: string;
+  additional: string;
   isEditMode: boolean;
 }
 
@@ -38,32 +42,19 @@ const initialState: BlogFormState = {
   title: '',
   lead: '',
   category: '',
-  niveau: '',
-  description: '',
-  tags: [],
-  ingredients: [],
   duration: '',
-
+  quantity: '',
+  tags: [],
+  level: '',
+  ingredients: [],
+  description: '',
+  additional: '',
   isEditMode: false,
 };
 
-const BlogForm: React.FC<BlogFormProps> = ({
-  uploadProcess,
-  setFile,
-  submitForm,
-  initialFormState = initialState,
-}) => {
+const BlogForm: React.FC<BlogFormProps> = ({ uploadProcess, setFile, submitForm, initialFormState = initialState, }) => {
   const [form, setForm] = useState(initialFormState);
-  const {
-    title,
-    category,
-    niveau,
-    lead,
-    duration,
-    description,
-    ingredients,
-    isEditMode,
-  } = form;
+  const { title, lead, category, duration, quantity, level, ingredients, description, additional, isEditMode, } = form;
 
   const [listItemText, setListItemText] = useState<string>('');
   const isSubmitDisabled = useMemo<boolean>(
@@ -71,12 +62,21 @@ const BlogForm: React.FC<BlogFormProps> = ({
     [isEditMode, uploadProcess]
   );
 
-  const handleAddListItem = () => {
-    if (listItemText.trim() !== '') {
-      setForm({ ...form, ingredients: [...form.ingredients, listItemText] });
-      setListItemText('');
+
+  const [ingredient, setIngredient] = useState<string>('');
+  const [amount, setAmount] = useState<string>('');
+
+
+  const handleAddIngredient = () => {
+    if (ingredient.trim() !== '') {
+      const newIngredient: Ingredient = { name: ingredient, amount: amount };
+      setForm({ ...form, ingredients: [...form.ingredients, newIngredient] });
+      setIngredient('');
+      setAmount('');
     }
   };
+
+
 
   const handleDeleteListItem = (index: number) => {
     const updatedList = [...form.ingredients];
@@ -103,8 +103,8 @@ const BlogForm: React.FC<BlogFormProps> = ({
     setForm({ ...form, category: e.target.value });
   };
 
-  const onNiveauChange = (e: SelectChangeEvent<string>) => {
-    setForm({ ...form, niveau: e.target.value });
+  const onlevelChange = (e: SelectChangeEvent<string>) => {
+    setForm({ ...form, level: e.target.value });
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,7 +115,7 @@ const BlogForm: React.FC<BlogFormProps> = ({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (title && lead && description && duration && ingredients && category) {
+    if (title && lead && description && quantity && duration && additional && ingredients && category) {
       submitForm(form);
     }
   };
@@ -153,6 +153,15 @@ const BlogForm: React.FC<BlogFormProps> = ({
             name="lead"
             onChange={handleChange}
           />
+          {/* <FormGroup>
+            <FormControlLabel required control={<Checkbox />} label="Apéro" />
+            <FormControlLabel required control={<Checkbox />} label="Vorspeise" />
+            <FormControlLabel required control={<Checkbox />} label="Hauptgang" />
+            <FormControlLabel required control={<Checkbox />} label="Dessert" />
+            <FormControlLabel required control={<Checkbox />} label="Backen" />
+            <FormControlLabel required control={<Checkbox />} label="Sonstiges" />
+          </FormGroup>
+ */}
           <FormControl sx={{m: '0px 0px 20px 0px'}}>
             <RadioGroup
             row
@@ -162,14 +171,34 @@ const BlogForm: React.FC<BlogFormProps> = ({
               onChange={onCategoryChange}
             >
               <FormControlLabel
-                value="Kochen"
+                value="Apéro"
                 control={<Radio required={true} />}
-                label="Kochen"
+                label="Apéro"
                 />
+              <FormControlLabel
+                value="Vorspeise"
+                control={<Radio required={true} />}
+                label="Vorspeise"
+                />
+              <FormControlLabel
+                value="Hauptgang"
+                control={<Radio required={true} />}
+                label="Hauptgang"
+              />
+              <FormControlLabel
+                value="Dessert"
+                control={<Radio required={true} />}
+                label="Dessert"
+              />
               <FormControlLabel
                 value="Backen"
                 control={<Radio required={true} />}
                 label="Backen"
+              />
+              <FormControlLabel
+                value="Sonstiges"
+                control={<Radio required={true} />}
+                label="Sonstiges"
               />
             </RadioGroup>
           </FormControl>
@@ -178,7 +207,7 @@ const BlogForm: React.FC<BlogFormProps> = ({
             required
             fullWidth
             id="duration"
-            label="Zeit"
+            label="Zubereitungszeit (Minuten)"
             type="number"
             name="duration"
             autoComplete="duration"
@@ -186,6 +215,18 @@ const BlogForm: React.FC<BlogFormProps> = ({
             value={duration}
             onChange={handleChange}
           />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="outlined-multiline-flexible"
+              label="Für wie viele Personen / Stückanzahl"
+              multiline
+              maxRows={4}
+              value={quantity}
+              name="quantity"
+              onChange={handleChange}
+            />
           <Stack>
             <Autocomplete
               fullWidth
@@ -208,8 +249,8 @@ const BlogForm: React.FC<BlogFormProps> = ({
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
-              value={niveau}
-              onChange={onNiveauChange}
+              value={level}
+              onChange={onlevelChange}
             >
               <FormControlLabel
                 value="Einfach"
@@ -228,10 +269,48 @@ const BlogForm: React.FC<BlogFormProps> = ({
               />
             </RadioGroup>
           </FormControl>
-          <AddList>
+          <Grid container justifyContent={'space-between'} spacing={2}>
+            <Grid item xs={2}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  label="Menge"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                />
+            </Grid>
+            <Grid item xs={9}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                label="Zutat"
+                value={ingredient}
+                onChange={(e) => setIngredient(e.target.value)}
+                  />
+            </Grid>
+            <Grid item textAlign={'right'} xs={1}>
+              <AddButton
+              sx={{minWidth:0}}
+                variant="outlined"
+                endIcon={<AddCircleIcon style={{ fontSize: '35px' }} />}
+                onClick={handleAddIngredient}
+              ></AddButton>
+            </Grid>
+          </Grid>
+          <AddList sx={{mb: '30px'}}>
             {form.ingredients.map((item, index) => (
               <AddListItem disablePadding key={index}>
-                <ListItemText primary={item} />
+                <ListItemText primary={
+                  <Grid container spacing={2}>
+                    <Grid item xs={2}>
+                      <strong>{item.amount}</strong>
+                    </Grid>
+                    <Grid item xs={9}>
+                      {item.name}
+                    </Grid>
+                  </Grid>
+                  }
+                />
                 <ListItemSecondaryAction>
                   <IconButton
                     edge="end"
@@ -244,24 +323,6 @@ const BlogForm: React.FC<BlogFormProps> = ({
               </AddListItem>
             ))}
           </AddList>
-          <Grid container justifyContent={'space-between'}>
-            <Grid item xs={11}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                label="Zutaten"
-                value={listItemText}
-                onChange={(e) => setListItemText(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={1} textAlign={'right'}>
-              <AddButton
-                variant="outlined"
-                endIcon={<AddCircleIcon style={{ fontSize: '35px' }} />}
-                onClick={handleAddListItem}
-              ></AddButton>
-            </Grid>
-          </Grid>
           <TextField
             margin="normal"
             required
@@ -274,7 +335,18 @@ const BlogForm: React.FC<BlogFormProps> = ({
             name="description"
             onChange={handleChange}
           />
-          <Grid container spacing={2}>
+          <TextField
+            margin="normal"
+            fullWidth
+            id="outlined-multiline-flexible"
+            label="Tipps & Tricks"
+            multiline
+            maxRows={4}
+            value={additional}
+            name="additional"
+            onChange={handleChange}
+          />
+          <Grid container justifyContent={'space-between'}>
             {!isEditMode ? (
               <Grid item>
                 <Button
@@ -337,13 +409,10 @@ const tags = [
   { tagtitle: 'Sommer' },
   { tagtitle: 'Herbst' },
   { tagtitle: 'Winter' },
-  { tagtitle: 'Hauptgang' },
-  { tagtitle: 'Apéro' },
-  { tagtitle: 'Dessert' },
   { tagtitle: 'Gebäck' },
-  { tagtitle: 'Weihnachten' },
+  { tagtitle: 'Torten & Kuchen' },
+  { tagtitle: 'Guezli' },
   { tagtitle: 'Vegetarisch' },
-  { tagtitle: 'Vegan' },
 ];
 
 export default BlogForm;

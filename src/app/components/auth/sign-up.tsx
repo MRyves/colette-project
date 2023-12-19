@@ -24,7 +24,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ control, errors }) => {
               autoFocus
               margin="normal"
               type="text"
-              placeholder="Vorname"
+              label="Vorname"
             />
             {errors.firstName && <p>{errors.firstName.message}</p>}
           </>
@@ -43,7 +43,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ control, errors }) => {
               autoFocus
               margin="normal"
               type="text"
-              placeholder="Nachname"
+              label="Nachname"
             />
             {errors.lastName && <p>{errors.lastName.message}</p>}
           </>

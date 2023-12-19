@@ -4,24 +4,24 @@ import BlogSection from '../components/blogsection';
 import { Grid, Stack, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
-import { MainContainer } from '../theme/my-theme';
+import { MainContainer, MainImage } from '../theme/my-theme';
 import Blog from '../models/Blog';
 import Tags from '../components/layout/tags';
 import BlankSlate from '../components/blankslate/blankslate-blog';
 
-const Baking = () => {
+const Dessert = () => {
   const { blogs, queryBlogs, deleteBlog, loading, error } = useBlogs();
   const user = useSelector((state: RootState) => state.auth.currentUser);
-  const filteredBlogs = useMemo(() => blogs.filter(blog => blog.tags.includes('Guezli')), [blogs]);
+  const filteredBlogs = useMemo(() => blogs.filter(blog => blog.tags.includes('Torten & Kuchen')), [blogs]);
 
   useEffect(() => {
-    queryBlogs({ category: 'Backen' });
+    queryBlogs({ category: 'Dessert' });
   }, []);
 
   return (
     <MainContainer maxWidth='lg'>
         <Stack sx={{ m: '0 0 40px 0' }}>
-          <Typography variant="h1">Backen</Typography>
+          <Typography variant="h1">Dessert</Typography>
           <Typography>
             In der Küche treffen Kulturen und Traditionen aufeinander. Jede
             Region der Welt hat ihre eigenen einzigartigen Gerichte und
@@ -50,7 +50,7 @@ const Baking = () => {
           <Grid item xs={12} md={5} lg={4}>
           <Grid item>
             {blogs.length > 0 ? (
-              <Typography variant='h2'>Guezli</Typography>
+              <Typography variant='h2'>Torten & Kuchen</Typography>
               ) : (
                 ''
               )}
@@ -66,4 +66,4 @@ const Baking = () => {
   );
 };
 
-export default Baking;
+export default Dessert;
