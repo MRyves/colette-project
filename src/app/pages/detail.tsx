@@ -26,8 +26,6 @@ import { RootState } from '../store/store';
 import CommentSection from '../components/commentsection';
 
 
-
-
 const Detail = () => {
   const { blogId } = useParams();
   const navigate = useNavigate();
@@ -166,9 +164,9 @@ const Detail = () => {
           </Grid>
           <Grid sx={{ m: '20px 0px 20px 0px' }}>
             {blogs[0]?.tags &&
-              blogs[0].tags.map((tags, index) => (
-                <StyledTagButton disabled key={index}>
-                  {tags.trim()}
+              blogs[0].tags.map((tag, index) => (
+                <StyledTagButton onClick={() => navigate(`/tags/${tag}`)} key={index}>
+                  {tag.trim()}
                 </StyledTagButton>
               ))}
           </Grid>
@@ -225,7 +223,7 @@ const Detail = () => {
             </CardContent>
           </Card>
 
-          <CommentSection />
+          <CommentSection blogId={blogId!} />
           {/* <Typography variant='h3' sx={{ m: '50px 0px 0px 0px' }}>Kommentare</Typography>
           {currentUser ? (
             <AddCommentForm submitForm={(comment) => createComment(blogId!, {...comment, authorId: currentUser.uid})} />
