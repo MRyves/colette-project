@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
+  Avatar,
   Box,
   Card,
   CardContent,
@@ -8,7 +9,6 @@ import {
   Grid,
   ListItem,
   Rating,
-  Stack,
   Typography,
 } from '@mui/material';
 import useBlogs from '../hooks/useBlogs';
@@ -24,6 +24,9 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import CommentSection from '../components/commentsection';
+
+
+
 
 const Detail = () => {
   const { blogId } = useParams();
@@ -104,7 +107,7 @@ const Detail = () => {
           </Card>
         </Grid>
         <Grid item xs={12} md={5} lg={4} sx={{ mb: '20px' }}>
-          <Typography variant="body1" sx={{ mb: '30px' }}>
+          <Typography variant="body1" sx={{ mb: '40px' }}>
             {blogs[0]?.lead}
           </Typography>
           <Grid container>
@@ -171,7 +174,7 @@ const Detail = () => {
           </Grid>
           <Typography>
             <Box fontWeight="700" display="inline">
-              Rezept von:
+            Rezept von:
             </Box>{' '}
             {blogs[0]?.author}
           </Typography>
@@ -214,7 +217,7 @@ const Detail = () => {
               {blogs[0]?.additional && (
                 <>
                   <Typography sx={{ mt: '50px' }} variant="h3">
-                    Tipps & Tricks
+                  Tipps & Tricks
                   </Typography>
                   <Typography>{blogs[0]?.additional}</Typography>
                 </>

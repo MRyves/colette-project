@@ -153,15 +153,15 @@ const BlogForm: React.FC<BlogFormProps> = ({ uploadProcess, setFile, submitForm,
             name="lead"
             onChange={handleChange}
           />
-          {/* <FormGroup>
-            <FormControlLabel required control={<Checkbox />} label="Apéro" />
+          <FormGroup>
+            <FormControlLabel required control={<Checkbox />} label="Apéro"/>
             <FormControlLabel required control={<Checkbox />} label="Vorspeise" />
             <FormControlLabel required control={<Checkbox />} label="Hauptgang" />
             <FormControlLabel required control={<Checkbox />} label="Dessert" />
             <FormControlLabel required control={<Checkbox />} label="Backen" />
             <FormControlLabel required control={<Checkbox />} label="Sonstiges" />
           </FormGroup>
- */}
+
           <FormControl sx={{m: '0px 0px 20px 0px'}}>
             <RadioGroup
             row
