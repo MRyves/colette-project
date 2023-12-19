@@ -84,7 +84,7 @@ const Detail = () => {
             <Grid container>
               <Grid container alignItems={'center'} justifyContent={'space-between'} sx={{ borderWidth: 0, borderBottomWidth: '1px', borderStyle: 'solid', borderColor: Colors.borderColors }}>
                 <Grid item>
-                  <Typography sx={{ fontWeight: '700' }}>Arbeitszeit:</Typography>
+                  <Typography sx={{ fontWeight: '700' }}>Auf dem Tisch in:</Typography>
                 </Grid>
                 <Grid item>
                   <Typography>{blogs[0]?.duration} Min.</Typography>

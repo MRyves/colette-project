@@ -202,7 +202,9 @@ const BlogForm: React.FC<BlogFormProps> = ({ uploadProcess, setFile, submitForm,
               />
             </RadioGroup>
           </FormControl>
-          <TextField
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+            <TextField
             margin="normal"
             required
             fullWidth
@@ -215,18 +217,22 @@ const BlogForm: React.FC<BlogFormProps> = ({ uploadProcess, setFile, submitForm,
             value={duration}
             onChange={handleChange}
           />
+            </Grid>
+            <Grid item xs={6}>
             <TextField
               margin="normal"
               required
               fullWidth
               id="outlined-multiline-flexible"
-              label="Für wie viele Personen / Stückanzahl"
+              label="Portionen / Stückanzahl"
               multiline
               maxRows={4}
               value={quantity}
               name="quantity"
               onChange={handleChange}
             />
+            </Grid>
+          </Grid>
           <Stack>
             <Autocomplete
               fullWidth
@@ -254,17 +260,17 @@ const BlogForm: React.FC<BlogFormProps> = ({ uploadProcess, setFile, submitForm,
             >
               <FormControlLabel
                 value="Einfach"
-                control={<Radio required={true} />}
+                control={<Radio disableRipple required={true} />}
                 label="Einfach"
               />
               <FormControlLabel
                 value="Mittel"
-                control={<Radio required={true} />}
+                control={<Radio disableRipple required={true} />}
                 label="Mittel"
               />
               <FormControlLabel
                 value="Schwierig"
-                control={<Radio required={true} />}
+                control={<Radio disableRipple required={true} />}
                 label="Schwierig"
               />
             </RadioGroup>
