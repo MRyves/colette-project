@@ -1,12 +1,12 @@
 import { Card, CardContent, CardMedia, Grid, Rating, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import User from '../models/User';
 import DialogDelete from './dialog-delete';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import EditIcon from '@mui/icons-material/Edit';
 import { Colors, ReadmoreButton } from '../theme/my-theme';
 import Blog from '../models/Blog';
+import { Link } from 'react-router-dom';
 
 
 interface BlogSectionProps {
@@ -46,6 +46,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({
                 component='img'
                 image={blog.imgUrl}
                 title={blog.title}
+                alt={"Bild von " + blog.title}
               />
             </Link>
             <CardContent>
@@ -68,8 +69,9 @@ const BlogSection: React.FC<BlogSectionProps> = ({
                   <Grid item xs={2}>
                     <Grid container alignItems={'center'} justifyContent={'flex-end'} spacing={1}>
                       <Grid item xs={6}>
-                        <Link to={`/edit/${blog.uid}`}>
+                        <Link aria-label="Rezept bearbeiten" to={`/edit/${blog.uid}`}>
                           <EditIcon
+                            role="button"
                             sx={{
                               color: Colors.secondary.main,
                               transition: '.3s ease-out',
@@ -82,6 +84,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({
                       {!!handleDelete ?
                         <Grid item xs={6}>
                           <DeleteOutlinedIcon
+                            aria-label="Rezept löschen"
                             sx={{
                               color: Colors.secondary.main,
                               transition: '.3s ease-out',

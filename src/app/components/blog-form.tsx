@@ -6,7 +6,7 @@ import User from '../models/User';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { Autocomplete, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, IconButton, InputLabel, ListItemSecondaryAction, ListItemText, MenuItem, Radio, RadioGroup, Select, SelectChangeEvent, Stack, } from '@mui/material';
+import { Autocomplete, FormControl, FormControlLabel, Grid, IconButton, ListItemSecondaryAction, ListItemText, Radio, RadioGroup, SelectChangeEvent, Stack, } from '@mui/material';
 import { AddButton, AddList, AddListItem, MainContainer } from '../theme/my-theme';
 import { Link } from 'react-router-dom';
 
@@ -153,15 +153,6 @@ const BlogForm: React.FC<BlogFormProps> = ({ uploadProcess, setFile, submitForm,
             name="lead"
             onChange={handleChange}
           />
-          <FormGroup>
-            <FormControlLabel required control={<Checkbox />} label="Apéro"/>
-            <FormControlLabel required control={<Checkbox />} label="Vorspeise" />
-            <FormControlLabel required control={<Checkbox />} label="Hauptgang" />
-            <FormControlLabel required control={<Checkbox />} label="Dessert" />
-            <FormControlLabel required control={<Checkbox />} label="Backen" />
-            <FormControlLabel required control={<Checkbox />} label="Sonstiges" />
-          </FormGroup>
-
           <FormControl sx={{m: '0px 0px 20px 0px'}}>
             <RadioGroup
             row
@@ -194,11 +185,6 @@ const BlogForm: React.FC<BlogFormProps> = ({ uploadProcess, setFile, submitForm,
                 value="Backen"
                 control={<Radio required={true} />}
                 label="Backen"
-              />
-              <FormControlLabel
-                value="Sonstiges"
-                control={<Radio required={true} />}
-                label="Sonstiges"
               />
             </RadioGroup>
           </FormControl>
@@ -409,16 +395,15 @@ const BlogForm: React.FC<BlogFormProps> = ({ uploadProcess, setFile, submitForm,
 };
 
 const tags = [
-  { tagtitle: 'Süss' },
-  { tagtitle: 'Salzig' },
   { tagtitle: 'Frühling' },
   { tagtitle: 'Sommer' },
-  { tagtitle: 'Herbst' },
-  { tagtitle: 'Winter' },
+  { tagtitle: 'herbstlich' },
+  { tagtitle: 'winterlich' },
+  { tagtitle: 'Frühstück' },
   { tagtitle: 'Gebäck' },
   { tagtitle: 'Torten & Kuchen' },
   { tagtitle: 'Guezli' },
-  { tagtitle: 'Vegetarisch' },
+  { tagtitle: 'vegetarisch' },
 ];
 
 export default BlogForm;

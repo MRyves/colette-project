@@ -28,7 +28,8 @@ const LatestBlog: React.FC<LatestBlogProps> = ({ blogs, user, handleDelete }) =>
             component='img'
             image={latestBlog.imgUrl}
             title={latestBlog.title}
-          />
+            alt={"Bild von " + latestBlog.title}
+            />
         </Link>
         <CardContent>
           <Typography variant='h2'>
@@ -53,12 +54,12 @@ const LatestBlog: React.FC<LatestBlogProps> = ({ blogs, user, handleDelete }) =>
               <Grid item xs={2}>
                 <Grid container alignItems={'center'} justifyContent={'flex-end'} spacing={1}>
                   <Grid item>
-                    <Link to={`/edit/${latestBlog.uid}`}>
+                    <Link aria-label="Rezept bearbeiten" to={`/edit/${latestBlog.uid}`}>
                       <EditIcon sx={{ color: Colors.secondary.main }} />
                     </Link>
                   </Grid>
                   <Grid item>
-                    <DeleteOutlinedIcon sx={{ color: Colors.secondary.main }}
+                    <DeleteOutlinedIcon aria-label="Rezept löschen" sx={{ color: Colors.secondary.main }}
                                         onClick={() => handleDelete(latestBlog.uid)} />
                   </Grid>
                 </Grid>

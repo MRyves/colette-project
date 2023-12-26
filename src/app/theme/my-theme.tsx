@@ -273,8 +273,6 @@ const myTheme = createTheme({
             fontSize: 18,
             marginBottom: 10,
             marginTop: 4,
-            textTransform: "uppercase",
-            letterSpacing: 1,
         },
         },
 });
@@ -289,6 +287,7 @@ const StyledTagButton = styled(Button)(() => ({
     fontWeight: '700',
     letterSpacing: 0.7,
     padding: '5px 12px 2px 12px',
+    color: Colors.white,
     '&.Mui-disabled': {
         color: Colors.white
       },

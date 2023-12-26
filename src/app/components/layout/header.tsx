@@ -4,7 +4,6 @@ import Navigation from './navigation';
 import User from '../../models/User';
 import { Link } from 'react-router-dom';
 import LoginNav from './loginnav';
-import Darkmode from '../darkmode';
 
 
 interface HeaderProps {
@@ -24,9 +23,6 @@ const Header: React.FC<HeaderProps> = ({ user, handleLogout }) => {
                             <Link to={'/'}>
                                 <img src="assets/logo-negativ.png" alt="Chuchiblog" style={{ maxWidth: '300px', paddingTop: '20px', paddingBottom: '15px' }} />
                             </Link>
-                        </Grid>
-                        <Grid item>
-                            <Darkmode />
                         </Grid>
                     </Grid>
                 </Container>

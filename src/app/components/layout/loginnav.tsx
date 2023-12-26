@@ -59,9 +59,7 @@ const LoginNav: React.FC<LoginNavProps> = ({
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip arrow title="Open">
               <IconButton
-                disableRipple
                 onClick={handleOpenUserMenu}
-                sx={{ p: 0 }}
               >
                 <PersonIcon 
                   sx={{ 

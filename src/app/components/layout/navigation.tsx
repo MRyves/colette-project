@@ -82,7 +82,6 @@ const Navigation: React.FC<NavigationProps> = ({
       <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
         <IconButton
           size="large"
-          disableRipple
           aria-label="account of current user"
           aria-controls="menu-appbar"
           aria-haspopup="true"
@@ -144,13 +143,11 @@ const Navigation: React.FC<NavigationProps> = ({
       <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
         {pages.map((page, index) => (
           <Button
-            disableRipple
             key={index}
             component={NavLink}
             to={page.to}
             sx={{
-              m: '0px 30px 0px 0px',
-              p: '17px 0px 15px 0px',
+              p: '17px 15px 15px 15px',
               '&.active': {
                 color: Colors.secondary.main,
               },
@@ -165,11 +162,9 @@ const Navigation: React.FC<NavigationProps> = ({
         ))}
         {userId && location.pathname !== '/create' ? (
           <Button
-            disableRipple
             component={NavLink}
             sx={{
-              m: 0,
-              p: '17px 0px 15px 0px',
+              p: '17px 15px 15px 15px',
               color: Colors.secondary.main,
             '&.active': {
               color: Colors.secondary.main,

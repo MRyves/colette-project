@@ -1,10 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import authReducer, { checkAuthStatus } from './auth/auth-slice';
-import darkModeReducer from './darkModeReducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  darkMode: darkModeReducer
 });
 
 export const setupStore = (preloadedState?: Partial<RootState>, checkForAuthStatus = true) => {

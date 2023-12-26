@@ -1,29 +1,15 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import {
-  Avatar,
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Grid,
-  ListItem,
-  Rating,
-  Typography,
-} from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Grid, ListItem, Rating, Typography, } from '@mui/material';
 import useBlogs from '../hooks/useBlogs';
-import {
-  Colors,
-  MainContainer,
-  StyledTagButton,
-  ZutatenCard,
-} from '../theme/my-theme';
+import { Colors, MainContainer, StyledTagButton, ZutatenCard, } from '../theme/my-theme';
 import Sharing from '../components/sharing';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import CommentSection from '../components/commentsection';
+import { FieldValue, Timestamp } from 'firebase/firestore';
 
 
 const Detail = () => {
@@ -43,6 +29,22 @@ const Detail = () => {
     await deleteBlog(blogId!);
     navigate('/');
   };
+
+
+  const dateFormatOptions: Intl.DateTimeFormatOptions = {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  };
+  
+  const formatTimestamp = (timestamp: Timestamp | FieldValue): string => {
+    if (!(timestamp instanceof Timestamp)) {
+      return 'Standarddarstellung für FieldValue';
+    }
+    return timestamp.toDate().toLocaleDateString('de-DE', dateFormatOptions);
+  };
+
+
 
   return (
     <MainContainer maxWidth="lg">
@@ -65,7 +67,7 @@ const Detail = () => {
             >
               <Grid item>
                 <Link to={`/edit/${blogId}`}>
-                  <EditIcon
+                  <EditIcon aria-label="Rezept bearbeiten"
                     sx={{
                       color: Colors.secondary.main,
                       transition: '.3s ease-out',
@@ -77,7 +79,7 @@ const Detail = () => {
                 </Link>
               </Grid>
               <Grid item>
-                <DeleteOutlinedIcon
+                <DeleteOutlinedIcon aria-label="Rezept löschen"
                   sx={{
                     color: Colors.secondary.main,
                     transition: '.3s ease-out',
@@ -170,11 +172,17 @@ const Detail = () => {
                 </StyledTagButton>
               ))}
           </Grid>
-          <Typography>
+          <Typography sx={{mb: '5px'}}>
             <Box fontWeight="700" display="inline">
             Rezept von:
             </Box>{' '}
             {blogs[0]?.author}
+          </Typography>
+          <Typography variant="body1">
+          <Box fontWeight="700" display="inline">
+            Erfasst am:
+            </Box>{' '}
+            {blogs[0]?.timestamp ? formatTimestamp(blogs[0].timestamp) : ''}
           </Typography>
           <Sharing blogId={blogId!} title={blogs[0]?.title} />
         </Grid>
@@ -224,41 +232,6 @@ const Detail = () => {
           </Card>
 
           <CommentSection blogId={blogId!} />
-          {/* <Typography variant='h3' sx={{ m: '50px 0px 0px 0px' }}>Kommentare</Typography>
-          {currentUser ? (
-            <AddCommentForm submitForm={(comment) => createComment(blogId!, {...comment, authorId: currentUser.uid})} />
-          ) : ''}
-          {comments.length === 0 ? (
-            <BlankSlateComment />
-          ) : (
-            comments.map((comment) => (
-            <Card key={comment.uid} elevation={0} sx={{ marginTop: '30px' }}>
-              <CardContent>
-                <Grid container justifyContent={'space-between'}>
-                  <Grid item>
-                    <Typography variant='h4'>{comment.nickname}</Typography>
-                  </Grid>
-                  <Grid item>
-                    <Rating size='small' readOnly value={comment.rating} />
-                  </Grid>
-                </Grid>
-                <Grid container columnSpacing={2} alignItems={'center'} sx={{mb: '8px'}}>
-                  <Grid item>
-                  <Typography variant='subtitle1'>
-                      {blogs[0]?.timestamp
-                        ? formatTimestamp(blogs[0]?.timestamp)
-                        : ''}
-                    </Typography>
-                  </Grid>
-                  <Grid item>
-                    {currentUser?.uid === comment.authorId ? <DeleteOutlinedIcon color="disabled" fontSize='small' onClick={() => deleteComment(blogId!, comment.uid!)} />: ''}
-                  </Grid>
-                </Grid>
-                <Typography>{comment.comment}</Typography>
-              </CardContent>
-            </Card> 
-          ))
-          )} */}
         </Grid>
       </Grid>
     </MainContainer>

@@ -36,7 +36,6 @@ describe('CommentSection', () => {
         currentUser: { uid: '123', email: 'test-email@jest.com', displayName: 'Jest unit-test' },
         loading: false
       },
-      darkMode: { darkMode: false }
     };
     renderWithProviders(<CommentSection blogId="jest-unit-test" />, { preloadedState: mockLoggedInState });
     expect(await screen.findByText('Kommentieren')).toBeInTheDocument();
