@@ -4,7 +4,7 @@ import BlogSection from '../components/blogsection';
 import { Grid, Stack, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
-import { MainContainer, MainImage } from '../theme/my-theme';
+import { MainContainer } from '../theme/my-theme';
 import Blog from '../models/Blog';
 import Tags from '../components/layout/tags';
 import BlankSlate from '../components/blankslate/blankslate-blog';
